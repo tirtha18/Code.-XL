@@ -163,7 +163,8 @@ export const extract = async (req, res) => {
     for (let i = 0; i < finalData.length; i++)
       newSheet.sheet.push(finalData[i]);
     const user_id = req.body.user_id;
-    if (!user_id) return res.status(400).json({ Message: "User not logged in" });
+    if (!user_id)
+      return res.status(400).json({ Message: "User not logged in" });
     Sheets.findOneAndUpdate({ user_id }, { $push: { sheets: newSheet } })
       .then((sheets) => {
         if (sheets) console.log("New Sheet added");
@@ -175,10 +176,13 @@ export const extract = async (req, res) => {
       })
       .catch((error) => console.log(error));
     fs.unlinkSync(filePath);
-    return res.json({ message: "Excel sheet extracted succefully!", finalData });
+    return res.json({
+      message: "Excel sheet extracted succefully!",
+      finalData,
+    });
   } catch (error) {
     console.error(error);
-   res.status(500).json({ message: "Error extracting Excel sheet" });
+    res.status(500).json({ message: "Error extracting Excel sheet" });
     throw error;
   }
 };
