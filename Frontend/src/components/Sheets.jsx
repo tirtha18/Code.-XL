@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { FaArrowRight } from "react-icons/fa6";
-
 const sheetData = [
   { ind: 1, name: "Sheet 1", problems: ["Problem 1", "Problem 2"] },
   { ind: 2, name: "Sheet 2", problems: ["Problem 3", "Problem 4"] },
@@ -15,16 +14,15 @@ function Sheet({ setSheetshow, selectedsheet }) {
       <button
         className="px-2 py-1 rounded-lg text-white bg-blue-800 ml-8"
         onClick={() => {
-          setSheetshow(false);console.log(selectedsheet);
+          setSheetshow(false);
+          console.log(selectedsheet);
         }}
       >
         Back
       </button>
-      
     </div>
   );
 }
-
 export default function Sheets() {
   const [sheetshow, setSheetshow] = useState(false);
   const [selectedsheet, setSelectedsheet] = useState({});

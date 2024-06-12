@@ -24,6 +24,8 @@ app.use("/api/", router1);
 
 app.use("/api/", router2);
 
+app.get('/abc',async (req,res) => {res.send("gjhkrefw")});
+
 app.listen(process.env.PORT || 3000, () => {
   console.log("Express server initialized");
 });
