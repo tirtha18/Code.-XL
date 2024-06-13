@@ -6,6 +6,8 @@ import router1 from "./routes/sheetupload.js";
 
 import router2 from "./routes/togglepstatus.js";
 
+import router3 from "./routes/getsheets.js";
+
 import { connectToDatabase } from "./config/database.js";
 
 import cors from "cors";
@@ -23,6 +25,8 @@ app.use("/api/auth", router);
 app.use("/api/", router1);
 
 app.use("/api/", router2);
+
+app.use("/api/",router3);
 
 app.get('/abc',async (req,res) => {res.send("gjhkrefw")});
 

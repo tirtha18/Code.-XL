@@ -22,7 +22,7 @@ const LoginRegister = () => {
     if (!username || !password) {
       toast.error("Please fill all the fields!");
       return;
-    }
+    } 
     login({
       username: username,
       password: password,
