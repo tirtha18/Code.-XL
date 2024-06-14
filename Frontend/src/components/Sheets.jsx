@@ -8,7 +8,7 @@ import { AuthContext } from "./AuthProvider";
 import { FileUploader } from "react-drag-drop-files";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
-function FileUploadForm({ setFileshow, user_id }) {
+function FileUploadForm({ setFileshow, user_id, setReload }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const handleFileChange = (file) => {
     setSelectedFile(file);
@@ -32,6 +32,7 @@ function FileUploadForm({ setFileshow, user_id }) {
         }
       );
       console.log(response);
+      setReload(true);
     } catch (error) {
       console.log(error);
     }
@@ -50,6 +51,8 @@ function FileUploadForm({ setFileshow, user_id }) {
           onClick={() => {
             setFileshow(false);
             FileUpload();
+            if (!selectedFile)
+              return alert("Select or drop a file to continue");
           }}
           disabled={!selectedFile}
         >
@@ -68,14 +71,48 @@ function FileUploadForm({ setFileshow, user_id }) {
     </div>
   );
 }
-function Sheet({ setSheetshow, selectedsheet }) {
+
+function Sheet({
+  setSheetshow,
+  selectedsheet,
+  sheet_id,
+  sheets_id,
+  setReload,
+}) {
+  const [problem_id, setProblem_id] = useState(null);
+
+  useEffect(() => {
+    const toggleProblemstatus = async () => {
+      console.log(sheet_id, "/n", sheets_id, "/n", problem_id);
+      if (problem_id && sheet_id && sheets_id) {
+        try {
+          console.log(1);
+          const response = await axios.post(
+            "https://code-xl.onrender.com/api/toggleprobstatus",
+            { problem_id: problem_id, sheets_id: sheets_id, sheet_id: sheet_id }
+          );
+          console.log(1);
+          console.log(response);
+          setReload(true);
+          setProblem_id("");
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
+    toggleProblemstatus();
+  }, [problem_id]);
+
+  const handleStatusToggle = (problem_id) => {
+    setProblem_id(problem_id);
+  };
+
   return (
-    <div className="p-4 capitalize">
+    <div className="p-4 capitalize m-6">
       <button
-        className="px-4 py-2 rounded-lg text-black bg-white mb-8 font-bold flex flex-row items-center space-x-1 "
+        className="px-4 py-2 rounded-lg text-black bg-white mb-8 font-bold flex flex-row items-center space-x-1"
         onClick={() => {
           setSheetshow(false);
-          console.log(selectedsheet);
         }}
       >
         <IoMdArrowRoundBack size={20} />
@@ -85,6 +122,9 @@ function Sheet({ setSheetshow, selectedsheet }) {
         <table className="w-full bg-gray-800 text-white">
           <thead>
             <tr>
+              <th className="py-2 px-4 border-b border-gray-700 bg-gray-900 text-left">
+                Status
+              </th>
               <th className="py-2 px-4 border-b border-gray-700 bg-gray-900 text-left">
                 Topic Name
               </th>
@@ -96,9 +136,6 @@ function Sheet({ setSheetshow, selectedsheet }) {
               </th>
               <th className="py-2 px-4 border-b border-gray-700 bg-gray-900 text-left">
                 Video
-              </th>
-              <th className="py-2 px-4 border-b border-gray-700 bg-gray-900 text-left">
-                Status
               </th>
             </tr>
           </thead>
@@ -112,6 +149,23 @@ function Sheet({ setSheetshow, selectedsheet }) {
                     : "bg-gray-800 hover:bg-gray-700"
                 }
               >
+                <td className="py-2 px-4 border-b border-gray-700">
+                  <button
+                    onClick={() => {
+                      handleStatusToggle(problem._id);
+                    }}
+                  >
+                    {problem.status === "DONE" ? (
+                      <div className="  font-semibold rounded-2xl px-2 flex flex-auto items-center justify-center bg-green-800 text text-green-400">
+                        Done
+                      </div>
+                    ) : (
+                      <div className="  font-semibold rounded-2xl px-2 flex flex-auto items-center justify-center bg-red-800 text text-red-400">
+                        Pending
+                      </div>
+                    )}
+                  </button>
+                </td>
                 <td className="py-2 px-4 border-b border-gray-700">
                   {problem.tag}
                 </td>
@@ -138,14 +192,6 @@ function Sheet({ setSheetshow, selectedsheet }) {
                     Video Link
                   </a>
                 </td>
-                <td className="py-2 px-8 border-b border-gray-700">
-                  <input
-                    type="checkbox"
-                    checked={problem.done || false}
-                    onChange={() => handleCheckboxChange(index)}
-                    className="mr-2"
-                  />
-                </td>
               </tr>
             ))}
           </tbody>
@@ -154,6 +200,7 @@ function Sheet({ setSheetshow, selectedsheet }) {
     </div>
   );
 }
+
 export default function Sheets() {
   const [sheetshow, setSheetshow] = useState(false);
   const [selectedsheet, setSelectedsheet] = useState([]);
@@ -161,10 +208,15 @@ export default function Sheets() {
   const [sheets, setSheets] = useState([]);
   const [fileshow, setFileshow] = useState(false);
   const [userid, setUserid] = useState("");
+  const [reload, setReload] = useState(false);
+  const [sheet_id, setSheet_id] = useState("");
+  const [sheets_id, setSheets_id] = useState("");
+
   useEffect(() => {
     const getSheets = async () => {
       try {
         if (!user) return console.log("User ID not available");
+        if (reload) setReload(false);
         const user_id = user._id;
         setUserid(user_id);
         const response = await axios.get(
@@ -174,12 +226,14 @@ export default function Sheets() {
           }
         );
         setSheets(response.data.sheets);
+        console.log("sheets_id ", response.data._id);
+        setSheets_id(response.data._id);
       } catch (error) {
         console.log(error);
       }
     };
     getSheets();
-  }, [user]);
+  }, [user, reload]);
   return (
     <div className="overflow-auto">
       {!sheetshow ? (
@@ -201,7 +255,7 @@ export default function Sheets() {
                 onClick={() => {
                   setSelectedsheet(it.sheet);
                   setSheetshow(true);
-                  console.log(selectedsheet);
+                  setSheet_id(it._id);
                 }}
                 className="hover:cursor-pointer hover:scale-105 duration-300 p-5 rounded-xl h-44 flex border flex-col bg text-2xl text-black font-bold bg-white"
               >
@@ -217,10 +271,20 @@ export default function Sheets() {
           </div>
         </div>
       ) : (
-        <Sheet setSheetshow={setSheetshow} selectedsheet={selectedsheet} />
+        <Sheet
+          setSheetshow={setSheetshow}
+          selectedsheet={selectedsheet}
+          sheet_id={sheet_id}
+          sheets_id={sheets_id}
+          setReload={setReload}
+        />
       )}
       {fileshow && (
-        <FileUploadForm setFileshow={setFileshow} user_id={userid} />
+        <FileUploadForm
+          setFileshow={setFileshow}
+          user_id={userid}
+          setReload={setReload}
+        />
       )}
     </div>
   );
