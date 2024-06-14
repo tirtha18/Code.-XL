@@ -44,7 +44,7 @@ const LoginRegister = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/register",
+        "https://code-xl.onrender.com/api/auth/register",
         {
           name: fullName,
           username: username,

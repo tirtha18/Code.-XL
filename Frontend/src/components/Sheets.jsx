@@ -23,7 +23,7 @@ function FileUploadForm({ setFileshow, user_id }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/upload",
+        "https://code-xl.onrender.com/api/upload",
         formData,
         {
           headers: {
@@ -168,7 +168,7 @@ export default function Sheets() {
         const user_id = user._id;
         setUserid(user_id);
         const response = await axios.get(
-          "http://localhost:3000/api/getSheets",
+          "https://code-xl.onrender.com/api/getSheets",
           {
             params: { user_id: user_id },
           }
