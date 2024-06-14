@@ -53,9 +53,6 @@ const AuthProvider = ({ children }) => {
       setUser(null);
       localStorage.removeItem("authToken");
       toast.success("You have been logged out succesfully!");
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
     } catch (error) {
       console.log(error);
     }
