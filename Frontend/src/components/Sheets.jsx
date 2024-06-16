@@ -83,7 +83,6 @@ function Sheet({
 
   useEffect(() => {
     const toggleProblemstatus = async () => {
-      console.log(sheet_id, "/n", sheets_id, "/n", problem_id);
       if (problem_id && sheet_id && sheets_id) {
         try {
           

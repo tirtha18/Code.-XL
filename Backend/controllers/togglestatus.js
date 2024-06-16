@@ -26,8 +26,7 @@ export const togglestatus = async (req, res) => {
     if (flag) {
       await sheets.save();
       res.json({
-        message: "Problem status toggled successfully",
-        sheets,
+        message: "Problem status toggled successfully"
       });
     } else {
       return res
