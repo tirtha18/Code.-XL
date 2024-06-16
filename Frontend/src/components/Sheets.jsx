@@ -86,15 +86,14 @@ function Sheet({
       console.log(sheet_id, "/n", sheets_id, "/n", problem_id);
       if (problem_id && sheet_id && sheets_id) {
         try {
-          console.log(1);
+          
           const response = await axios.post(
             "https://code-xl.onrender.com/api/toggleprobstatus",
             { problem_id: problem_id, sheets_id: sheets_id, sheet_id: sheet_id }
           );
-          console.log(1);
-          console.log(response);
           setReload(true);
           setProblem_id("");
+          console.log(1);
         } catch (error) {
           console.log(error);
         }
@@ -160,7 +159,7 @@ function Sheet({
                         Done
                       </div>
                     ) : (
-                      <div className="  font-semibold rounded-2xl px-2 flex flex-auto items-center justify-center bg-red-800 text text-red-400">
+                      <div className="font-semibold rounded-2xl px-2 flex flex-auto items-center justify-center bg-red-800 text text-red-400">
                         Pending
                       </div>
                     )}

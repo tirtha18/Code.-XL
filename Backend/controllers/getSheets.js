@@ -2,7 +2,6 @@ import Sheet from "../models/Sheet.js";
 
 export const getSheets = async (req, res) => {
   try {
-    console.log(req.headers);
     const user_id = req.query.user_id;
     if (!user_id) {
       return res.status(400).json({ message: "No user_id sent" });

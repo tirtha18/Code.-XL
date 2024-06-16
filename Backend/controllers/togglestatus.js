@@ -1,49 +1,41 @@
 import Sheets from "../models/Sheet.js";
-
 export const togglestatus = async (req, res) => {
-  const problem_id = req.body.problem_id;
-  const sheet_id = req.body.sheet_id;
-  const sheets_id = req.body.sheets_id;
+  const { problem_id, sheet_id, sheets_id } = req.body;
   try {
-    let flag = false;
     const sheets = await Sheets.findById(sheets_id);
-    let updated_sheets = sheets.sheets;
-    console.log(updated_sheets[2]._id);
-    for (let i = 0; i < updated_sheets.length; i++) {
-      if (updated_sheets[i]._id.toString() === sheet_id) {
-        for (let j = 0; j < updated_sheets[i].sheet.length; j++) {
-          if (updated_sheets[i].sheet[j]._id.toString() === problem_id) {
+    if (!sheets) {
+      return res.status(400).json({ message: "Sheets not found" });
+    }
+    let flag = false;
+    for (let i = 0; i < sheets.sheets.length; i++) {
+      if (sheets.sheets[i]._id.toString() === sheet_id) {
+        for (let j = 0; j < sheets.sheets[i].sheet.length; j++) {
+          if (sheets.sheets[i].sheet[j]._id.toString() === problem_id) {
             flag = true;
-            if (updated_sheets[i].sheet[j].status == "PENDING")
-              updated_sheets[i].sheet[j].status = "DONE";
-            else updated_sheets[i].sheet[j].status = "PENDING";
+            sheets.sheets[i].sheet[j].status =
+              sheets.sheets[i].sheet[j].status === "PENDING"
+                ? "DONE"
+                : "PENDING";
+            break;
           }
-          if (flag) break;
         }
+        if(flag)
+        break;
       }
     }
-    console.log(flag);
     if (flag) {
-      try {
-        const getupsheed = async () => {
-          const updSheet = await Sheets.findByIdAndUpdate(sheets_id, {
-            $set: { sheets: updated_sheets },
-          });
-          res.json({
-            message: "Problem status toggled successfully",
-            updSheet,
-          });
-        };
-        getupsheed();
-      } catch (error) {
-        console.log(error);
-      }
+      await sheets.save();
+      res.json({
+        message: "Problem status toggled successfully",
+        sheets,
+      });
     } else {
       return res
         .status(400)
-        .json({ messaga: "Invalid sheet, problem or sheet ids" });
+        .json({ message: "Invalid sheet, problem or sheet ids" });
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };

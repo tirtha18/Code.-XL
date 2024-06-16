@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const Problem = new Schema({
+const ProblemSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -22,24 +22,31 @@ const Problem = new Schema({
   },
 });
 
-const Sheet = new Schema({
+const SheetSchema = new Schema({
   name: {
     type: String,
     required: true,
   },
   sheet: {
-    type: [Problem],
+    type: [ProblemSchema],
   },
 });
-const sheetsSchema = new Schema({
+
+const SheetsSchema = new Schema({
   user_id: {
     type: Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
   sheets: {
-    type: [Sheet],
+    type: [SheetSchema],
     required: true,
   },
 });
-export default mongoose.model("Sheets", sheetsSchema);
+
+const Problem = mongoose.model("Problem", ProblemSchema);
+const Sheet = mongoose.model("Sheet", SheetSchema);
+const Sheets = mongoose.model("Sheets", SheetsSchema);
+
+export default Sheets;
+export { Problem, Sheet };
