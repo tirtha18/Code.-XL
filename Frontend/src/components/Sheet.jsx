@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import axios from "axios";
 import Spinner from "./SpinnerAni";
-import { IoMdArrowDropdown } from "react-icons/io";
+import { RiArrowDropUpLine } from "react-icons/ri";
+import { RiArrowDropDownLine } from "react-icons/ri";
 export default function Sheet({
   setSheetshow,
   selectedsheet,
@@ -66,7 +67,7 @@ export default function Sheet({
   return (
     <div className="p-4 capitalize m-6">
       <button
-        className="px-4 py-2 rounded-lg text-black bg-white mb-10 font-bold flex flex-row items-center space-x-1"
+        className="px-4 py-2 rounded-lg text-black bg-white mb-10 font-bold flex flex-row items-center space-x-1 hover:scale-105 duration-300"
         onClick={() => setSheetshow(false)}
       >
         <IoMdArrowRoundBack size={20} />
@@ -75,71 +76,83 @@ export default function Sheet({
       <div className="">
         <div className="">
           {Object.entries(dividedprob).map(([tag, problems], index) => (
-            <div key={tag} className=" mb-6">
-              <div className="w-full bg-gray-900 flex p-4 flex-row text-gray-300 rounded-t-lg justify-between border-b border-gray-500 items-center">
-                <div className="text-xl font-bold ">{tag}</div>
-                <div className="">
-                  <IoMdArrowDropdown
-                    className="hover:cursor-pointer"
-                    onClick={() => {
-                      handleDropdown(index);
-                    }}
-                    size={25}
-                  />
+            <div key={tag} className=" mb-6 border-zinc-700 border rounded-lg ">
+              <div
+                onClick={() => {
+                  handleDropdown(index);
+                }}
+                className={`w-full bg-zinc-900 flex p-4 flex-row hover:cursor-pointer text-gray-300 rounded-t-lg justify-between items-center ${
+                  dropdown[index]
+                    ? "border-b border-zinc-500"
+                    : "duration-200 rounded-b-lg shadow-md shadow-zinc-700"
+                }`}
+              >
+                <div
+                  className={`text-xl font-bold ${
+                    dropdown[index] ? "mb-2" : ""
+                  }`}
+                >
+                  {tag}
+                </div>
+                <div
+                  className={`${
+                    dropdown[index]
+                      ? " bg-green-900 border text-green-300 border-green-500"
+                      : "bg-zinc-800"
+                  } rounded-lg p-1`}
+                >
+                  {!dropdown[index] ? (
+                    <RiArrowDropDownLine
+                      className="hover:cursor-pointer"
+                      size={28}
+                    />
+                  ) : (
+                    <RiArrowDropUpLine
+                      className="hover:cursor-pointer"
+                      size={28}
+                    />
+                  )}
                 </div>
               </div>
               {dropdown[index] && (
                 <div
-                  className="max-h-64 mb-10 overflow-auto"
+                  className="max-h-64  overflow-auto"
                   style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                 >
-                  <table className="w-full bg-gray-800 text-white ">
+                  <table className="w-full bg-zinc-900 text-gray-400 ">
                     <thead>
                       <tr>
-                        <th className="py-2 px-4 border-b border-gray-700 bg-gray-900 text-left">
+                        <th className="py-2 px-4 text-left border-b border-zinc-600">
                           Status
                         </th>
-                        <th className="py-2 px-4 border-b border-gray-700 bg-gray-900 text-left">
-                          Topic Name
-                        </th>
-                        <th className="py-2 px-4 border-b border-gray-700 bg-gray-900 text-left">
+                        <th className="py-2 px-4 text-left border-b border-zinc-600">
                           Problem Name
                         </th>
-                        <th className="py-2 px-4 border-b border-gray-700 bg-gray-900 text-left">
+                        <th className="py-2 px-4 text-left border-b border-zinc-600">
                           Practice
                         </th>
-                        <th className="py-2 px-4 border-b border-gray-700 bg-gray-900 text-left">
+                        <th className="py-2 px-4 text-left border-b border-zinc-600">
                           Video
                         </th>
                       </tr>
                     </thead>
-                    <tbody>
-                      {problems.map((problem, index) => (
-                        <tr
-                          key={problem._id}
-                          className={
-                            index % 2 === 0
-                              ? "bg-gray-700"
-                              : "bg-gray-800 hover:bg-gray-700"
-                          }
-                        >
-                          <td className="py-2 px-4 border-b border-gray-700">
+                    <tbody className=" text-gray-300">
+                      {problems.map((problem) => (
+                        <tr key={problem._id} className=" bg-zinc-800">
+                          <td className="py-2 px-4 border-b border-zinc-700">
                             <button
                               onClick={() => handleStatusToggle(problem._id)}
                             >
                               {problem.status === "DONE" ? (
-                                <div className="font-semibold rounded-2xl px-2 flex items-center justify-center bg-green-800 text-green-400">
+                                <div className="font-semibold rounded-2xl px-3 flex items-center justify-center bg-green-800 text-green-300">
                                   Done
                                 </div>
                               ) : (
-                                <div className="font-semibold rounded-2xl px-2 flex items-center justify-center bg-red-800 text-red-400">
+                                <div className="font-semibold rounded-2xl px-3 flex items-center justify-center bg-red-800 text-red-400">
                                   Pending
                                 </div>
                               )}
                             </button>
-                          </td>
-                          <td className="py-2 px-4 border-b border-gray-700">
-                            {problem.tag}
                           </td>
                           <td className="py-2 px-4 border-b border-gray-700">
                             {problem.name}

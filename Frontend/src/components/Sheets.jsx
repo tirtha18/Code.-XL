@@ -55,10 +55,8 @@ function FileUploadForm({ setFileshow, user_id, setReload }) {
           className="bg-black text-gray-100 py-2 px-4 rounded-lg ml-7 hover:cursor-pointer hover:scale-105 duration-200"
           onClick={() => {
             if (!selectedFile) {
-             alert("Select or drop a file to continue");
-            }
-            else
-            FileUpload();
+              alert("Select or drop a file to continue");
+            } else FileUpload();
           }}
         >
           Upload
@@ -78,8 +76,6 @@ function FileUploadForm({ setFileshow, user_id, setReload }) {
   );
 }
 
-
-
 export default function Sheets() {
   const [sheetshow, setSheetshow] = useState(false);
   const [selectedsheet, setSelectedsheet] = useState([]);
@@ -91,7 +87,6 @@ export default function Sheets() {
   const [sheet_id, setSheet_id] = useState("");
   const [sheets_id, setSheets_id] = useState("");
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const getSheets = async () => {
       try {
@@ -127,10 +122,10 @@ export default function Sheets() {
           className="px-10 py-10 overflow-auto"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          <div className="grid sm:grid-cols-1 md:grid-cols-3 md:gap-14 gap-4">
+          <div className="grid sm:grid-cols-1 md:grid-cols-3 md:gap-8 gap-4">
             <div
               onClick={() => setFileshow(true)}
-              className="hover:cursor-pointer hover:scale-105 duration-300 bg p-5 rounded-xl h-44 flex border text-3xl text-gray-700 font-bold bg-white items-center justify-center"
+              className="hover:cursor-pointer hover:scale-105 duration-200 bg p-5 rounded-xl h-44 flex text-3xl shadow-md shadow-zinc-700 text-gray-400 font-bold border-zinc-700 border hover:border-green-400 hover:border bg-zinc-900 items-center justify-center  hover:text-green-500"
             >
               <FiPlus className="hover:scale-105 duration-200" size={100} />
             </div>
@@ -143,10 +138,10 @@ export default function Sheets() {
                   setSheetshow(true);
                   setSheet_id(it._id);
                 }}
-                className="hover:cursor-pointer hover:scale-105 duration-300 p-5 rounded-xl h-44 flex border flex-col bg text-2xl text-black font-bold bg-white"
+                className="hover:cursor-pointer hover:scale-105 duration-200 p-5 rounded-xl h-44 flex flex-col bg text-2xl shadow-md shadow-zinc-700 text-gray-300 font-bold bg-zinc-900 border-zinc-700 border hover:border hover:text-green-500 hover:border-green-500 "
               >
                 <div>{it.name.substring(0, it.name.length - 5)}</div>
-                <div className="text-sm font-sans font mt-auto text-gray-900 underline flex flex-row items-center">
+                <div className="text-sm font-sans font mt-auto underline flex flex-row items-center">
                   View all
                   <div className="px-1">
                     <FaArrowRight />
