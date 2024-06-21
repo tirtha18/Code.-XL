@@ -21,7 +21,6 @@ const AuthProvider = ({ children }) => {
       setUser(jwtDecode(storedToken));
     }
   }, []);
-
   const login = async (credentials) => {
     if (!credentials) {
       console.log("Invalid credentials");

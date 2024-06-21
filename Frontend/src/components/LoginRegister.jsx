@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import React, { useState, useContext } from "react";
 import axios from "axios";
-
 import { AuthContext } from "./AuthProvider";
 const LoginRegister = () => {
   const [activeCard, setActiveCard] = useState("login");

@@ -56,7 +56,7 @@ export default function Navbar() {
           <div className="mt-20">
             {navItems.map((item) => (
               <Link key={item.ind} to={item.link}>
-                <div className="flex flex-row space-x-5 items-center hover:bg-white hover:text-black  lg:py-4 py-4 px-4 w-full rounded-lg hover:cursor-pointer hover:scale-105">
+                <div className="flex flex-row space-x-5 items-center hover:bg-white hover:text-black lg:py-4 py-4 px-4 w-full rounded-lg hover:cursor-pointer hover:scale-105">
                   {item.icon}
                   <div>{item.name}</div>
                 </div>
@@ -64,6 +64,7 @@ export default function Navbar() {
             ))}
           </div>
         </div>
+        {user&&(
         <div
           onClick={() => {
             logout();
@@ -71,7 +72,7 @@ export default function Navbar() {
           className="flex items-center text mt-auto mb-4 py-2 px-10 rounded-lg text-gray-800 bg-white flex-row space-x-2 hover:cursor-pointer "
         >
           <div>Logout |</div> <MdOutlineLogout />
-        </div>
+        </div>)}
       </div>
     </>
   );
