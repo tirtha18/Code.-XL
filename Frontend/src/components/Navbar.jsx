@@ -9,7 +9,6 @@ import { IoIosHome } from "react-icons/io";
 import { ImBooks } from "react-icons/im";
 import { AuthContext } from "./AuthProvider";
 import "react-toastify/dist/ReactToastify.css";
-
 const navItems = [
   {
     ind: 0,
@@ -50,9 +49,10 @@ const navItems = [
 ];
 
 export default function Navbar() {
-  const { user, token, login, logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   const temp = [];
   for (let i = 0; i < navItems.length; i++) temp.push(false);
+  temp[0]=true;
   const [navactive, setNavactive] = useState(temp);
   const handleNavclick = (index) => {
     const tem = [...navactive];
@@ -63,7 +63,7 @@ export default function Navbar() {
   };
   return (
     <>
-      <div className="flex flex-col bg-black text-white h-screen items-center text-xl shadow-md shadow-gray-500">
+      <div className="md:flex flex-col bg-black text-white md:h-screen items-center text-xl shadow-md shadow-gray-500 hidden">
         <div className="flex flex-col items-center">
           <div className="text-3xl mt-4 py-3 px-10 rounded-lg text-gray-800 bg-white font-semibold ">
             Code. XL

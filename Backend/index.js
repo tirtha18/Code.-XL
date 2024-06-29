@@ -8,9 +8,12 @@ import router2 from "./routes/togglepstatus.js";
 
 import router3 from "./routes/getsheets.js";
 
+import router4 from "./routes/getUser.js";
+
 import { connectToDatabase } from "./config/database.js";
 
 import cors from "cors";
+
 
 const app = express();
 
@@ -27,6 +30,8 @@ app.use("/api/", router1);
 app.use("/api/", router2);
 
 app.use("/api/",router3);
+
+app.use("/api/",router4);
 
 app.get('/abc',async (req,res) => {res.send("gjhkrefw")});
 

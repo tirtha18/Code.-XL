@@ -17,7 +17,7 @@ function App() {
           <div className="w-1/6">
             <Navbar />
           </div>
-          <div className="flex flex-col w-5/6 max-h-full h-screen">
+          <div className="flex flex-col w-5/6  max-h-full h-screen">
             <Header />
             <Routes>
               <Route path="/sheets" element={<Sheets />} />

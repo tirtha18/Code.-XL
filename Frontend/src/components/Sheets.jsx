@@ -125,7 +125,7 @@ export default function Sheets() {
           <div className="grid sm:grid-cols-1 md:grid-cols-3 md:gap-8 gap-4">
             <div
               onClick={() => setFileshow(true)}
-              className="hover:cursor-pointer hover:scale-105 duration-200 bg p-5 rounded-xl h-44 flex text-3xl shadow-md shadow-zinc-700 text-gray-400 font-bold border-zinc-700 border hover:border-green-400 hover:border bg-zinc-900 items-center justify-center  hover:text-green-500"
+              className="hover:cursor-pointer hover:scale-105 duration-200 bg p-5 rounded-xl h-44 flex text-3xl shadow-md shadow-zinc-700 font-bold border border-green-500 hover:border bg-zinc-900 items-center justify-center text-green-500"
             >
               <FiPlus className="hover:scale-105 duration-200" size={100} />
             </div>
