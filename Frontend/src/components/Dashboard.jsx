@@ -13,6 +13,8 @@ export default function Dashboard() {
   const [user_id, setUserid] = useState(null);
   const { user } = useContext(AuthContext);
   const [sheets, setSheets] = useState([]);
+  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   useEffect(() => {
     const getSheets = async () => {
       try {
@@ -35,6 +37,29 @@ export default function Dashboard() {
     };
     getSheets();
   }, [user]);
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        if (!user) return console.log("User ID not available");
+        const user_id = user._id;
+        setUserid(user_id);
+        setLoading(true);
+        const response = await axios.get(
+          "https://code-xl.onrender.com/api/getUser",
+          {
+            params: { user_id: user_id },
+          }
+        );
+        setName(response.data.name);
+        setUsername(response.data.username);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getUser();
+  }, [user]);
   const editedsheets = sheets;
   console.log(sheets);
   for (let i = 0; i < sheets.length; i++) {
@@ -56,8 +81,8 @@ export default function Dashboard() {
                 <img width="120" height="120" src={User_img} alt="User" />
               </div>
               <div className="mt-1 flex flex-col items-center">
-                <h1 className="text-2xl font-bold">Tirtha Biswas</h1>
-                <h2 className="text-zinc-400 mt-1">#tirtha_18</h2>
+                <h1 className="text-2xl font-bold">{name}</h1>
+                <h2 className="text-zinc-400 mt-1">{username}</h2>
               </div>
               <div className="mt-8 flex flex-col border-t border-zinc-700 items-center text-zinc-500">
                 <div>
