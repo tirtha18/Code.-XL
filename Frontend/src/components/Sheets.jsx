@@ -43,8 +43,8 @@ function FileUploadForm({ setFileshow, user_id, setReload }) {
     }
   };
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
-      <div className="bg-black bg-opacity-70 absolute inset-0"></div>
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 ">
+      <div className="bg-black bg-opacity-50 backdrop-blur-sm absolute inset-0 "></div>
       <div className="bg-white p-8 rounded-lg shadow-lg z-10 flex items-center flex-row">
         <FileUploader
           handleChange={handleFileChange}

@@ -40,8 +40,9 @@ function ShowSheetDetails({ selectedsheet, setSheetshow }) {
 
   return (
     <div className="fixed top-0 left-0 flex justify-center items-center min-h-screen w-screen z-50 bg-opacity-50 backdrop-blur-sm">
-      <div className="relative bg-zinc-800 border-zinc-600 border p-8 rounded-lg shadow-lg text-zinc-300 flex-col flex items-center">
-        <button
+      <div className="relative bg-zinc-800 border-zinc-600 border  rounded-lg shadow-lg text-zinc-300 flex-col flex items-center">
+      <div className="text-lg font-semibold p-4 border-b border-zinc-600 text-zinc-300 w-full">
+                  Progress: <button
           onClick={() => setSheetshow(false)}
           className="absolute top-4 right-4"
           aria-label="Close"
@@ -61,14 +62,16 @@ function ShowSheetDetails({ selectedsheet, setSheetshow }) {
             />
           </svg>
         </button>
-        <div className="m-2 flex items-center flex-row space-x-10">
+                </div>
+        <div className=" flex items-center flex-row space-x-16 mt-8 mb-8">
           <div className="flex items-center ">
-            <div  className=" w-[600px] h-[600px] capitalize"><DoughnutChart topicColors={topicColors} topicLabels={topicLabels} topicCompletion={topicCompletion} borderColors={borderColors}/></div>
+            <div  className=" w-[550px] capitalize mt-4"><DoughnutChart topicColors={topicColors} topicLabels={topicLabels} topicCompletion={topicCompletion} borderColors={borderColors}/></div>
           </div>
-          <div className=""></div>
-          <div>
+          <div ></div>
+          <div></div>
+          <div className="flex flex-col overflow-auto h-[600px] ">
             {topicsCompstatus.map((it,index) => (
-              <ul key={index} className="flex flex-col min-w-72 text-sm p-2 space-y-2 text-zinc-400 ">
+              <ul key={index} className="flex flex-col min-w-72 text-sm pr-2 py-2 space-y-2 text-zinc-400 font-semibold ">
                 <div className=""><h4>{it.topic.toUpperCase()}</h4></div>
                 <div className=""><ProgressBar value = {it.completion}/></div>
               </ul>

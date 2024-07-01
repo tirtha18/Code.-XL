@@ -1,29 +1,26 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { MdPadding } from 'react-icons/md';
 ChartJS.register(ArcElement, Tooltip, Legend);
 const options = {
-  responsive: true,
   plugins: {
     legend: {
-      position: 'right',
-    },
-    title: {
-      display: true,
-      text: 'Problems Solved',
+      position: 'bottom',
     },
   },
+  
 };
 const DoughnutChart = ({topicLabels, topicColors, topicCompletion, borderColors}) => {
   const data = {
     labels: topicLabels,
     datasets: [
       {
-        label: '# of Problems',
+        label: '# Problems solved',
         data: topicCompletion,
         backgroundColor: topicColors,
         borderColor: borderColors,
-        borderWidth: 6,
+        borderWidth: 8,
       },
     ],
   };
