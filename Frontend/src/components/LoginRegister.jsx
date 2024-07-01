@@ -11,7 +11,7 @@ const LoginRegister = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const navigate = useNavigate();
-  const { user, token, login, logout } = useContext(AuthContext);
+  const { login} = useContext(AuthContext);
   const toggleCard = (cardType) => {
     setActiveCard(cardType);
   };
@@ -68,7 +68,7 @@ const LoginRegister = () => {
   return (
     <>
       <div className="fixed top-0 left-0 flex justify-center items-center min-h-screen w-screen bg-black z-50">
-        <div className="relative bg-white p-8 rounded-lg shadow-lg w-full max-w-md text-black flex-col flex items-center">
+        <div className="relative bg-zinc-100 p-8 rounded-lg shadow-lg w-full max-w-md text-black flex-col flex items-center">
           <button
             onClick={handleClose}
             className="absolute top-4 right-4 text-black"

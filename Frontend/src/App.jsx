@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./components/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -17,12 +18,26 @@ function App() {
           <div className="w-1/6">
             <Navbar />
           </div>
-          <div className="flex flex-col w-5/6  max-h-full h-screen">
+          <div className="flex flex-col w-5/6 max-h-full h-screen">
             <Header />
             <Routes>
-              <Route path="/sheets" element={<Sheets />} />
               <Route path="/login" element={<LoginRegister />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route
+                path="/sheets"
+                element={
+                  <ProtectedRoute>
+                    <Sheets />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
           </div>
         </div>

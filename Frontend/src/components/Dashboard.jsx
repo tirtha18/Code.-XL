@@ -8,11 +8,85 @@ import { useContext } from "react";
 import { AuthContext } from "./AuthProvider";
 import axios from "axios";
 import Spinner from "./SpinnerAni";
+import ProgressBar from "./ProgressBar";
+import DoughnutChart from "./DoughnutChart";
+import randomColor from 'randomcolor';
+function ShowSheetDetails({ selectedsheet, setSheetshow }) {
+  if (!selectedsheet.sheet) return null;
+  const dividedprob = selectedsheet.sheet.reduce((acc, prob) => {
+    if (!acc[prob.tag]) acc[prob.tag] = [];
+    acc[prob.tag].push(prob);
+    return acc;
+  }, {});
+  const topicsCompstatus = [];
+  const topicLabels = [];
+  const topicCompletion = [];
+  const topicColors = [];
+  const borderColors = [];
+  for (const [topic, problems] of Object.entries(dividedprob)) {
+    const done = problems.filter((problem) => problem.status === "DONE");
+    let completion = Math.floor((done.length / problems.length) * 100);
+    topicsCompstatus.push({
+      topic: topic,
+      doneprob: done.length,
+      totalprob: problems.length,
+      completion: completion,
+    });
+    topicLabels.push(topic.toUpperCase());
+    topicCompletion.push(done.length);
+    topicColors.push(randomColor({ luminosity: 'bright' }));
+    borderColors.push("rgb(39 39 42 )");
+  }
+
+  return (
+    <div className="fixed top-0 left-0 flex justify-center items-center min-h-screen w-screen z-50 bg-opacity-50 backdrop-blur-sm">
+      <div className="relative bg-zinc-800 border-zinc-600 border p-8 rounded-lg shadow-lg text-zinc-300 flex-col flex items-center">
+        <button
+          onClick={() => setSheetshow(false)}
+          className="absolute top-4 right-4"
+          aria-label="Close"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+        <div className="m-2 flex items-center flex-row space-x-10">
+          <div className="flex items-center ">
+            <div  className=" w-[600px] h-[600px] capitalize"><DoughnutChart topicColors={topicColors} topicLabels={topicLabels} topicCompletion={topicCompletion} borderColors={borderColors}/></div>
+          </div>
+          <div className=""></div>
+          <div>
+            {topicsCompstatus.map((it,index) => (
+              <ul key={index} className="flex flex-col min-w-72 text-sm p-2 space-y-2 text-zinc-400 ">
+                <div className=""><h4>{it.topic.toUpperCase()}</h4></div>
+                <div className=""><ProgressBar value = {it.completion}/></div>
+              </ul>
+            ))}
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  );
+}
 export default function Dashboard() {
   const [loading, setLoading] = useState(false);
   const [user_id, setUserid] = useState(null);
   const { user } = useContext(AuthContext);
   const [sheets, setSheets] = useState([]);
+  const [selectedsheet, setSelectedsheet] = useState({});
+  const [sheetshow, setSheetshow] = useState(false);
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   useEffect(() => {
@@ -35,9 +109,6 @@ export default function Dashboard() {
         setLoading(false);
       }
     };
-    getSheets();
-  }, [user]);
-  useEffect(() => {
     const getUser = async () => {
       try {
         if (!user) return console.log("User ID not available");
@@ -58,6 +129,7 @@ export default function Dashboard() {
         setLoading(false);
       }
     };
+    getSheets();
     getUser();
   }, [user]);
   const editedsheets = sheets;
@@ -129,7 +201,10 @@ export default function Dashboard() {
                       <div
                         key={sheet._id}
                         className="w-32 flex flex-col items-center hover:cursor-pointer"
-                        onClick={() => {}}
+                        onClick={() => {
+                          setSelectedsheet(sheet);
+                          setSheetshow(true);
+                        }}
                       >
                         <CircularProgressbar
                           value={sheet.completionStatus}
@@ -156,6 +231,9 @@ export default function Dashboard() {
                 <div className="text-lg font-semibold p-4 border-b border-zinc-600 text-zinc-300">
                   Upcoming Contests
                 </div>
+                <div>
+                  <div></div>
+                </div>
               </div>
             </div>
             <div className="flex flex-row">
@@ -166,6 +244,12 @@ export default function Dashboard() {
         </div>
         {loading && <Spinner />}
       </div>
+      {sheetshow && (
+        <ShowSheetDetails
+          selectedsheet={selectedsheet}
+          setSheetshow={setSheetshow}
+        />
+      )}
     </div>
   );
 }

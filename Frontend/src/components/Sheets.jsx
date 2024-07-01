@@ -62,7 +62,7 @@ function FileUploadForm({ setFileshow, user_id, setReload }) {
           Upload
         </button>
         <button
-          className="bg-gray-100 border shadow-lg text-black py-2 px-4 rounded-lg ml-3 hover:cursor-pointer hover:scale-105 duration-300"
+          className="bg-gray-200 border shadow-lg text-black py-2 px-4 rounded-lg ml-3 hover:cursor-pointer hover:scale-105 duration-300"
           onClick={() => {
             setFileshow(false);
             setSelectedFile(null);
@@ -125,7 +125,7 @@ export default function Sheets() {
           <div className="grid sm:grid-cols-1 md:grid-cols-3 md:gap-8 gap-4">
             <div
               onClick={() => setFileshow(true)}
-              className="hover:cursor-pointer hover:scale-105 duration-200 bg p-5 rounded-xl h-44 flex text-3xl shadow-md shadow-zinc-700 font-bold border border-green-500 hover:border bg-zinc-900 items-center justify-center text-green-500"
+              className="hover:cursor-pointer hover:scale-105 duration-200 bg p-5 rounded-xl h-44 flex text-3xl font-bold border border-green-500 hover:border-2 bg-zinc-900 items-center justify-center text-green-500"
             >
               <FiPlus className="hover:scale-105 duration-200" size={100} />
             </div>
@@ -138,7 +138,7 @@ export default function Sheets() {
                   setSheetshow(true);
                   setSheet_id(it._id);
                 }}
-                className="hover:cursor-pointer hover:scale-105 duration-200 p-5 rounded-xl h-44 flex flex-col bg text-2xl shadow-md shadow-zinc-700 text-gray-300 font-bold bg-zinc-900 border-zinc-700 border hover:border hover:text-green-500 hover:border-green-500 "
+                className="hover:cursor-pointer hover:scale-105 duration-200 p-5 rounded-xl h-44 flex flex-col bg text-2xl text-gray-300 font-bold bg-zinc-900 border-zinc-700 border hover:border-2 hover:text-green-500 hover:border-green-500 "
               >
                 <div>{it.name.substring(0, it.name.length - 5)}</div>
                 <div className="text-sm font-sans font mt-auto underline flex flex-row items-center">
