@@ -1,4 +1,4 @@
-import express from "express";
+import express, { response } from "express";
 
 import router from "./routes/auth.js";
 
@@ -14,7 +14,6 @@ import { connectToDatabase } from "./config/database.js";
 
 import cors from "cors";
 
-
 const app = express();
 
 connectToDatabase();
@@ -29,9 +28,9 @@ app.use("/api/", router1);
 
 app.use("/api/", router2);
 
-app.use("/api/",router3);
+app.use("/api/", router3);
 
-app.use("/api/",router4);
+app.use("/api/", router4);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Express server initialized");

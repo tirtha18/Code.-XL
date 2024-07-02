@@ -2,6 +2,7 @@ import exceljs from "exceljs";
 import fs from "fs";
 import Sheets from "../models/Sheet.js";
 import { getVideoLink } from "./getVideoLink.js";
+import { set } from "mongoose";
 export const extract = async (req, res) => {
   try {
     if (!req.file) {
@@ -147,45 +148,55 @@ export const extract = async (req, res) => {
         }
       }
     }
-
-    const finalData = [];
-    for (let i = 0; i < extractedData.length; i++) {
-      if (
-        extractedData[i].name !== "" &&
-        extractedData[i].tag !== "" &&
-        extractedData[i].link !== ""
-      ) {
-        const videoUrl = "";
-        getVideoLink("JavaScript Tutorial")
-          .then((link) => (videoUrl = link))
-          .catch((error) => console.error("Error:", error));
-      }
-      extractedData[i]["videoLink"] = videoUrl;
-      finalData.push(extractedData[i]);
-    }
-    for (let i = 0; i < finalData.length; i++)
-      finalData[i]["status"] = "PENDING";
-    let newSheet = { name: req.file.originalname, sheet: [] };
-    for (let i = 0; i < finalData.length; i++)
-      newSheet.sheet.push(finalData[i]);
-    const user_id = req.body.user_id;
-    if (!user_id)
-      return res.status(400).json({ Message: "User not logged in" });
-    Sheets.findOneAndUpdate({ user_id }, { $push: { sheets: newSheet } })
-      .then((sheets) => {
-        if (sheets) console.log("New Sheet added");
-        else {
-          const sheets = new Sheets({ user_id: user_id, sheets: [newSheet] });
-          console.log("First sheet is inserted into sheets");
-          sheets.save();
+    let finalData = [];
+    async function getfinalData(extractedData) {
+      let finalData = [];
+      for (let i = 0; i < extractedData.length; i++) {
+        if (
+          extractedData[i].name !== "" &&
+          extractedData[i].tag !== "" &&
+          extractedData[i].link !== ""
+        ) {
+          let videoUrl = "";
+          try {
+            videoUrl = await getVideoLink("striver");
+            console.log(videoUrl);
+          } catch (error) {
+            console.log(error);
+          }
+          extractedData[i]["videoLink"] = videoUrl;
+          extractedData[i]["status"]= "PENDING";
+          finalData.push(extractedData[i]);
         }
+      }
+      return finalData;
+    }
+    getfinalData(extractedData)
+      .then((temp) => {
+        finalData = temp;
+        let newSheet = { name: req.file.originalname, sheet: [] };
+        for (let i = 0; i < finalData.length; i++)
+          newSheet.sheet.push(finalData[i]);
+        const user_id = req.body.user_id;
+        if (!user_id)
+          return res.status(400).json({ Message: "User not logged in" });
+        Sheets.findOneAndUpdate({ user_id }, { $push: { sheets: newSheet } })
+          .then((sheets) => {
+            if (sheets) console.log("New Sheet added");
+            else {
+              const sheets = new Sheets({ user_id: user_id, sheets: [newSheet] });
+              console.log("First sheet is inserted into sheets");
+              sheets.save();
+            }
+          })
+          .catch((error) => console.log(error));
+        fs.unlinkSync(filePath);
+        return res.json({
+          message: "Excel sheet extracted succefully!",
+        });
       })
       .catch((error) => console.log(error));
-    fs.unlinkSync(filePath);
-    return res.json({
-      message: "Excel sheet extracted succefully!",
-      finalData,
-    });
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error extracting Excel sheet" });
