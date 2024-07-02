@@ -26,6 +26,10 @@ function ShowSheetDetails({ selectedsheet, setSheetshow }) {
   for (const [topic, problems] of Object.entries(dividedprob)) {
     const done = problems.filter((problem) => problem.status === "DONE");
     let completion = Math.floor((done.length / problems.length) * 100);
+    for(let i=0;i<problems.length;i++)
+      {
+        console.log(problems[i]);
+      }
     topicsCompstatus.push({
       topic: topic,
       doneprob: done.length,

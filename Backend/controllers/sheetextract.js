@@ -155,9 +155,11 @@ export const extract = async (req, res) => {
         extractedData[i].tag !== "" &&
         extractedData[i].link !== ""
       ) {
+        const videoUrl="";
         getVideoLink("JavaScript Tutorial")
-          .then((link) => (extractedData[i].videoLink = link))
+          .then((link) => (videoUrl = link))
           .catch((error) => console.error("Error:", error));
+          extractedData[i]["videoLink"] = videoUrl;
         finalData.push(extractedData[i]);
       }
     }
