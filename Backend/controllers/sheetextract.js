@@ -155,11 +155,11 @@ export const extract = async (req, res) => {
         extractedData[i].tag !== "" &&
         extractedData[i].link !== ""
       ) {
-        const videoUrl="";
+        const videoUrl = "";
         getVideoLink("JavaScript Tutorial")
           .then((link) => (videoUrl = link))
           .catch((error) => console.error("Error:", error));
-          extractedData[i]["videoLink"] = videoUrl;
+        extractedData[i]["videoLink"] = videoUrl;
         finalData.push(extractedData[i]);
       }
     }
@@ -176,7 +176,7 @@ export const extract = async (req, res) => {
         if (sheets) console.log("New Sheet added");
         else {
           const sheets = new Sheets({ user_id: user_id, sheets: [newSheet] });
-          console.log("First sheet is inserted sheets");
+          console.log("First sheet is inserted into sheets");
           sheets.save();
         }
       })

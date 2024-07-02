@@ -20,6 +20,10 @@ const ProblemSchema = new Schema({
     enum: ["PENDING", "DONE"],
     default: "PENDING",
   },
+  videoLink: {
+    type: String,
+    required: true,
+  }
 });
 
 const SheetSchema = new Schema({
