@@ -33,8 +33,6 @@ app.use("/api/",router3);
 
 app.use("/api/",router4);
 
-app.get('/abc',async (req,res) => {res.send("gjhkrefw")});
-
 app.listen(process.env.PORT || 3000, () => {
   console.log("Express server initialized");
 });
