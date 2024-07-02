@@ -156,6 +156,7 @@ export const extract = async (req, res) => {
         extractedData[i].link !== ""
       ) {
         const videoUrl = "";
+        finalData[i]["status"] = "PENDING";
         getVideoLink("JavaScript Tutorial")
           .then((link) => (videoUrl = link))
           .catch((error) => console.error("Error:", error));
@@ -163,8 +164,6 @@ export const extract = async (req, res) => {
         finalData.push(extractedData[i]);
       }
     }
-    for (let i = 0; i < finalData.length; i++)
-      finalData[i]["status"] = "PENDING";
     let newSheet = { name: req.file.originalname, sheet: [] };
     for (let i = 0; i < finalData.length; i++)
       newSheet.sheet.push(finalData[i]);
