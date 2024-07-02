@@ -154,10 +154,12 @@ export const extract = async (req, res) => {
         extractedData[i].name !== "" &&
         extractedData[i].tag !== "" &&
         extractedData[i].link !== ""
-      )getVideoLink('JavaScript Tutorial')
-      .then((link) => extractedData[i].videoLink = link )
-      .catch((error) => console.error('Error:', error));     
+      ) {
+        getVideoLink("JavaScript Tutorial")
+          .then((link) => (extractedData[i].videoLink = link))
+          .catch((error) => console.error("Error:", error));
         finalData.push(extractedData[i]);
+      }
     }
     for (let i = 0; i < finalData.length; i++)
       finalData[i]["status"] = "PENDING";
