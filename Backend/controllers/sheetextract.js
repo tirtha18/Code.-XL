@@ -159,7 +159,7 @@ export const extract = async (req, res) => {
         ) {
           let videoUrl = "";
           try {
-            videoUrl = await getVideoLink("striver");
+            videoUrl = await getVideoLink(extractedData[i].name);
             console.log(videoUrl);
           } catch (error) {
             console.log(error);
@@ -192,7 +192,7 @@ export const extract = async (req, res) => {
           .catch((error) => console.log(error));
         fs.unlinkSync(filePath);
         return res.json({
-          message: "Excel sheet extracted succefully!",
+          message: "Excel sheet extracted succefully!",finalData
         });
       })
       .catch((error) => console.log(error));
