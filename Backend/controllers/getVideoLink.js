@@ -8,7 +8,7 @@ export const getVideoLink = async (query) => {
         params: {
           part: "snippet",
           q: query,
-          key: "AIzaSyDQxqXt1Rl4Cf3NGByQIUZI6xJannCGzyU",
+          key: "AIzaSyB30gEL3b3E3qzhxANpPDc1P725DxQL6C0",
           type: "video",
         },
       }
@@ -18,5 +18,6 @@ export const getVideoLink = async (query) => {
     return url;
   } catch (error) {
     //console.log(error);
+    return "";
   }
 };

@@ -22,7 +22,6 @@ const ProblemSchema = new Schema({
   },
   videoLink: {
     type: String,
-    required: true,
   }
 });
 

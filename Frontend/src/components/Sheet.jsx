@@ -74,14 +74,14 @@ export default function Sheet({
         <div>Back</div>
       </button>
       <div className="">
-        <div className="">
+        <div className=" ">
           {Object.entries(dividedprob).map(([tag, problems], index) => (
-            <div key={tag} className=" mb-6 border-zinc-700 border rounded-lg ">
+            <div key={tag} className=" mb-6 border-zinc-700 bg-zinc-900 border rounded-lg ">
               <div
                 onClick={() => {
                   handleDropdown(index);
                 }}
-                className={`w-full bg-zinc-900 flex p-4 flex-row hover:cursor-pointer text-gray-300 rounded-t-lg justify-between items-center ${
+                className={`w-full bg-zinc-900 flex p-4 flex-row hover:cursor-pointer  text-gray-300 rounded-t-lg justify-between items-center ${
                   dropdown[index]
                     ? "border-b border-zinc-500"
                     : "duration-200 rounded-b-lg shadow-md shadow-zinc-700"
@@ -116,30 +116,30 @@ export default function Sheet({
               </div>
               {dropdown[index] && (
                 <div
-                  className="max-h-64  overflow-auto"
+                  className="max-h-64 overflow-auto m-8 border rounded-lg border-zinc-600"
                   style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                 >
-                  <table className="w-full bg-zinc-900 text-gray-400 ">
+                  <table className="w-full bg-zinc-900 text-gray-400 min-w-full min-h-full ">
                     <thead>
-                      <tr>
-                        <th className="py-2 px-4 text-left border-b border-zinc-600">
-                          Status
+                      <tr className="text-sm">
+                        <th className="py-2 px-4 text-left">
+                          STATUS
                         </th>
-                        <th className="py-2 px-4 text-left border-b border-zinc-600">
-                          Problem Name
+                        <th className="py-2 px-4 text-left border-l border-zinc-600">
+                          NAME
                         </th>
-                        <th className="py-2 px-4 text-left border-b border-zinc-600">
-                          Practice
+                        <th className="py-2 px-4 text-left border-l border-zinc-600">
+                          PRACTICE
                         </th>
-                        <th className="py-2 px-4 text-left border-b border-zinc-600">
-                          Video
+                        <th className="py-2 px-4 text-left border-l border-zinc-600">
+                          VIDEO
                         </th>
                       </tr>
                     </thead>
-                    <tbody className=" text-gray-300">
+                    <tbody className=" text-zinc-300">
                       {problems.map((problem) => (
-                        <tr key={problem._id} className=" bg-zinc-800">
-                          <td className="py-2 px-4 border-b border-zinc-700">
+                        <tr key={problem._id} className=" bg-zinc-900">
+                          <td className="py-2 px-4 border-t border-zinc-600">
                             <button
                               onClick={() => handleStatusToggle(problem._id)}
                             >
@@ -154,10 +154,10 @@ export default function Sheet({
                               )}
                             </button>
                           </td>
-                          <td className="py-2 px-4 border-b border-gray-700">
+                          <td className="py-2 px-4 border-t border-x border-zinc-600">
                             {problem.name}
                           </td>
-                          <td className="py-2 px-4 border-b border-gray-700">
+                          <td className="py-2 px-4 border-t border-r border-zinc-600">
                             <a
                               href={problem.link}
                               target="_blank"
@@ -167,7 +167,7 @@ export default function Sheet({
                               Practice Link
                             </a>
                           </td>
-                          <td className="py-2 px-4 border-b border-gray-700">
+                          <td className="py-2 px-4 border-t border-zinc-600">
                             <a
                               href={problem.videoLink}
                               target="_blank"
