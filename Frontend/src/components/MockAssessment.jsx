@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import Timer from "./Timer";
 import ProgressBar from "./ProgressBar";
+const api = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 const options = [
   { value: "aptitude", label: "Aptitude" },
   { value: "dbms", label: "DBMS" },
@@ -109,7 +110,7 @@ function AssesmentQuestions({
   useEffect(() => {
     const getQuestions = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/questions");
+        const response = await axios.get(`${api}/questions`);
         const filteredQuestions = response.data.filter(
           (question) =>
             topics.includes(question.topic) &&
