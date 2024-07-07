@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
-import axios from "axios";
 import Timer from "./Timer";
 import ProgressBar from "./ProgressBar";
-const api = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+import Questions from "../questions.json";
 const options = [
   { value: "aptitude", label: "Aptitude" },
   { value: "dbms", label: "DBMS" },
@@ -71,14 +70,26 @@ function Result({ setShowResult, attemptedq, correctq, totalq }) {
               <h1>Accuracy</h1>
             </div>
             <div className=" mt-3">
-              <ProgressBar value={attemptedq !== 0 ?Math.floor((correctq / attemptedq) * 100): 0} />
+              <ProgressBar
+                value={
+                  attemptedq !== 0
+                    ? Math.floor((correctq / attemptedq) * 100)
+                    : 0
+                }
+              />
             </div>
           </div>
           <div className="w-full space-x-2 mb-6 flex flex-row">
-            <button  className="px-2 py-1 bg-green-600 rounded-lg ml-auto hover:bg-green-800">
+            <button className="px-2 py-1 bg-green-600 rounded-lg ml-auto hover:bg-green-800">
               <h1>Save Results</h1>
             </button>
-            <button className="px-3 py-1 bg-zinc-600 rounded-lg  hover:bg-zinc-900  " onClick={() => {setShowResult(false); toast("Correct Answers are displayed below each question!")} }>
+            <button
+              className="px-3 py-1 bg-zinc-600 rounded-lg  hover:bg-zinc-900  "
+              onClick={() => {
+                setShowResult(false);
+                toast("Correct Answers are displayed below each question!");
+              }}
+            >
               <h1>Show Answers</h1>
             </button>
           </div>
@@ -109,21 +120,18 @@ function AssesmentQuestions({
   }, [timesup]);
   useEffect(() => {
     const getQuestions = async () => {
-      try {
-        const response = await axios.get(`${api}/questions`);
-        const filteredQuestions = response.data.filter(
-          (question) =>
-            topics.includes(question.topic) &&
-            question.difficulty === difficulty.toLowerCase()
-        );
-        const ques = filteredQuestions.slice(0, number);
-        setQuestionsfetched(ques);
-        setSelectedQuestion(ques[0]);
-        setQuesno("1");
-        setQuestionShow(true);
-      } catch (error) {
-        console.log("Error fetching questions:", error);
-      }
+      console.log(Questions.questions);
+      const allQues = Questions.questions;
+      const filteredQuestions = allQues.filter(
+        (question) =>
+          topics.includes(question.topic) &&
+          question.difficulty === difficulty.toLowerCase()
+      );
+      const ques = filteredQuestions.slice(0, number);
+      setQuestionsfetched(ques);
+      setSelectedQuestion(ques[0]);
+      setQuesno("1");
+      setQuestionShow(true);
     };
     getQuestions();
   }, [duration, difficulty, topics, number]);
