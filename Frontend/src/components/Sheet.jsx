@@ -4,6 +4,9 @@ import axios from "axios";
 import Spinner from "./SpinnerAni";
 import { RiArrowDropUpLine } from "react-icons/ri";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import GFG_logo from "../images/GFG_logo1.png";
+import YT_logo from "../images/YT_logo.png";
+import LC_logo from "../images/LC_logo.png";
 export default function Sheet({
   setSheetshow,
   selectedsheet,
@@ -13,7 +16,6 @@ export default function Sheet({
   const [problem_id, setProblem_id] = useState(null);
   const [loading, setLoading] = useState(false);
   const [sheetdata, setSheetdata] = useState(selectedsheet);
-
   const dividedprob = sheetdata.sheet.reduce((acc, prob) => {
     if (!acc[prob.tag]) acc[prob.tag] = [];
     acc[prob.tag].push(prob);
@@ -81,7 +83,7 @@ export default function Sheet({
                 onClick={() => {
                   handleDropdown(index);
                 }}
-                className={`w-full bg-zinc-900 flex p-4 flex-row hover:cursor-pointer  text-gray-300 rounded-t-lg justify-between items-center ${
+                className={`w-full bg-zinc-900 flex p-4 flex-row hover:cursor-pointer text-gray-300 rounded-t-lg justify-between items-center ${
                   dropdown[index]
                     ? "border-b border-zinc-500"
                     : "duration-200 rounded-b-lg shadow-md shadow-zinc-700"
@@ -116,30 +118,30 @@ export default function Sheet({
               </div>
               {dropdown[index] && (
                 <div
-                  className="max-h-64 overflow-auto m-8 border rounded-lg border-zinc-600"
+                  className="max-h-64 overflow-auto  bg-zinc-900  m-8 border rounded-lg border-zinc-600"
                   style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                 >
-                  <table className="w-full bg-zinc-900 text-gray-400 min-w-full min-h-full ">
+                  <table className="w-full text-gray-400 min-h-full ">
                     <thead>
                       <tr className="text-sm">
-                        <th className="py-2 px-4 text-left">
+                        <th className=" text-center">
                           STATUS
                         </th>
                         <th className="py-2 px-4 text-left border-l border-zinc-600">
                           NAME
                         </th>
-                        <th className="py-2 px-4 text-left border-l border-zinc-600">
+                        <th className="py-2 px-4 text-center border-l border-zinc-600">
                           PRACTICE
                         </th>
-                        <th className="py-2 px-4 text-left border-l border-zinc-600">
+                        <th className="py-2 px-4 text-center border-l border-zinc-600">
                           VIDEO
                         </th>
                       </tr>
                     </thead>
-                    <tbody className=" text-zinc-300">
+                    <tbody className=" text-zinc-300 ">
                       {problems.map((problem) => (
-                        <tr key={problem._id} className=" bg-zinc-900">
-                          <td className="py-2 px-4 border-t border-zinc-600">
+                        <tr key={problem._id}className=" ">
+                          <td className="py-2 px-1 border-t text-center border-zinc-600">
                             <button
                               onClick={() => handleStatusToggle(problem._id)}
                             >
@@ -154,27 +156,27 @@ export default function Sheet({
                               )}
                             </button>
                           </td>
-                          <td className="py-2 px-4 border-t border-x border-zinc-600">
+                          <td className="py-2 pl-4 border-t border-x border-zinc-600">
                             {problem.name}
                           </td>
-                          <td className="py-2 px-4 border-t border-r border-zinc-600">
+                          <td className="py-1 border-t text-center border-r border-zinc-600">
                             <a
+                              className="flex justify-center w-full h-full items-center"
                               href={problem.link}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-blue-300 underline"
                             >
-                              Practice Link
+                              { problem.link.substring(0,16) === "https://leetcode" ? 
+                              (<img src={LC_logo} alt="#" className=" w-8 py-2"  />): (<img src={GFG_logo} alt="#" className=" w-24" />)}
                             </a>
                           </td>
-                          <td className="py-2 px-4 border-t border-zinc-600">
-                            <a
+                          <td className="py-1 border-t text-center border-zinc-600">
+                            <a className="flex justify-center w-full items-center"
                               href={problem.videoLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-blue-300 underline"
                             >
-                              Video Link
+                              <img src={YT_logo} alt="#" className="w-8" />
                             </a>
                           </td>
                         </tr>
@@ -186,7 +188,6 @@ export default function Sheet({
             </div>
           ))}
         </div>
-
         {loading && <Spinner />}
       </div>
     </div>

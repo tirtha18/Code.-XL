@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./components/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import MockAssessment from "./components/MockAssessment";
 
 function App() {
   return (
@@ -38,10 +39,18 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route
+                path="/mockassessment"
+                element={
+                  <ProtectedRoute>
+                    <MockAssessment/>
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
           </div>
         </div>
-        <ToastContainer position="bottom-center" autoClose={1000} />
+        <ToastContainer position="bottom-center" autoClose={2000} />
       </AuthProvider>
     </Router>
   );

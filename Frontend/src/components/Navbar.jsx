@@ -38,7 +38,7 @@ const navItems = [
     ind: 4,
     icon: <ImBooks />,
     name: "Mock Assesment",
-    link: "/Mockiassesment",
+    link: "/mockassessment",
   },
   {
     ind: 5,
@@ -89,7 +89,7 @@ export default function Navbar() {
             onClick={() => {
               logout();
             }}
-            className="flex items-center text mt-auto mb-4 py-2 px-10 rounded-lg text-gray-800 bg-white flex-row space-x-2 hover:cursor-pointer "
+            className="flex items-center text mt-auto text-lg mb-4 py-2 px-10 rounded-lg text-zinc-900 bg-white flex-row space-x-2 hover:cursor-pointer hover:scale-105 duration-200 hover:bg-red-600 hover:text-zinc-300"
           >
             <div>Logout |</div> <MdOutlineLogout />
           </div>

@@ -10,7 +10,7 @@ import axios from "axios";
 import Spinner from "./SpinnerAni";
 import ProgressBar from "./ProgressBar";
 import DoughnutChart from "./DoughnutChart";
-import randomColor from 'randomcolor';
+import randomColor from "randomcolor";
 function ShowSheetDetails({ selectedsheet, setSheetshow }) {
   if (!selectedsheet.sheet) return null;
   const dividedprob = selectedsheet.sheet.reduce((acc, prob) => {
@@ -26,10 +26,9 @@ function ShowSheetDetails({ selectedsheet, setSheetshow }) {
   for (const [topic, problems] of Object.entries(dividedprob)) {
     const done = problems.filter((problem) => problem.status === "DONE");
     let completion = Math.floor((done.length / problems.length) * 100);
-    for(let i=0;i<problems.length;i++)
-      {
-        console.log(problems[i]);
-      }
+    for (let i = 0; i < problems.length; i++) {
+      console.log(problems[i]);
+    }
     topicsCompstatus.push({
       topic: topic,
       doneprob: done.length,
@@ -38,46 +37,61 @@ function ShowSheetDetails({ selectedsheet, setSheetshow }) {
     });
     topicLabels.push(topic.toUpperCase());
     topicCompletion.push(done.length);
-    topicColors.push(randomColor({ luminosity: 'bright' }));
+    topicColors.push(randomColor({ luminosity: "bright" }));
     borderColors.push("rgb(39 39 42 )");
   }
 
   return (
     <div className="fixed top-0 left-0 flex justify-center items-center min-h-screen w-screen z-50 bg-opacity-50 backdrop-blur-sm">
       <div className="relative bg-zinc-800 border-zinc-600 border  rounded-lg shadow-lg text-zinc-300 flex-col flex items-center">
-      <div className="text-lg font-semibold p-4 border-b border-zinc-600 text-zinc-300 w-full">
-                  Progress: <button
-          onClick={() => setSheetshow(false)}
-          className="absolute top-4 right-4"
-          aria-label="Close"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
+        <div className="text-lg font-semibold p-4 border-b border-zinc-600 text-zinc-300 w-full">
+          Progress:
+          <button
+            onClick={() => setSheetshow(false)}
+            className="absolute top-4 right-4"
+            aria-label="Close"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-                </div>
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
         <div className=" flex items-center flex-row space-x-16 mt-8 mb-8">
           <div className="flex items-center ">
-            <div  className=" w-[550px] capitalize mt-4"><DoughnutChart topicColors={topicColors} topicLabels={topicLabels} topicCompletion={topicCompletion} borderColors={borderColors}/></div>
+            <div className=" w-[550px] capitalize mt-4">
+              <DoughnutChart
+                topicColors={topicColors}
+                topicLabels={topicLabels}
+                topicCompletion={topicCompletion}
+                borderColors={borderColors}
+              />
+            </div>
           </div>
-          <div ></div>
+          <div></div>
           <div></div>
           <div className="flex flex-col overflow-auto h-[600px] ">
-            {topicsCompstatus.map((it,index) => (
-              <ul key={index} className="flex flex-col min-w-72 text-sm pr-2 py-2 space-y-2 text-zinc-400 font-semibold ">
-                <div className=""><h4>{it.topic.toUpperCase()}</h4></div>
-                <div className=""><ProgressBar value = {it.completion}/></div>
+            {topicsCompstatus.map((it, index) => (
+              <ul
+                key={index}
+                className="flex flex-col min-w-72 text-sm pr-2 py-2 space-y-2 text-zinc-400 font-semibold "
+              >
+                <div className="">
+                  <h4>{it.topic.toUpperCase()}</h4>
+                </div>
+                <div className="">
+                  <ProgressBar value={it.completion} />
+                </div>
               </ul>
             ))}
           </div>
@@ -151,10 +165,16 @@ export default function Dashboard() {
     );
   }
   return (
-    <div className="text-white overflow-auto">
-      <div className="m-4">
+    <div className="text-white overflow-auto h-full"
+    style={{
+      overflowY: "scroll",
+      scrollbarWidth: "thin",
+      msOverflowStyle: "none",
+      scrollbarColor: "#10B981 transparent",
+    }}>
+      <div className="m-4 h-full">
         <div className="flex flex-row h-full">
-          <div className="w border border-zinc-700 flex flex-col items-center bg-zinc-900 px-2 min-h-screen max-h-full min-w-1/3 rounded-lg">
+          <div className="w border border-zinc-700 flex flex-col items-center bg-zinc-900 px-2 h-full min-w-1/3 rounded-lg">
             <div className="m-2 flex flex-col items-center">
               <div className="my-4">
                 <img width="120" height="120" src={User_img} alt="User" />
@@ -192,22 +212,26 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
-          <div className="md:flex flex-col w-full pl-4">
-            <div className="flex flex-row">
-              <div className="bg-zinc-900 border border-zinc-700 rounded-lg h-full mr-4 w-3/5">
+          <div className="flex flex-col w-full pl-4 h-full">
+            <div className="flex flex-row h-1/2">
+              <div
+                className="bg-zinc-900 border border-zinc-700 rounded-lg mr-4 w-2/3 overflow-auto"
+                style={{
+                  overflowY: "scroll",
+                  scrollbarWidth: "thin",
+                  msOverflowStyle: "none",
+                  scrollbarColor: "#10B981 transparent",
+                }}
+              >
                 <div className="text-lg text-zinc-100 font-semibold p-4 border-b border-zinc-600">
                   Progress
                 </div>
-
-                <div
-                  style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-                  className="flex overflow-auto h-64 mb-4 w-full  "
-                >
-                  <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mx-auto gap-x-12 gap-y-8 my-8">
+                <div className="flex w-full h-full">
+                  <div className=" grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-x-4 w-full h-full place-items-center mx-4 my-4">
                     {editedsheets.map((sheet) => (
                       <div
                         key={sheet._id}
-                        className="w-32 flex flex-col items-center hover:cursor-pointer"
+                        className="w-auto my-4 mx-3 h-48 flex flex-col items-center hover:cursor-pointer"
                         onClick={() => {
                           setSelectedsheet(sheet);
                           setSheetshow(true);
@@ -238,14 +262,18 @@ export default function Dashboard() {
                 <div className="text-lg font-semibold p-4 border-b border-zinc-600 text-zinc-300">
                   Upcoming Contests
                 </div>
-                <div>
+                <div className="">
                   <div></div>
                 </div>
               </div>
             </div>
-            <div className="flex flex-row">
-              <div></div>
-              <div></div>
+            <div className=" border border-zinc-700 rounded-lg ml-auto w-full mt-4 h-full">
+              <div className="text-lg font-semibold p-4 border-b border-zinc-600 text-zinc-300">
+                Mock Assessment Analysis
+              </div>
+              <div className="">
+                <div></div>
+              </div>
             </div>
           </div>
         </div>

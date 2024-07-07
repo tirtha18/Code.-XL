@@ -1,0 +1,945 @@
+{
+  "questions": [
+    {
+      "question": "What is the capital of France?",
+      "options": { "a": "London", "b": "Paris", "c": "Berlin", "d": "Rome" },
+      "correctAns": "Paris",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "aptitude"
+    },
+    {
+      "question": "Who invented the telephone?",
+      "options": {
+        "a": "Thomas Edison",
+        "b": "Alexander Graham Bell",
+        "c": "Nikola Tesla",
+        "d": "Galileo Galilei"
+      },
+      "correctAns": "Alexander Graham Bell",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "aptitude"
+    },
+    {
+      "question": "Which data structure uses Last In First Out (LIFO) principle?",
+      "options": { "a": "Queue", "b": "Stack", "c": "Heap", "d": "Tree" },
+      "correctAns": "Stack",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "dbms"
+    },
+    {
+      "question": "In SQL, what does the 'JOIN' keyword do?",
+      "options": {
+        "a": "Selects all records from both tables",
+        "b": "Combines rows from different tables",
+        "c": "Performs mathematical operations",
+        "d": "None of the above"
+      },
+      "correctAns": "Combines rows from different tables",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which operating system is known for its open-source development model?",
+      "options": {
+        "a": "Windows",
+        "b": "Linux",
+        "c": "Mac OS",
+        "d": "Android"
+      },
+      "correctAns": "Linux",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "os"
+    },
+    {
+      "question": "What is the command used to list all files in Unix?",
+      "options": { "a": "ls", "b": "dir", "c": "list", "d": "show" },
+      "correctAns": "ls",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "os"
+    },
+    {
+      "question": "If a car travels 60 km in 1.5 hours, what is its average speed?",
+      "options": {
+        "a": "30 km/h",
+        "b": "40 km/h",
+        "c": "45 km/h",
+        "d": "60 km/h"
+      },
+      "correctAns": "40 km/h",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "aptitude"
+    },
+    {
+      "question": "Which DBMS language is used for interacting with the database?",
+      "options": { "a": "HTML", "b": "SQL", "c": "Python", "d": "Java" },
+      "correctAns": "SQL",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "What does RAM stand for in computing?",
+      "options": {
+        "a": "Random Access Memory",
+        "b": "Read-Only Memory",
+        "c": "Remote Access Management",
+        "d": "Real-time Activity Monitor"
+      },
+      "correctAns": "Random Access Memory",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "os"
+    },
+    {
+      "question": "Which OS was developed by Microsoft?",
+      "options": {
+        "a": "Ubuntu",
+        "b": "iOS",
+        "c": "Windows",
+        "d": "Chrome OS"
+      },
+      "correctAns": "Windows",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "os"
+    },
+    {
+      "question": "What is the command used to create a new directory in Unix?",
+      "options": { "a": "cd", "b": "mkdir", "c": "newdir", "d": "make" },
+      "correctAns": "mkdir",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "os"
+    },
+    {
+      "question": "What is a primary key in a relational database?",
+      "options": {
+        "a": "A key used to create relationships between tables",
+        "b": "A key that uniquely identifies each record in a table",
+        "c": "A key used for sorting records in ascending order",
+        "d": "A key used to unlock sensitive data"
+      },
+      "correctAns": "A key that uniquely identifies each record in a table",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "dbms"
+    },
+    {
+      "question": "What is the default sorting order for 'ORDER BY' clause in SQL?",
+      "options": {
+        "a": "Ascending",
+        "b": "Descending",
+        "c": "Random",
+        "d": "None of the above"
+      },
+      "correctAns": "Ascending",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which programming language is commonly used for writing shell scripts in Unix?",
+      "options": { "a": "Java", "b": "C++", "c": "Python", "d": "Bash" },
+      "correctAns": "Bash",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "os"
+    },
+    {
+      "question": "What is 2 to the power of 5?",
+      "options": { "a": "16", "b": "32", "c": "64", "d": "128" },
+      "correctAns": "32",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "aptitude"
+    },
+    {
+      "question": "Which DBMS feature allows multiple users to access the database simultaneously?",
+      "options": {
+        "a": "Concurrency control",
+        "b": "Data encryption",
+        "c": "Data backup",
+        "d": "Data recovery"
+      },
+      "correctAns": "Concurrency control",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "dbms"
+    },
+    {
+      "question": "What is the command used to display the current directory in Unix?",
+      "options": { "a": "pwd", "b": "dir", "c": "ls", "d": "show" },
+      "correctAns": "pwd",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "os"
+    },
+    {
+      "question": "What is the capital of Japan?",
+      "options": { "a": "Beijing", "b": "Seoul", "c": "Tokyo", "d": "Bangkok" },
+      "correctAns": "Tokyo",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "aptitude"
+    },
+    {
+      "question": "A train travels 60 km in the first hour and 70 km in the next hour. What is its average speed?",
+      "options": { "a": "62 km/h", "b": "65 km/h", "c": "67.5 km/h", "d": "70 km/h" },
+      "correctAns": "65 km/h",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "A sum of money amounts to $800 in 2 years and $900 in 3 years at simple interest. What is the principal amount?",
+      "options": { "a": "$700", "b": "$720", "c": "$750", "d": "$780" },
+      "correctAns": "$700",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "In a group of 80 students, 70% play cricket and 50% play football. If every student plays at least one game, how many students play both games?",
+      "options": { "a": "10", "b": "20", "c": "30", "d": "40" },
+      "correctAns": "20",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "A boat takes 6 hours to travel 12 km upstream and the same distance downstream. If the speed of the boat in still water is 5 km/h, what is the speed of the stream?",
+      "options": { "a": "1 km/h", "b": "2 km/h", "c": "3 km/h", "d": "4 km/h" },
+      "correctAns": "1 km/h",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "A man spends 75% of his income. If his income increases by 20% and his expenditure increases by 10%, what is the percentage increase in his savings?",
+      "options": { "a": "25%", "b": "40%", "c": "50%", "d": "60%" },
+      "correctAns": "50%",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "In a mixture of 60 liters, the ratio of milk to water is 2:1. How much water should be added to make the ratio 1:2?",
+      "options": { "a": "60 liters", "b": "40 liters", "c": "30 liters", "d": "20 liters" },
+      "correctAns": "60 liters",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "Two trains are moving in opposite directions at speeds of 60 km/h and 90 km/h, respectively. If they take 5 seconds to cross each other, what is the length of each train?",
+      "options": { "a": "100 m", "b": "125 m", "c": "150 m", "d": "175 m" },
+      "correctAns": "125 m",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "A man invests $5000 in a scheme that offers 8% compound interest per annum, compounded quarterly. What is the amount after 2 years?",
+      "options": { "a": "$5400", "b": "$5624.32", "c": "$5832.16", "d": "$6010.24" },
+      "correctAns": "$5832.16",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "If a:b = 3:4 and b:c = 2:5, what is the ratio a:c?",
+      "options": { "a": "3:5", "b": "3:10", "c": "6:5", "d": "6:20" },
+      "correctAns": "3:10",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "The sum of three consecutive odd numbers is 153. What is the middle number?",
+      "options": { "a": "49", "b": "51", "c": "53", "d": "55" },
+      "correctAns": "51",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "If 4x + 3y = 5 and 2x - 5y = -3, what is the value of x?",
+      "options": { "a": "1", "b": "2", "c": "3", "d": "4" },
+      "correctAns": "1",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "What is the value of x if log2(8x) = 5?",
+      "options": { "a": "4", "b": "8", "c": "16", "d": "32" },
+      "correctAns": "4",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "A cylindrical tank with a radius of 7 meters and height of 10 meters is filled with water. What is the volume of water in cubic meters?",
+      "options": { "a": "154", "b": "220", "c": "308", "d": "440" },
+      "correctAns": "154",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "If the perimeter of a square is 40 cm, what is the area of the square?",
+      "options": { "a": "100 cm²", "b": "150 cm²", "c": "200 cm²", "d": "250 cm²" },
+      "correctAns": "100 cm²",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "A person bought a watch for $1500 and sold it for $1800. What is the percentage profit?",
+      "options": { "a": "10%", "b": "15%", "c": "20%", "d": "25%" },
+      "correctAns": "20%",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "If x = 2 and y = 3, what is the value of (x^y + y^x)?",
+      "options": { "a": "17", "b": "25", "c": "32", "d": "41" },
+      "correctAns": "17",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "A man takes 5 hours 45 minutes to travel a certain distance at 8 km/h. How long will he take to travel the same distance at 12 km/h?",
+      "options": { "a": "2 hours 20 minutes", "b": "3 hours 30 minutes", "c": "3 hours 50 minutes", "d": "4 hours 15 minutes" },
+      "correctAns": "3 hours 50 minutes",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "What is the value of (81^0.25 + 27^1/3)?",
+      "options": { "a": "6", "b": "7", "c": "8", "d": "9" },
+      "correctAns": "6",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "A rectangle has a length of 10 cm and a diagonal of 26 cm. What is the width of the rectangle?",
+      "options": { "a": "16 cm", "b": "18 cm", "c": "20 cm", "d": "24 cm" },
+      "correctAns": "24 cm",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "What is the sum of the first 20 even numbers?",
+      "options": { "a": "210", "b": "220", "c": "400", "d": "420" },
+      "correctAns": "420",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "If a:b = 4:5 and b:c = 5:6, what is the ratio a:b:c?",
+      "options": { "a": "20:25:30", "b": "24:30:36", "c": "30:40:50", "d": "20:30:40" },
+      "correctAns": "20:25:30",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "A man sells two articles for $5000 each, gaining 20% on one and losing 20% on the other. What is his overall gain or loss?",
+      "options": { "a": "$200 gain", "b": "$200 loss", "c": "$100 gain", "d": "$100 loss" },
+      "correctAns": "$200 loss",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "What is the smallest number that leaves a remainder of 2 when divided by 3, 4, and 5?",
+      "options": { "a": "22", "b": "32", "c": "42", "d": "52" },
+      "correctAns": "62",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "A man buys a chair for $500 and sells it at a loss of 20%. What is the selling price?",
+      "options": { "a": "$400", "b": "$350", "c": "$300", "d": "$250" },
+      "correctAns": "$400",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "What is the probability of getting at least one head in two tosses of a fair coin?",
+      "options": { "a": "1/4", "b": "1/2", "c": "3/4", "d": "1" },
+      "correctAns": "3/4",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "A man can do a piece of work in 5 days, and his son can do it in 10 days. How long will they take to do it together?",
+      "options": { "a": "2.5 days", "b": "3.33 days", "c": "4 days", "d": "5 days" },
+      "correctAns": "3.33 days",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "If 3a + 2b = 5 and 5a - 3b = 2, what is the value of a?",
+      "options": { "a": "1", "b": "2", "c": "3", "d": "4" },
+      "correctAns": "1",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "A shopkeeper sells an article for $450, making a profit of 12.5%. What was the cost price?",
+      "options": { "a": "$400", "b": "$375", "c": "$350", "d": "$300" },
+      "correctAns": "$400",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "What is the HCF of 96 and 128?",
+      "options": { "a": "16", "b": "32", "c": "48", "d": "64" },
+      "correctAns": "32",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "The difference between the squares of two consecutive even integers is 84. What are the integers?",
+      "options": { "a": "10 and 12", "b": "12 and 14", "c": "14 and 16", "d": "16 and 18" },
+      "correctAns": "14 and 16",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "A cistern has three pipes. The first two pipes can fill it in 4 and 6 hours respectively, and the third pipe can empty it in 3 hours. If all the pipes are opened simultaneously, how long will it take to fill the cistern?",
+      "options": { "a": "10 hours", "b": "12 hours", "c": "14 hours", "d": "16 hours" },
+      "correctAns": "12 hours",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "If the cost price of 12 pens is equal to the selling price of 15 pens, what is the loss percentage?",
+      "options": { "a": "10%", "b": "20%", "c": "25%", "d": "30%" },
+      "correctAns": "20%",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "A bag contains 5 red, 3 green, and 2 blue balls. What is the probability of drawing a green ball?",
+      "options": { "a": "1/2", "b": "1/3", "c": "1/4", "d": "1/5" },
+      "correctAns": "1/3",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "If the selling price of 20 articles is equal to the cost price of 25 articles, what is the profit percentage?",
+      "options": { "a": "20%", "b": "25%", "c": "30%", "d": "35%" },
+      "correctAns": "25%",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "What is the least number which when divided by 4, 5, and 6 leaves a remainder of 3?",
+      "options": { "a": "53", "b": "63", "c": "73", "d": "83" },
+      "correctAns": "63",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "A man buys 2 watches for $300. He sells one at a profit of 20% and the other at a loss of 10%. If he makes neither a profit nor a loss, what is the cost price of each watch?",
+      "options": { "a": "$150 and $150", "b": "$200 and $100", "c": "$175 and $125", "d": "$180 and $120" },
+      "correctAns": "$200 and $100",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "A man walks at 5 km/h and after 5 hours he is overtaken by a cyclist who started 10 hours after him. What is the speed of the cyclist?",
+      "options": { "a": "10 km/h", "b": "15 km/h", "c": "20 km/h", "d": "25 km/h" },
+      "correctAns": "25 km/h",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "The average of 11 numbers is 10. If the average of the first six numbers is 9 and the average of the last six numbers is 11, what is the sixth number?",
+      "options": { "a": "8", "b": "9", "c": "10", "d": "11" },
+      "correctAns": "10",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "A shopkeeper marks his goods 20% above the cost price and allows a discount of 10% on the marked price. What is his gain percentage?",
+      "options": { "a": "8%", "b": "10%", "c": "12%", "d": "15%" },
+      "correctAns": "8%",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "What is the greatest number that divides 96, 240, and 384 without leaving a remainder?",
+      "options": { "a": "24", "b": "32", "c": "48", "d": "64" },
+      "correctAns": "48",
+      "selectedOption": "",
+      "difficulty": "hard",
+      "topic": "aptitude"
+    },
+    {
+      "question": "What does SQL stand for?",
+      "options": {
+        "a": "Simple Query Language",
+        "b": "Structured Query Language",
+        "c": "Standard Query Language",
+        "d": "Single Query Language"
+      },
+      "correctAns": "Structured Query Language",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which operating system is designed primarily for mobile devices?",
+      "options": {
+        "a": "Windows",
+        "b": "Linux",
+        "c": "Android",
+        "d": "Mac OS"
+      },
+      "correctAns": "Android",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "os"
+    },
+    {
+      "question": "Which DBMS language is used to define the structure of a database?",
+      "options": { "a": "SQL", "b": "Java", "c": "Python", "d": "HTML" },
+      "correctAns": "SQL",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "dbms"
+    },
+    {
+      "question": "What is the command used to change directory in Unix?",
+      "options": { "a": "cd", "b": "chdir", "c": "changedir", "d": "move" },
+      "correctAns": "cd",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "os"
+    },
+    {
+      "question": "What is the smallest prime number?",
+      "options": { "a": "1", "b": "2", "c": "3", "d": "5" },
+      "correctAns": "2",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "aptitude"
+    },
+    {
+      "question": "In DBMS, what does 'ACID' stand for?",
+      "options": {
+        "a": "Atomicity, Consistency, Isolation, Durability",
+        "b": "Association, Commitment, Isolation, Division",
+        "c": "Atomicity, Commitment, Integration, Dependency",
+        "d": "Association, Consistency, Integrity, Deployment"
+      },
+      "correctAns": "Atomicity, Consistency, Isolation, Durability",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which operating system is known for its command-line interface?",
+      "options": {
+        "a": "Windows",
+        "b": "Linux",
+        "c": "Mac OS",
+        "d": "Android"
+      },
+      "correctAns": "Linux",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "os"
+    },
+    {
+      "question": "What is the command used to find files in Unix?",
+      "options": { "a": "locate", "b": "search", "c": "find", "d": "grep" },
+      "correctAns": "find",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "os"
+    },
+    {
+      "question": "What is the command used to list all tables in a database?",
+      "options": {
+        "a": "SHOW TABLES",
+        "b": "LIST TABLES",
+        "c": "VIEW TABLES",
+        "d": "DISPLAY TABLES"
+      },
+      "correctAns": "SHOW TABLES",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "What is the term for the unique identifier for each record in a database table?",
+      "options": {
+        "a": "Primary Key",
+        "b": "Foreign Key",
+        "c": "Unique Key",
+        "d": "Candidate Key"
+      },
+      "correctAns": "Primary Key",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "What is the command to delete a database in SQL?",
+      "options": {
+        "a": "REMOVE DATABASE",
+        "b": "DELETE DATABASE",
+        "c": "DROP DATABASE",
+        "d": "ERASE DATABASE"
+      },
+      "correctAns": "DROP DATABASE",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which SQL statement is used to update data in a database?",
+      "options": { "a": "MODIFY", "b": "UPDATE", "c": "CHANGE", "d": "ALTER" },
+      "correctAns": "UPDATE",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "What does DDL stand for in SQL?",
+      "Options": {
+        "a": "Data Definition Language",
+        "b": "Data Description Language",
+        "c": "Data Determination Language",
+        "d": "Data Display Language"
+      },
+      "Correct Answer": "a",
+      "Selected Option": "",
+      "Difficulty": "easy",
+      "Topic": "dbms"
+    },
+    {
+      "question": "Which command is used to add a new column to an existing table in SQL?",
+      "options": {
+        "a": "ALTER TABLE",
+        "b": "ADD COLUMN",
+        "c": "MODIFY TABLE",
+        "d": "CHANGE TABLE"
+      },
+      "correctAns": "ALTER TABLE",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "dbms"
+    },
+    {
+      "question": "What is the term for a set of rules that ensures data integrity in a relational database?",
+      "options": {
+        "a": "Normalization",
+        "b": "Constraint",
+        "c": "Validation",
+        "d": "Schema"
+      },
+      "correctAns": "Constraint",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which SQL clause is used to filter records?",
+      "options": { "a": "WHERE", "b": "FILTER", "c": "HAVING", "d": "SEARCH" },
+      "correctAns": "WHERE",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which command is used to retrieve data from a database?",
+      "options": { "a": "GET", "b": "FETCH", "c": "SELECT", "d": "RETRIEVE" },
+      "correctAns": "SELECT",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "What is the command to remove all records from a table in SQL?",
+      "options": { "a": "DELETE", "b": "DROP", "c": "TRUNCATE", "d": "CLEAR" },
+      "correctAns": "TRUNCATE",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "dbms"
+    },
+    {
+      "question": "What is the command to combine records from two tables in SQL?",
+      "options": { "a": "UNION", "b": "JOIN", "c": "MERGE", "d": "APPEND" },
+      "correctAns": "JOIN",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "What is the purpose of the 'GROUP BY' clause in SQL?",
+      "options": {
+        "a": "To sort the result set",
+        "b": "To group rows that have the same values",
+        "c": "To filter records",
+        "d": "To join tables"
+      },
+      "correctAns": "To group rows that have the same values",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which command is used to remove a table from a database in SQL?",
+      "options": {
+        "a": "DELETE TABLE",
+        "b": "DROP TABLE",
+        "c": "REMOVE TABLE",
+        "d": "ERASE TABLE"
+      },
+      "correctAns": "DROP TABLE",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "What does the 'HAVING' clause do in SQL?",
+      "options": {
+        "a": "Filters groups",
+        "b": "Filters rows",
+        "c": "Sorts records",
+        "d": "Joins tables"
+      },
+      "correctAns": "Filters groups",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "dbms"
+    },
+    {
+      "question": "What is the command used to create a database in SQL?",
+      "options": {
+        "a": "NEW DATABASE",
+        "b": "CREATE DATABASE",
+        "c": "MAKE DATABASE",
+        "d": "INIT DATABASE"
+      },
+      "correctAns": "CREATE DATABASE",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "What is the term for an attribute that uniquely identifies each row in a table?",
+      "options": {
+        "a": "Primary Key",
+        "b": "Unique Key",
+        "c": "Foreign Key",
+        "d": "Composite Key"
+      },
+      "correctAns": "Primary Key",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which SQL command is used to add new records to a table?",
+      "options": { "a": "INSERT", "b": "ADD", "c": "APPEND", "d": "CREATE" },
+      "correctAns": "INSERT",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "What does DML stand for in SQL?",
+      "options": {
+        "a": "Data Management Language",
+        "b": "Data Manipulation Language",
+        "c": "Data Movement Language",
+        "d": "Data Modeling Language"
+      },
+      "correctAns": "Data Manipulation Language",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "What is the purpose of the 'ORDER BY' clause in SQL?",
+      "options": {
+        "a": "To sort the result set",
+        "b": "To filter records",
+        "c": "To group rows",
+        "d": "To join tables"
+      },
+      "correctAns": "To sort the result set",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which command is used to update existing records in a table in SQL?",
+      "options": { "a": "MODIFY", "b": "CHANGE", "c": "UPDATE", "d": "ALTER" },
+      "correctAns": "UPDATE",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "What does 'RDBMS' stand for?",
+      "options": {
+        "a": "Relational DataBase Management System",
+        "b": "Real-time DataBase Management System",
+        "c": "Relational DataBase Manipulation System",
+        "d": "Real-time DataBase Manipulation System"
+      },
+      "correctAns": "Relational DataBase Management System",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "What is the command used to rename a table in SQL?",
+      "options": { "a": "RENAME", "b": "ALTER", "c": "MODIFY", "d": "CHANGE" },
+      "correctAns": "RENAME",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which SQL function is used to return the number of rows in a result set?",
+      "options": {
+        "a": "COUNT()",
+        "b": "SUM()",
+        "c": "TOTAL()",
+        "d": "ROWS()"
+      },
+      "correctAns": "COUNT()",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which SQL command is used to delete a database?",
+      "options": {
+        "a": "DELETE DATABASE",
+        "b": "REMOVE DATABASE",
+        "c": "DROP DATABASE",
+        "d": "ERASE DATABASE"
+      },
+      "correctAns": "DROP DATABASE",
+      "selectedOption": "",
+      "difficulty": "medium",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which SQL clause is used to combine rows from two or more tables?",
+      "options": { "a": "JOIN", "b": "MERGE", "c": "COMBINE", "d": "APPEND" },
+      "correctAns": "JOIN",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which SQL statement is used to extract data from a database?",
+      "options": { "a": "GET", "b": "FETCH", "c": "SELECT", "d": "RETRIEVE" },
+      "correctAns": "SELECT",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which SQL function is used to return the maximum value in a set of values?",
+      "options": {
+        "a": "MAX()",
+        "b": "MIN()",
+        "c": "GREATEST()",
+        "d": "LARGEST()"
+      },
+      "correctAns": "MAX()",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which SQL function is used to return the average value in a set of values?",
+      "options": {
+        "a": "AVG()",
+        "b": "MEAN()",
+        "c": "MEDIAN()",
+        "d": "AVERAGE()"
+      },
+      "correctAns": "AVG()",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which SQL clause is used to filter records returned by a query?",
+      "options": { "a": "WHERE", "b": "HAVING", "c": "FILTER", "d": "SEARCH" },
+      "correctAns": "WHERE",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which SQL function is used to return the sum of a set of values?",
+      "options": {
+        "a": "SUM()",
+        "b": "TOTAL()",
+        "c": "ADD()",
+        "d": "AGGREGATE()"
+      },
+      "correctAns": "SUM()",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    },
+    {
+      "question": "Which SQL function is used to return the smallest value in a set of values?",
+      "options": {
+        "a": "MIN()",
+        "b": "LOWEST()",
+        "c": "LEAST()",
+        "d": "SMALLEST()"
+      },
+      "correctAns": "MIN()",
+      "selectedOption": "",
+      "difficulty": "easy",
+      "topic": "dbms"
+    }
+  ]
+}
