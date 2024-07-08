@@ -27,7 +27,8 @@
     "react-drag-drop-files": "^2.3.10",
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.23.1",
-    "react-toastify": "^10.0.5"
+    "react-toastify": "^10.0.5",
+    "uniqid": "^5.4.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

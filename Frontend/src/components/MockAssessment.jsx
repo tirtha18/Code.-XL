@@ -3,7 +3,8 @@ import { toast } from "react-toastify";
 import { useEffect } from "react";
 import Timer from "./Timer";
 import ProgressBar from "./ProgressBar";
-import Questions from "../questions.json";
+import rawQuestions from "../questions.json";
+const Questions = JSON.parse(JSON.stringify(rawQuestions));
 const options = [
   { value: "aptitude", label: "Aptitude" },
   { value: "dbms", label: "DBMS" },
@@ -104,6 +105,10 @@ function AssesmentQuestions({
   topics,
   number,
   setShowAssessment,
+  setDuration,
+  setDifficulty,
+  setTopics,
+  setNumber,
 }) {
   const [questionsfetched, setQuestionsfetched] = useState(questions);
   const [questionShow, setQuestionShow] = useState(false);
@@ -115,34 +120,42 @@ function AssesmentQuestions({
   const [correctq, setCorrectq] = useState(0);
   const [attemptedq, setAttemptedq] = useState(0);
   const [totalq, setTotalq] = useState(0);
+  const [navbuttons, setNavbuttons] = useState([]);
   useEffect(() => {
     if (timesup) handleSubmit();
   }, [timesup]);
   useEffect(() => {
-    const getQuestions = async () => {
-      console.log(Questions.questions);
-      const allQues = Questions.questions;
-      const filteredQuestions = allQues.filter(
-        (question) =>
-          topics.includes(question.topic) &&
-          question.difficulty === difficulty.toLowerCase()
-      );
-      const ques = filteredQuestions.slice(0, number);
-      setQuestionsfetched(ques);
-      setSelectedQuestion(ques[0]);
-      setQuesno("1");
-      setQuestionShow(true);
-    };
-    getQuestions();
+    console.log(Questions.questions);
+    const allQues = JSON.parse(JSON.stringify(Questions.questions));
+    const filteredQuestions = allQues.filter(
+      (question) =>
+        topics.includes(question.topic) &&
+        question.difficulty === difficulty.toLowerCase()
+    );
+    const ques = filteredQuestions.slice(0, number);
+    setQuestionsfetched(ques);
+    setSelectedQuestion(ques[0]);
+    setQuesno("1");
+    setQuestionShow(true);
+    const temp = [];
+    for (let i = 0; i < questionsfetched.length; i++) temp.push(false);
+    if (temp.length > 0) temp[0] = true;
+    setNavbuttons([...temp]);
   }, [duration, difficulty, topics, number]);
   const handleOptionclick = (e, index) => {
     const temp = [...questionsfetched];
     temp[index - 1].selectedOption = temp[index - 1].options[e.target.value];
     setQuestionsfetched(temp);
   };
-  const handleSubmit = () => {
-    setShowResult(true);
-    setSubmithide(true);
+  const handleNavigation = (index) => {
+    const temp = [...navbuttons];
+    for (let i = 0; i < temp.length; i++) {
+      if (i != index) temp[i] = false;
+      else temp[i] = true;
+      setNavbuttons(temp);
+    }
+  };
+  useEffect(() => {
     const correctQues = questionsfetched.filter((question) => {
       return question.correctAns === question.selectedOption;
     });
@@ -152,6 +165,10 @@ function AssesmentQuestions({
     setTotalq(questionsfetched.length);
     setAttemptedq(attemptedQues.length);
     setCorrectq(correctQues.length);
+  }, [questionsfetched, totalq, attemptedq, correctq]);
+  const handleSubmit = () => {
+    setShowResult(true);
+    setSubmithide(true);
     setTimesup(true);
   };
   return (
@@ -233,12 +250,15 @@ function AssesmentQuestions({
             <div className=" h-full grid grid-cols-4 place-items-center gap-y-2 gap-x-2 ">
               {questionsfetched.map((question, index) => (
                 <button
-                  className=" text-zinc-200 bg-zinc-900 flex items-center py-2 w-12 justify-center rounded-lg"
+                  className={`text-zinc-200 ${
+                    navbuttons[index] ? "bg-zinc-200 text-zinc-900" : question.selectedOption ==="" ? "bg-zinc-900": "bg-violet-600"
+                  }  flex items-center py-2 w-12 justify-center rounded-lg`}
                   key={index}
                   onClick={() => {
                     setQuestionShow(true);
                     setSelectedQuestion(question);
                     setQuesno(index + 1);
+                    handleNavigation(index);
                   }}
                 >
                   {index + 1}
@@ -257,6 +277,10 @@ function AssesmentQuestions({
           <button
             onClick={() => {
               setShowAssessment(false);
+              setDifficulty(null);
+              setTopics([]);
+              setDuration(null);
+              setNumber(null);
             }}
             className="text-center text-white text-lg  w-full bg-red-600 hover:bg-red-800  rounded-lg py-1"
           >
@@ -433,6 +457,10 @@ export default function MockAssessment() {
               difficulty={difficulty}
               number={number}
               setShowAssessment={setShowAssessment}
+              setDuration={setDuration}
+              setDifficulty={setDifficulty}
+              setTopics={setTopics}
+              setNumber={setNumber}
             />
           )}
         </div>
