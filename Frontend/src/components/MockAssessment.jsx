@@ -251,7 +251,7 @@ function AssesmentQuestions({
               {questionsfetched.map((question, index) => (
                 <button
                   className={`text-zinc-200 ${
-                    navbuttons[index] ? "bg-zinc-200 text-zinc-900" : question.selectedOption ==="" ? "bg-zinc-900": "bg-violet-600"
+                    (navbuttons[index] ? "bg-zinc-200 text-zinc-900" : (question.selectedOption ==="" ? "bg-zinc-900": "bg-violet-600"))
                   }  flex items-center py-2 w-12 justify-center rounded-lg`}
                   key={index}
                   onClick={() => {
