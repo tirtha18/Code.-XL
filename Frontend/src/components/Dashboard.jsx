@@ -215,18 +215,17 @@ export default function Dashboard() {
           <div className="flex flex-col w-full pl-4 h-full">
             <div className="flex flex-row h-1/2">
               <div
-                className="bg-zinc-900 border border-zinc-700 rounded-lg mr-4 w-2/3 overflow-auto"
-                style={{
-                  overflowY: "scroll",
-                  scrollbarWidth: "thin",
-                  msOverflowStyle: "none",
-                  scrollbarColor: "#10B981 transparent",
-                }}
+                className=" border h-full border-zinc-700 rounded-lg mr-4 w-2/3  "
               >
                 <div className="text-lg text-zinc-100 font-semibold p-4 border-b border-zinc-600">
                   Progress
                 </div>
-                <div className="flex w-full h-full">
+                <div className="flex w-full h-[80%] overflow-auto" style={{
+                  overflowY: "scroll",
+                  scrollbarWidth: "thin",
+                  msOverflowStyle: "none",
+                  scrollbarColor: "#10B981 transparent",
+                }}>
                   <div className=" grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-x-4 w-full h-full place-items-center mx-4 my-4">
                     {editedsheets.map((sheet) => (
                       <div

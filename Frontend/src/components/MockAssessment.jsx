@@ -121,11 +121,15 @@ function AssesmentQuestions({
   const [attemptedq, setAttemptedq] = useState(0);
   const [totalq, setTotalq] = useState(0);
   const [navbuttons, setNavbuttons] = useState([]);
+  const temp = [];
+  
+    
+  
+
   useEffect(() => {
     if (timesup) handleSubmit();
   }, [timesup]);
   useEffect(() => {
-    console.log(Questions.questions);
     const allQues = JSON.parse(JSON.stringify(Questions.questions));
     const filteredQuestions = allQues.filter(
       (question) =>
@@ -133,20 +137,20 @@ function AssesmentQuestions({
         question.difficulty === difficulty.toLowerCase()
     );
     const ques = filteredQuestions.slice(0, number);
+    for (let i = 0; i < ques.length; i++) temp.push(false);
+    if (temp.length > 0) temp[0] = true;
+    setNavbuttons(temp);
     setQuestionsfetched(ques);
     setSelectedQuestion(ques[0]);
     setQuesno("1");
     setQuestionShow(true);
-    const temp = [];
-    for (let i = 0; i < questionsfetched.length; i++) temp.push(false);
-    if (temp.length > 0) temp[0] = true;
-    setNavbuttons([...temp]);
   }, [duration, difficulty, topics, number]);
   const handleOptionclick = (e, index) => {
     const temp = [...questionsfetched];
     temp[index - 1].selectedOption = temp[index - 1].options[e.target.value];
     setQuestionsfetched(temp);
   };
+
   const handleNavigation = (index) => {
     const temp = [...navbuttons];
     for (let i = 0; i < temp.length; i++) {
@@ -251,7 +255,9 @@ function AssesmentQuestions({
               {questionsfetched.map((question, index) => (
                 <button
                   className={`text-zinc-200 ${
-                    (navbuttons[index] ? "bg-zinc-200 text-zinc-900" : (question.selectedOption ==="" ? "bg-zinc-900": "bg-violet-600"))
+                    navbuttons[index]
+                      ? "bg-zinc-200 text-zinc-900"
+                      : question.selectedOption === "" ? "bg-zinc-900":"bg-violet-600"
                   }  flex items-center py-2 w-12 justify-center rounded-lg`}
                   key={index}
                   onClick={() => {
@@ -259,6 +265,7 @@ function AssesmentQuestions({
                     setSelectedQuestion(question);
                     setQuesno(index + 1);
                     handleNavigation(index);
+                    console.log(navbuttons);
                   }}
                 >
                   {index + 1}
@@ -291,7 +298,6 @@ function AssesmentQuestions({
     </div>
   );
 }
-
 export default function MockAssessment() {
   const [showAssessment, setShowAssessment] = useState(false);
   const [duration, setDuration] = useState(null);

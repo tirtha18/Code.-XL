@@ -57,7 +57,6 @@ export default function Navbar() {
   const handleNavclick = (index) => {
     const tem = [...navactive];
     for (let i = 0; i < tem.length; i++) tem[i] = false;
-    console.log(tem);
     tem[index] = true;
     setNavactive(tem);
   };
