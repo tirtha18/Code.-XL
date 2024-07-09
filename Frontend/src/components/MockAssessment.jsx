@@ -4,6 +4,10 @@ import { useEffect } from "react";
 import Timer from "./Timer";
 import ProgressBar from "./ProgressBar";
 import rawQuestions from "../questions.json";
+import { useContext } from "react";
+import { AuthContext } from "./AuthProvider";
+import axios from "axios";
+
 const Questions = JSON.parse(JSON.stringify(rawQuestions));
 const options = [
   { value: "aptitude", label: "Aptitude" },
@@ -18,7 +22,44 @@ const questions = [
     correctAns: "40 km/h",
   },
 ];
-function Result({ setShowResult, attemptedq, correctq, totalq }) {
+function Result({
+  setShowResult,
+  attemptedq,
+  correctq,
+  totalq,
+  questionsfetched,
+}) {
+  const [disableSave, setDisablesave] = useState(false);
+  const { user } = useContext(AuthContext);
+  const handleSaveResult = () => {
+    if (!testName) {
+      alert("Enter the name of the Mock Test to continue!");
+      return;
+    }
+    const uploadMocktest = async () => {
+      try {
+        const response = await axios.post(
+          "https://code-xl.onrender.com/api/uploadMock",
+          {
+            user_id: user._id,
+            name: testName,
+            questions: questionsfetched,
+            total_q: totalq.toString(),
+            attempted_q: attemptedq.toString(),
+            correct_q: correctq.toString(),
+          }
+        );
+        console.log(response);
+        setDisablesave(true);
+        toast.success("Assessment Results Uploaded Successfully!");
+      } catch (error) {
+        console.log(error);
+        toast.error("Upload failed!");
+      }
+    };
+    uploadMocktest();
+  };
+  const [testName, setTestName] = useState("");
   return (
     <div className="fixed top-0 left-0 flex justify-center items-center h-screen w-screen z-50 bg-opacity-50 backdrop-blur-sm">
       <div className="relative bg-zinc-800 border-zinc-600 border  w-[40%] rounded-lg shadow-lg text-zinc-300 flex-col flex items-center">
@@ -80,12 +121,29 @@ function Result({ setShowResult, attemptedq, correctq, totalq }) {
               />
             </div>
           </div>
+          <div className=" text-zinc-400 bg-zinc-700 rounded-lg  p-4 mt-4 mb-6">
+            <h1 className="ml-1">Name your test:</h1>
+            <input
+              onChange={(e) => {
+                setTestName(e.target.value);
+              }}
+              className="bg-zinc-800 rounded-lg w-full p-1 px-2 text-sm mt-2"
+              type="text"
+              value={testName}
+              placeholder="Example: Mock Test A"
+            />
+          </div>
           <div className="w-full space-x-2 mb-6 flex flex-row">
-            <button className="px-2 py-1 bg-green-600 rounded-lg ml-auto hover:bg-green-800">
+            {!disableSave&&(<button
+              onClick={() => {
+                handleSaveResult();
+              }}
+              className="px-2 py-1 bg-green-600 rounded-lg ml-auto hover:bg-green-800"
+            >
               <h1>Save Results</h1>
-            </button>
+            </button>)}
             <button
-              className="px-3 py-1 bg-zinc-600 rounded-lg  hover:bg-zinc-900  "
+              className="px-3 py-1 bg-zinc-600 rounded-lg  ml-auto hover:bg-zinc-900  "
               onClick={() => {
                 setShowResult(false);
                 toast("Correct Answers are displayed below each question!");
@@ -122,10 +180,6 @@ function AssesmentQuestions({
   const [totalq, setTotalq] = useState(0);
   const [navbuttons, setNavbuttons] = useState([]);
   const temp = [];
-  
-    
-  
-
   useEffect(() => {
     if (timesup) handleSubmit();
   }, [timesup]);
@@ -183,6 +237,7 @@ function AssesmentQuestions({
           correctq={correctq}
           attemptedq={attemptedq}
           totalq={totalq}
+          questionsfetched={questionsfetched}
         />
       )}
       <div className="w-[60%] bg-zinc-900 rounded-lg h-[70%] p-4 ">
@@ -257,7 +312,9 @@ function AssesmentQuestions({
                   className={`text-zinc-200 ${
                     navbuttons[index]
                       ? "bg-zinc-200 text-zinc-900"
-                      : question.selectedOption === "" ? "bg-zinc-900":"bg-violet-600"
+                      : question.selectedOption === ""
+                      ? "bg-zinc-900"
+                      : "bg-violet-600"
                   }  flex items-center py-2 w-12 justify-center rounded-lg`}
                   key={index}
                   onClick={() => {
