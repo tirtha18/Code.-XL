@@ -8,6 +8,8 @@ import { AuthContext } from "./AuthProvider";
 import { FileUploader } from "react-drag-drop-files";
 import Sheet from "./Sheet";
 import Spinner from "./SpinnerAni";
+import { FaExternalLinkAlt } from "react-icons/fa";
+import { MdOutlineArrowOutward } from "react-icons/md";
 function FileUploadForm({ setFileshow, user_id, setReload }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -114,14 +116,41 @@ export default function Sheets() {
   }, [user, reload]);
 
   return (
-    <div className="overflow-auto">
+    <div
+      className="overflow-auto"
+      style={{
+        overflowY: "scroll",
+        scrollbarWidth: "thin",
+        msOverflowStyle: "none",
+        scrollbarColor: "#10B981 transparent",
+      }}
+    >
       {loading ? (
         <Spinner />
       ) : !sheetshow ? (
-        <div
-          className="px-10 py-10 overflow-auto"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
+        <div className="px-10 py-10 h-full w-full">
+          <div className="mb-10">
+            <h1 className="text-3xl font-bold text-zinc-300">
+              Personalized Sheets
+            </h1>
+            <p className="mt-4 text-lg text-zinc-400">
+              Our Personalized Sheets feature revolutionizes study efficiency by
+              allowing users to upload Excel or similar sheets. Automatically
+              extracting and categorizing problems by topic, it seamlessly
+              integrates with YouTube to provide relevant video links. Users can
+              easily track completion status, checking off solved problems for a
+              clear overview of their progress. Enhance your learning experience
+              with organized, interactive study tools tailored to your needs.
+              Get started with Striver's famous SDE sheet and level up your learning game!{" "}
+              <a
+                href=""
+                className=" capitalize hover:underline ml-1 text-zinc-200 text-sm bg-zinc-900 px-2 py-1 rounded-3xl  font-semibold hover:scale-105 duration-200 shadow-sm border border-zinc-800  hover:text-green-500"
+              >
+                Striver's SDE sheet 
+              </a>
+            </p>
+          </div>
+
           <div className="grid sm:grid-cols-1 md:grid-cols-3 md:gap-8 gap-4">
             <div
               onClick={() => setFileshow(true)}

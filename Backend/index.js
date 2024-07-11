@@ -12,6 +12,8 @@ import router4 from "./routes/getUser.js";
 
 import router5 from "./routes/uploadMocktest.js";
 
+import router6 from "./routes/getMock.js";
+
 import { connectToDatabase } from "./config/database.js";
 
 import cors from "cors";
@@ -35,6 +37,8 @@ app.use("/api/", router3);
 app.use("/api/", router4);
 
 app.use("/api/",router5);
+
+app.use("/api/",router6);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Express server initialized");

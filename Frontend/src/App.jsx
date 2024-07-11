@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./components/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MockAssessment from "./components/MockAssessment";
+import LandHome from "./components/LandingPage/LandHome"
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route path="/"  element = {<LandHome/>}></Route>
             </Routes>
           </div>
         </div>

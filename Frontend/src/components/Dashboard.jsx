@@ -11,6 +11,7 @@ import Spinner from "./SpinnerAni";
 import ProgressBar from "./ProgressBar";
 import DoughnutChart from "./DoughnutChart";
 import randomColor from "randomcolor";
+import LineChart from "./LineChart";
 function ShowSheetDetails({ selectedsheet, setSheetshow }) {
   if (!selectedsheet.sheet) return null;
   const dividedprob = selectedsheet.sheet.reduce((acc, prob) => {
@@ -110,6 +111,9 @@ export default function Dashboard() {
   const [sheetshow, setSheetshow] = useState(false);
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
+  const [mockresults, setMockresults] = useState([]);
+  const [mocklabels, setMocklabels ] = useState([]);
+  const [mockdata, setMockdata ] =useState([]);
   useEffect(() => {
     const getSheets = async () => {
       try {
@@ -150,11 +154,39 @@ export default function Dashboard() {
         setLoading(false);
       }
     };
+    const getMock = async () => {
+      try {
+        if (!user) return console.log("User ID not available");
+        const user_id = user._id;
+        setUserid(user_id);
+        setLoading(true);
+        const response = await axios.get("https://code-xl.onrender.com/api/getMock", {
+          params: { user_id: user_id },
+        });
+        console.log(response.data);
+        setMockresults(response.data);
+        const labels = [];
+        const data =[];
+        for(let i =0 ;i<response.data.length;i++)
+        {
+          let correctq = Number(response.data[i].correct_q);
+          let totalq =Number(response.data[i].total_q);
+          data.push(Math.floor((correctq/totalq)*100));
+          labels.push(response.data[i].name);
+        }
+        setMockdata(data);
+        setMocklabels(labels);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getMock();
     getSheets();
     getUser();
   }, [user]);
   const editedsheets = sheets;
-  console.log(sheets);
   for (let i = 0; i < sheets.length; i++) {
     const temp = sheets[i].sheet;
     const done = temp.filter((problem) => {
@@ -165,13 +197,15 @@ export default function Dashboard() {
     );
   }
   return (
-    <div className="text-white overflow-auto h-full"
-    style={{
-      overflowY: "scroll",
-      scrollbarWidth: "thin",
-      msOverflowStyle: "none",
-      scrollbarColor: "#10B981 transparent",
-    }}>
+    <div
+      className="text-white overflow-auto h-full"
+      style={{
+        overflowY: "scroll",
+        scrollbarWidth: "thin",
+        msOverflowStyle: "none",
+        scrollbarColor: "#10B981 transparent",
+      }}
+    >
       <div className="m-4 h-full">
         <div className="flex flex-row h-full">
           <div className="w border border-zinc-700 flex flex-col items-center bg-zinc-900 px-2 h-full min-w-1/3 rounded-lg">
@@ -214,18 +248,19 @@ export default function Dashboard() {
           </div>
           <div className="flex flex-col w-full pl-4 h-full">
             <div className="flex flex-row h-1/2">
-              <div
-                className=" border h-full border-zinc-700 rounded-lg mr-4 w-2/3  "
-              >
+              <div className=" border h-full border-zinc-700 rounded-lg mr-4 w-2/3 ">
                 <div className="text-lg text-zinc-100 font-semibold p-4 border-b border-zinc-600">
                   Progress
                 </div>
-                <div className="flex w-full h-[80%] overflow-auto" style={{
-                  overflowY: "scroll",
-                  scrollbarWidth: "thin",
-                  msOverflowStyle: "none",
-                  scrollbarColor: "#10B981 transparent",
-                }}>
+                <div
+                  className="flex w-full h-[80%] overflow-auto"
+                  style={{
+                    overflowY: "scroll",
+                    scrollbarWidth: "thin",
+                    msOverflowStyle: "none",
+                    scrollbarColor: "#10B981 transparent",
+                  }}
+                >
                   <div className=" grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-x-4 w-full h-full place-items-center mx-4 my-4">
                     {editedsheets.map((sheet) => (
                       <div
@@ -266,12 +301,50 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
-            <div className=" border border-zinc-700 rounded-lg ml-auto w-full mt-4 h-full">
+            <div className=" border border-zinc-700 rounded-lg ml-auto w-full mt-4 h-full flex flex-col">
               <div className="text-lg font-semibold p-4 border-b border-zinc-600 text-zinc-300">
                 Mock Assessment Analysis
               </div>
-              <div className="">
-                <div></div>
+              <div className="w-full h-full flex flex-row">
+                <div className=" flex w-[62.5%] h-full items-center justify-center border-r border-zinc-700">
+                  <div className="h-[98%] py-2 w-[95%]">
+                    <LineChart mockdata={mockdata} mocklabels={mocklabels} />
+                  </div>
+                </div>
+                <div className=" flex flex-grow flex-col h-full items-center  ">
+                  <h1 className="text-lg text-zinc-300 py-2 px-4 w-full border-b border-zinc-700">
+                    History:
+                  </h1>
+                  <div className=" w-full items mt-6">
+                    <div
+                      className=" flex flex-col ml-4 mr-1 overflow-auto max-h-44"
+                      style={{
+                        overflowY: "scroll",
+                        scrollbarWidth: "thin",
+                        msOverflowStyle: "none",
+                        scrollbarColor: "#10B981 transparent",
+                      }}
+                    >
+                      {mockresults.map((result) => (
+                        <div className="w-full bg-zinc-800 rounded-lg p-2 space-y-2 text-sm text-zinc-300 hover:bg-zinc-700 duration-100 hover:cursor-pointer mb-2">
+                          <div className="flex flex-row">
+                            <p>{result.name}</p>{" "}
+                            <p className="ml-auto  font-extralight py-0.5 bg-zinc-900 rounded-lg min-w-10 flex items-center justify-center ">
+                              {result.correct_q}/{result.total_q}
+                            </p>{" "}
+                          </div>
+                          <ProgressBar
+                            value={Math.floor(
+                              (Number(result.correct_q) /
+                                Number(result.total_q)) *
+                                100
+                            )}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
