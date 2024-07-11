@@ -93,9 +93,9 @@ export default function LandHome() {
       </div>
       <div
         name="features"
-        className="min-h-screen bg-gradient-to-b from-gray-800 to-black flex flex-col text-gray-300 items-center justify-center "
+        className="min-h-screen bg-gradient-to-b from-gray-800 to-black flex flex-col text-gray-300 items-center justify-center py-24"
       >
-        <div className=" grid grid-cols-3 gap-2 h-full mb-16">
+        <div className=" grid grid-cols-3 gap-6 h-full mb-16">
           <div onClick={() => {navigate("/sheets");}} className="flex bg-black flex-col max-w-56 p-4 pt-12 pb-8 rounded-3xl items-center text-center m-2 border hover:scale-105 duration-200 hover:cursor-pointer">
             <h1 className="text-lg text-white font-semibold">
               Personalized Sheets

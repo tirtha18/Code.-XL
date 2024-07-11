@@ -11,6 +11,8 @@ import Dashboard from "./components/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MockAssessment from "./components/MockAssessment";
 import LandHome from "./components/LandingPage/LandHome"
+import CoreSub from "./components/CoreSub";
+import Community from "./components/Community";
 
 function App() {
   return (
@@ -49,7 +51,17 @@ function App() {
                 }
               />
               <Route path="/"  element = {<LandHome/>}></Route>
+              <Route path="/coresub"  element = {<CoreSub/>}></Route>
+              <Route
+                path="/community"
+                element={
+                  <ProtectedRoute>
+                    <Community/>
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
+            
           </div>
         </div>
         <ToastContainer position="bottom-center" autoClose={2000} />

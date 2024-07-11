@@ -12,6 +12,8 @@ import ProgressBar from "./ProgressBar";
 import DoughnutChart from "./DoughnutChart";
 import randomColor from "randomcolor";
 import LineChart from "./LineChart";
+import Leetcode from "../images/LC_logo.png";
+import Gfg from "../images/GFG_logo.png"
 function ShowSheetDetails({ selectedsheet, setSheetshow }) {
   if (!selectedsheet.sheet) return null;
   const dividedprob = selectedsheet.sheet.reduce((acc, prob) => {
@@ -112,8 +114,8 @@ export default function Dashboard() {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [mockresults, setMockresults] = useState([]);
-  const [mocklabels, setMocklabels ] = useState([]);
-  const [mockdata, setMockdata ] =useState([]);
+  const [mocklabels, setMocklabels] = useState([]);
+  const [mockdata, setMockdata] = useState([]);
   useEffect(() => {
     const getSheets = async () => {
       try {
@@ -160,18 +162,20 @@ export default function Dashboard() {
         const user_id = user._id;
         setUserid(user_id);
         setLoading(true);
-        const response = await axios.get("https://code-xl.onrender.com/api/getMock", {
-          params: { user_id: user_id },
-        });
+        const response = await axios.get(
+          "https://code-xl.onrender.com/api/getMock",
+          {
+            params: { user_id: user_id },
+          }
+        );
         console.log(response.data);
         setMockresults(response.data);
         const labels = [];
-        const data =[];
-        for(let i =0 ;i<response.data.length;i++)
-        {
+        const data = [];
+        for (let i = 0; i < response.data.length; i++) {
           let correctq = Number(response.data[i].correct_q);
-          let totalq =Number(response.data[i].total_q);
-          data.push(Math.floor((correctq/totalq)*100));
+          let totalq = Number(response.data[i].total_q);
+          data.push(Math.floor((correctq / totalq) * 100));
           labels.push(response.data[i].name);
         }
         setMockdata(data);
@@ -292,12 +296,68 @@ export default function Dashboard() {
                   </div>
                 </div>
               </div>
-              <div className=" border border-zinc-700 rounded-lg h-full ml-auto w-2/5 ">
+              <div className=" border border-zinc-700 flex flex-col rounded-lg h-full ml-auto w-2/5 ">
                 <div className="text-lg font-semibold p-4 border-b border-zinc-600 text-zinc-300">
                   Upcoming Contests
                 </div>
-                <div className="">
-                  <div></div>
+                <div className=" flex flex-grow overflow-auto items-center">
+                  <div className="flex flex-col mx-2 w-full">
+
+                    <div className="flex flex-row w-full justify-between px-4 py-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 hover:cursor-pointer">
+                      <div className="flex flex-col">
+                        <div className="flex flex-row items-center">
+                          <h2 className="text-lg">Leetcode </h2>
+                          <img
+                            className="w-6 h-6 ml-2"
+                            src={Leetcode}
+                            alt="#"
+                          />
+                        </div>
+                        <h2 className="text-sm text-zinc-400">Biweekly-236</h2>
+                      </div>
+                      <div className="flex flex-col text-sm">
+                        <h2>Starts in :</h2>
+                        <h2 className="text-zinc-400 mt-2">2d: 5h: 4m</h2>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-row w-full justify-between px-4 py-3 bg-zinc-900 rounded-lg mt-2 hover:bg-zinc-800 hover:cursor-pointer">
+                      <div className="flex flex-col">
+                        <div className="flex flex-row items-center">
+                          <h2 className="text-lg">Leetcode </h2>
+                          <img
+                            className="w-6 h-6 ml-2"
+                            src={Leetcode}
+                            alt="#"
+                          />
+                        </div>
+                        <h2 className="text-sm text-zinc-400">Weekly-146</h2>
+                      </div>
+                      <div className="flex flex-col text-sm">
+                        <h2>Starts in :</h2>
+                        <h2 className="text-zinc-400 mt-2">2d: 5h: 4m</h2>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-row w-full justify-between px-4 py-3 bg-zinc-900 rounded-lg mt-2 hover:bg-zinc-800 hover:cursor-pointer">
+                      <div className="flex flex-col">
+                        <div className="flex flex-row items-center">
+                          <h2 className="text-lg">GFG </h2>
+                          <img
+                            className=" w-14 h-7"
+                            src={Gfg}
+                            alt="#"
+                          />
+                        </div>
+                        <h2 className="text-sm text-zinc-400">Weekly-136</h2>
+                      </div>
+                      <div className="flex flex-col text-sm">
+                        <h2>Starts in :</h2>
+                        <h2 className="text-zinc-400 mt-2">2d: 5h: 4m</h2>
+                      </div>
+                    </div>
+
+                  </div>
                 </div>
               </div>
             </div>
@@ -308,7 +368,9 @@ export default function Dashboard() {
               <div className="w-full h-full flex flex-row">
                 <div className=" flex w-[62.5%] h-full items-center justify-center border-r border-zinc-700">
                   <div className="h-[98%] py-2 w-[95%]">
-                    <LineChart mockdata={mockdata} mocklabels={mocklabels} />
+                    <div className="h-full w-full mt-1">
+                      <LineChart mockdata={mockdata} mocklabels={mocklabels} />
+                    </div>
                   </div>
                 </div>
                 <div className=" flex flex-grow flex-col h-full items-center  ">
@@ -317,7 +379,7 @@ export default function Dashboard() {
                   </h1>
                   <div className=" w-full items mt-6">
                     <div
-                      className=" flex flex-col ml-4 mr-1 overflow-auto max-h-44"
+                      className=" flex flex-col ml-4 mr-1 overflow-auto max-h-40"
                       style={{
                         overflowY: "scroll",
                         scrollbarWidth: "thin",
@@ -326,7 +388,7 @@ export default function Dashboard() {
                       }}
                     >
                       {mockresults.map((result) => (
-                        <div className="w-full bg-zinc-800 rounded-lg p-2 space-y-2 text-sm text-zinc-300 hover:bg-zinc-700 duration-100 hover:cursor-pointer mb-2">
+                        <div className="w-full  rounded-lg py-0.5 space-y-2 text-sm text-zinc-300  hover:cursor-pointer mb-2">
                           <div className="flex flex-row">
                             <p>{result.name}</p>{" "}
                             <p className="ml-auto  font-extralight py-0.5 bg-zinc-900 rounded-lg min-w-10 flex items-center justify-center ">
