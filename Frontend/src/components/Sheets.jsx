@@ -57,7 +57,7 @@ function FileUploadForm({ setFileshow, user_id, setReload }) {
           className="bg-black text-gray-100 py-2 px-4 rounded-lg ml-7 hover:cursor-pointer hover:scale-105 duration-200"
           onClick={() => {
             if (!selectedFile) {
-              alert("Select or drop a file to continue");
+              alert("Select or drop a file to continue!");
             } else FileUpload();
           }}
         >
@@ -143,7 +143,7 @@ export default function Sheets() {
               with organized, interactive study tools tailored to your needs.
               Get started with Striver's famous SDE sheet and level up your learning game!{" "}
               <a
-                href=""
+                href="https://docs.google.com/spreadsheets/d/1SJYYWag2RNONf8BNW3W8z92nhJotSDm_/edit?usp=sharing&ouid=104446117698915010531&rtpof=true&sd=true"  target="_blank"
                 className=" capitalize hover:underline ml-1 text-zinc-200 text-sm bg-zinc-900 px-2 py-1 rounded-3xl  font-semibold hover:scale-105 duration-200 shadow-sm border border-zinc-800  hover:text-green-500"
               >
                 Striver's SDE sheet 

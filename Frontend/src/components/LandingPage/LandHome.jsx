@@ -148,7 +148,7 @@ export default function LandHome() {
         </div>
       </div>
       <div
-        name="techstack"
+        name="technologies"
         className="h-screen bg-gradient-to-b from-black to-gray-800 flex flex-col text-gray-300"
       >
         <div className="max-w-screen-lg mx-auto p-4 flex flex-col justify-center w-full h-ful text-white">

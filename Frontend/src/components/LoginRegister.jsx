@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "./AuthProvider";
+import Hero from "../images/Heroimg.png";
 const LoginRegister = () => {
   const [activeCard, setActiveCard] = useState("login");
   const [username, setUsername] = useState("");
@@ -11,7 +12,7 @@ const LoginRegister = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const navigate = useNavigate();
-  const { login} = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const toggleCard = (cardType) => {
     setActiveCard(cardType);
   };
@@ -21,7 +22,7 @@ const LoginRegister = () => {
     if (!username || !password) {
       toast.error("Please fill all the fields!");
       return;
-    } 
+    }
     login({
       username: username,
       password: password,
@@ -62,12 +63,19 @@ const LoginRegister = () => {
   };
 
   const handleClose = () => {
-    navigate("/");
+    navigate("/sheets");
   };
 
   return (
     <>
-      <div className="fixed top-0 left-0 flex justify-center items-center min-h-screen w-screen bg-black z-50">
+      <div className="fixed top-0 left-0 flex justify-center items-center min-h-screen w-screen bg-zinc-200 z-10">
+        <div class="top-0 right-0 fixed h-full w-1/2 overflow-hidden border-l-4 border-black ">
+          <img
+            src={Hero}
+            alt="#"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
         <div className="relative bg-zinc-100 p-8 rounded-lg shadow-lg w-full max-w-md text-black flex-col flex items-center">
           <button
             onClick={handleClose}

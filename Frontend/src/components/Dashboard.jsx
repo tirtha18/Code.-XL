@@ -254,7 +254,7 @@ export default function Dashboard() {
             <div className="flex flex-row h-1/2">
               <div className=" border h-full border-zinc-700 rounded-lg mr-4 w-2/3 ">
                 <div className="text-lg text-zinc-100 font-semibold p-4 border-b border-zinc-600">
-                  Progress
+                  Progress:
                 </div>
                 <div
                   className="flex w-full h-[80%] overflow-auto"
@@ -298,7 +298,7 @@ export default function Dashboard() {
               </div>
               <div className=" border border-zinc-700 flex flex-col rounded-lg h-full ml-auto w-2/5 ">
                 <div className="text-lg font-semibold p-4 border-b border-zinc-600 text-zinc-300">
-                  Upcoming Contests
+                  Upcoming Contests:
                 </div>
                 <div className=" flex flex-grow overflow-auto items-center">
                   <div className="flex flex-col mx-2 w-full">
@@ -335,7 +335,7 @@ export default function Dashboard() {
                       </div>
                       <div className="flex flex-col text-sm">
                         <h2>Starts in :</h2>
-                        <h2 className="text-zinc-400 mt-2">2d: 5h: 4m</h2>
+                        <h2 className="text-zinc-400 mt-2">3d: 4h: 4m</h2>
                       </div>
                     </div>
 
@@ -353,7 +353,7 @@ export default function Dashboard() {
                       </div>
                       <div className="flex flex-col text-sm">
                         <h2>Starts in :</h2>
-                        <h2 className="text-zinc-400 mt-2">2d: 5h: 4m</h2>
+                        <h2 className="text-zinc-400 mt-2">3d: 5h: 1m</h2>
                       </div>
                     </div>
 
@@ -363,7 +363,7 @@ export default function Dashboard() {
             </div>
             <div className=" border border-zinc-700 rounded-lg ml-auto w-full mt-4 h-full flex flex-col">
               <div className="text-lg font-semibold p-4 border-b border-zinc-600 text-zinc-300">
-                Mock Assessment Analysis
+                Mock Assessment Analysis:
               </div>
               <div className="w-full h-full flex flex-row">
                 <div className=" flex w-[62.5%] h-full items-center justify-center border-r border-zinc-700">
