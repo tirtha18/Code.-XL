@@ -13,7 +13,92 @@ import DoughnutChart from "./DoughnutChart";
 import randomColor from "randomcolor";
 import LineChart from "./LineChart";
 import Leetcode from "../images/LC_logo.png";
-import Gfg from "../images/GFG_logo.png"
+import Gfg from "../images/GFG_logo.png";
+import Tabs from "./Tabs";
+function ShowMockResults({ setShowMockdata, selectedmockdata }) {
+  console.log(selectedmockdata);
+  const correctq = selectedmockdata.correct_q;
+  const totalq = selectedmockdata.total_q;
+  const attemptedq = selectedmockdata.attempted_q;
+  const [toggleresult, setToggleresult] = useState(false);
+  return (
+    <div className="fixed top-0 left-0 flex justify-center items-center h-screen w-screen z-50 bg-opacity-50 backdrop-blur-sm">
+      <div className="relative bg-zinc-800 border-zinc-600 border  rounded-lg shadow-lg text-zinc-300 flex-col flex items-center w-[40%] min-h-[40%]">
+        <div className="text-lg font-semibold  border-b border-zinc-600 text-zinc-300 w-full  p-4">
+          {selectedmockdata.name}
+          <button
+            onClick={() => setShowMockdata(false)}
+            className="absolute top-4 right-4"
+            aria-label="Close"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+        <div className="w-[93%] mt-4"><Tabs setToggleresult = {setToggleresult}/></div>
+        {!toggleresult ? (
+          <div className="mt-6 flex-col w-[90%] h-[90%]">
+            <div className=" text-zinc-300 bg-zinc-600 rounded-lg shadow-sm shadow-zinc-600 p-4">
+              <div className="flex flex-row w-full justify-between">
+                <h1>Attemted:</h1>
+                <p className="ml-2 bg-zinc-800 px-2 text-zinc-400 py-0.5 text-sm rounded-lg">
+                  {attemptedq + "/" + totalq}
+                </p>
+              </div>
+              <div className=" mt-3">
+                <ProgressBar value={Math.floor((attemptedq / totalq) * 100)} />
+              </div>
+            </div>
+            <div className=" text-zinc-300 bg-zinc-700 rounded-lg  p-4 mt-4 mb-6">
+              <div className="flex flex-row w-full justify-between">
+                <h1>Total Score:</h1>
+                <p className="ml-2 bg-zinc-800 px-2 text-zinc-400 py-0.5 text-sm rounded-lg">
+                  {correctq + "/" + totalq}
+                </p>
+              </div>
+              <div className=" mt-3">
+                <ProgressBar value={Math.floor((correctq / totalq) * 100)} />
+              </div>
+              <div className="flex flex-row w-full justify-between mt-3">
+                <h1>Accuracy</h1>
+              </div>
+              <div className=" mt-3">
+                <ProgressBar
+                  value={
+                    attemptedq !== 0
+                      ? Math.floor((correctq / attemptedq) * 100)
+                      : 0
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="mt-6 flex-col w-[90%] max-h-96 overflow-auto space-y-2">
+            {selectedmockdata.questions.map((question,index) => (
+              <div key= {question._id} className="flex flex-col py-2">
+                <h1 className=" text-zinc-300">{index+1 +") "}{question.problem}</h1>
+                <h2 className="text-green-400 text-sm"><h2 className="text-zinc-400">Correct Answer: </h2> {question.answer}</h2>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 function ShowSheetDetails({ selectedsheet, setSheetshow }) {
   if (!selectedsheet.sheet) return null;
   const dividedprob = selectedsheet.sheet.reduce((acc, prob) => {
@@ -29,9 +114,6 @@ function ShowSheetDetails({ selectedsheet, setSheetshow }) {
   for (const [topic, problems] of Object.entries(dividedprob)) {
     const done = problems.filter((problem) => problem.status === "DONE");
     let completion = Math.floor((done.length / problems.length) * 100);
-    for (let i = 0; i < problems.length; i++) {
-      console.log(problems[i]);
-    }
     topicsCompstatus.push({
       topic: topic,
       doneprob: done.length,
@@ -116,6 +198,8 @@ export default function Dashboard() {
   const [mockresults, setMockresults] = useState([]);
   const [mocklabels, setMocklabels] = useState([]);
   const [mockdata, setMockdata] = useState([]);
+  const [showMockdata, setShowMockdata] = useState(false);
+  const [selectedmockdata, setSelectedmocckdata] = useState(null);
   useEffect(() => {
     const getSheets = async () => {
       try {
@@ -302,7 +386,6 @@ export default function Dashboard() {
                 </div>
                 <div className=" flex flex-grow overflow-auto items-center">
                   <div className="flex flex-col mx-2 w-full">
-
                     <div className="flex flex-row w-full justify-between px-4 py-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 hover:cursor-pointer">
                       <div className="flex flex-col">
                         <div className="flex flex-row items-center">
@@ -343,11 +426,7 @@ export default function Dashboard() {
                       <div className="flex flex-col">
                         <div className="flex flex-row items-center">
                           <h2 className="text-lg">GFG </h2>
-                          <img
-                            className=" w-14 h-7"
-                            src={Gfg}
-                            alt="#"
-                          />
+                          <img className=" w-14 h-7" src={Gfg} alt="#" />
                         </div>
                         <h2 className="text-sm text-zinc-400">Weekly-136</h2>
                       </div>
@@ -356,7 +435,6 @@ export default function Dashboard() {
                         <h2 className="text-zinc-400 mt-2">3d: 5h: 1m</h2>
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -388,7 +466,14 @@ export default function Dashboard() {
                       }}
                     >
                       {mockresults.map((result) => (
-                        <div className="w-full  rounded-lg py-0.5 space-y-2 text-sm text-zinc-300  hover:cursor-pointer mb-2">
+                        <div
+                          className="w-full  rounded-lg py-1 space-y-2 text-sm text-zinc-300  hover:cursor-pointer mb-2 px-2  hover:bg-zinc-700"
+                          onClick={() => {
+                            setSelectedmocckdata(result);
+                            setShowMockdata(true);
+                          }}
+                          key={result._id}
+                        >
                           <div className="flex flex-row">
                             <p>{result.name}</p>{" "}
                             <p className="ml-auto  font-extralight py-0.5 bg-zinc-900 rounded-lg min-w-10 flex items-center justify-center ">
@@ -411,6 +496,12 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
+        {showMockdata && (
+          <ShowMockResults
+            setShowMockdata={setShowMockdata}
+            selectedmockdata={selectedmockdata}
+          />
+        )}
         {loading && <Spinner />}
       </div>
       {sheetshow && (
