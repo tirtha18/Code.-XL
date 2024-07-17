@@ -9,7 +9,7 @@ import { IoIosHome } from "react-icons/io";
 import { ImBooks } from "react-icons/im";
 import { AuthContext } from "./AuthProvider";
 import "react-toastify/dist/ReactToastify.css";
-import { NavContextProvider, navContext } from "./NavContextProvider";
+import { navContext } from "./NavContextProvider";
 import { useNavigate } from "react-router-dom";
 const navItems = [
   {
@@ -85,7 +85,6 @@ export default function Navbar() {
           <div
             onClick={() => {
               logout();
-              navigate("/");
             }}
             className="flex items-center text mt-auto text-lg mb-4 py-2 px-10 rounded-lg text-zinc-900 bg-white flex-row space-x-2 hover:cursor-pointer hover:scale-105 duration-200 hover:bg-red-600 hover:text-zinc-300"
           >
