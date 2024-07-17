@@ -1,4 +1,15 @@
-﻿
+﻿# Code.XL
+
+## Overview
+
+Code.XL is an innovative web app designed to help students prepare for a career in software development. It offers a comprehensive suite of features tailored to enhance learning and ensure readiness for real-world challenges in the tech industry. With Code.XL, users can personalize their study plans and track their progress through intuitive visual graphs, allowing them to visualize their learning journey. This functionality helps users identify strengths and areas for improvement, empowering them to focus their efforts effectively. Additionally, the app fosters engagement with a vibrant community of learners, providing a supportive environment for collaboration and knowledge sharing.
+
+## Architecture
+
+Code.XL consists of two main components:
+- **Frontend**: The user interface, built using modern web technologies.
+- **Backend**: The server-side logic that handles data processing and storage.
+
 ## Key Features
 
 ### Personalized Sheets
@@ -19,8 +30,8 @@
 
 ## Screenshots
 
-![Screenshot 1](frontend/assets/screen1.png)  <!-- Ensure this path is correct -->
-![Screenshot 2](frontend/assets/screen2.png)  <!-- Ensure this path is correct -->
+![Screenshot 1](Frontend/src/assets/screen1.png)  <!-- Ensure this path is correct -->
+![Screenshot 2](Frontend/src/assets/screen2.png)  <!-- Ensure this path is correct -->
 
 ## Video Demo
 
