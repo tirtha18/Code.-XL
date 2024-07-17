@@ -10,6 +10,8 @@ import reactjs from "../../images/react.png";
 import mongodb from "../../images/mongo.png";
 import tailwind from "../../images/tailwind.png";
 import js from "../../images/js.png";
+import { useContext } from "react";
+import { NavContextProvider,navContext } from "../NavContextProvider";
 import { FaArrowRight } from "react-icons/fa";
 const techstack = [
   {
@@ -56,13 +58,14 @@ const techstack = [
   },
 ];
 export default function LandHome() {
+  const {changeActiveNav} = useContext(navContext);
   const navigate = useNavigate();
   return (
     <div className="absolute z-10 top-0 left-0 min-h-screen w-screen bg-black ">
       <Navbar />
       <div
         name="home"
-        className="h-screen bg-gradient-to-b from-black to-gray-800 flex flex-col text-gray-300"
+        className="h-screen bg-gradient-to-b from-black to-gray-900 flex flex-col text-gray-300"
       >
         <div className="max-w-screen mx-auto flex items-center justify-center h-full px-4 ml-[9%]">
           <div className="flex flex-col w-[50%] justify-center h-full">
@@ -76,7 +79,7 @@ export default function LandHome() {
             </p>
             <div
               onClick={() => {
-                navigate("/sheets");
+                navigate("/sheets");changeActiveNav(2);
               }}
               className="group text-white w-fit px-6 py-3 my-2 flex items-center rounded-md bg-gradient-to-r from-green-600 to hover:cursor-pointer bg-green-500 hover:scale-105 duration-300"
             >
@@ -93,10 +96,10 @@ export default function LandHome() {
       </div>
       <div
         name="features"
-        className="min-h-screen bg-gradient-to-b from-gray-800 to-black flex flex-col text-gray-300 items-center justify-center py-24"
+        className="min-h-screen bg-gradient-to-b from-gray-900 to-black flex flex-col text-gray-300 items-center justify-center py-24"
       >
         <div className=" grid grid-cols-3 gap-6 h-full mb-16">
-          <div onClick={() => {navigate("/sheets");}} className="flex bg-black flex-col max-w-56 p-4 pt-12 pb-8 rounded-3xl items-center text-center m-2 border hover:scale-105 duration-200 hover:cursor-pointer">
+          <div onClick={() => {changeActiveNav(2);navigate("/sheets");}} className="flex bg-black flex-col max-w-56 p-4 pt-12 pb-8 rounded-3xl items-center text-center m-2 border hover:scale-105 duration-200 hover:cursor-pointer">
             <h1 className="text-lg text-white font-semibold">
               Personalized Sheets
             </h1>
@@ -110,7 +113,7 @@ export default function LandHome() {
               <FaArrowRight size={18}/>
             </div>
           </div>
-          <div onClick={() => {navigate("/mockassessment");}} className="flex bg-black flex-col max-w-56 p-4 pt-12 pb-8 rounded-3xl items-center text-center m-2 border hover:scale-105 duration-200 hover:cursor-pointer">
+          <div onClick={() => {changeActiveNav(4);navigate("/mockassessment");}} className="flex bg-black flex-col max-w-56 p-4 pt-12 pb-8 rounded-3xl items-center text-center m-2 border hover:scale-105 duration-200 hover:cursor-pointer">
             <h1 className="text-lg text-white font-semibold">
               Custom Mock Assesment
             </h1>
@@ -123,7 +126,7 @@ export default function LandHome() {
               <FaArrowRight size={18} />
             </div>
           </div>
-          <div onClick={() => {navigate("/coresub");}} className="flex bg-black flex-col max-w-56 p-4 pt-12 pb-8 rounded-3xl items-center text-center m-2 border hover:scale-105 duration-200 hover:cursor-pointer ">
+          <div onClick={() => {changeActiveNav(3);navigate("/coresub");}} className="flex bg-black flex-col max-w-56 p-4 pt-12 pb-8 rounded-3xl items-center text-center m-2 border hover:scale-105 duration-200 hover:cursor-pointer ">
             <h1 className="text-lg text-white font-semibold">Core Subjects</h1>
             <p className="text-sm mt-4 text-gray-400 ">
               Code.XL's core subjects feature provides expertly crafted
@@ -134,7 +137,7 @@ export default function LandHome() {
               <FaArrowRight size={18}/>
             </div>
           </div>
-          <div onClick={() => {navigate("/community");}} className="flex bg-black flex-col max-w-56 p-4 pt-12 pb-8 rounded-3xl items-center text-center m-2 border hover:scale-105 duration-200 hover:cursor-pointer">
+          <div onClick={() => {changeActiveNav(5);navigate("/community");}} className="flex bg-black flex-col max-w-56 p-4 pt-12 pb-8 rounded-3xl items-center text-center m-2 border hover:scale-105 duration-200 hover:cursor-pointer">
             <h1 className="text-lg text-white font-semibold">Community</h1>
             <p className="text-sm mt-4 text-gray-400 ">
               Code.XL's community feature connects users with peers, fostering
@@ -149,7 +152,7 @@ export default function LandHome() {
       </div>
       <div
         name="technologies"
-        className="h-screen bg-gradient-to-b from-black to-gray-800 flex flex-col text-gray-300"
+        className="h-screen bg-gradient-to-b from-black to-gray-900 flex flex-col text-gray-300"
       >
         <div className="max-w-screen-lg mx-auto p-4 flex flex-col justify-center w-full h-ful text-white">
           <div>
@@ -175,7 +178,7 @@ export default function LandHome() {
       </div>
       <div
       name="contact"
-      className="w-full h-screen bg-gradient-to-b from-gray-800 to-black text-white"
+      className="w-full h-screen bg-gradient-to-b from-gray-900 to-black text-white"
     >
       <div className="flex flex-col p-4 justify-center max-w-screen-lg mx-auto h-full">
         <div className="pb-8">

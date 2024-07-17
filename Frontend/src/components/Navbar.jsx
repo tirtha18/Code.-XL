@@ -9,6 +9,8 @@ import { IoIosHome } from "react-icons/io";
 import { ImBooks } from "react-icons/im";
 import { AuthContext } from "./AuthProvider";
 import "react-toastify/dist/ReactToastify.css";
+import { NavContextProvider, navContext } from "./NavContextProvider";
+import { useNavigate } from "react-router-dom";
 const navItems = [
   {
     ind: 0,
@@ -49,16 +51,12 @@ const navItems = [
 ];
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const { activeNav, changeActiveNav } = useContext(navContext);
   const { user, logout } = useContext(AuthContext);
-  const temp = [];
-  for (let i = 0; i < navItems.length; i++) temp.push(false);
-  temp[0]=true;
-  const [navactive, setNavactive] = useState(temp);
   const handleNavclick = (index) => {
-    const tem = [...navactive];
-    for (let i = 0; i < tem.length; i++) tem[i] = false;
-    tem[index] = true;
-    setNavactive(tem);
+    console.log(activeNav);
+    changeActiveNav(index);
   };
   return (
     <>
@@ -73,7 +71,7 @@ export default function Navbar() {
                 <div
                   onClick={() => handleNavclick(item.ind)}
                   className={`flex flex-row space-x-5 items-center ${
-                    navactive[item.ind] ? "bg-white text-black scale-105" : ""
+                    activeNav[item.ind] ? "bg-white text-black scale-105" : ""
                   }   lg:py-4 py-4 px-4 w-full rounded-lg hover:cursor-pointer hover:scale-105 mb-1`}
                 >
                   {item.icon}
@@ -87,6 +85,7 @@ export default function Navbar() {
           <div
             onClick={() => {
               logout();
+              navigate("/");
             }}
             className="flex items-center text mt-auto text-lg mb-4 py-2 px-10 rounded-lg text-zinc-900 bg-white flex-row space-x-2 hover:cursor-pointer hover:scale-105 duration-200 hover:bg-red-600 hover:text-zinc-300"
           >

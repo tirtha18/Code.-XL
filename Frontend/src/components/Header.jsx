@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
 import { AuthContext } from "./AuthProvider";
 import User_img from "../images/User_img.png";
+import { navContext } from "./NavContextProvider";
 export default function Header() {
-  const { user, token, login, logout } = useContext(AuthContext);
+  const {changeActiveNav} = useContext(navContext);
+  const { user, token } = useContext(AuthContext);
   return (
     <div className="fixed-header min-h-[64px] flex shadow-sm shadow-gray-700 flex-row items-center z-10 w-full">
       <div className="ml-auto">
@@ -19,8 +21,8 @@ export default function Header() {
             </button>
           </Link>
         ) : (
-          <Link to={"/dashboard"}>
-            <div className=" text-white mr-6 hover:cursor-pointer border border-zinc-600 rounded-full">
+          <Link onClick={() => {changeActiveNav(1);}} to={"/dashboard"}>
+            <div  className=" text-white mr-6 hover:cursor-pointer border border-zinc-600 rounded-full">
               <img width="50" height="50" src={User_img} />
             </div>
           </Link>
