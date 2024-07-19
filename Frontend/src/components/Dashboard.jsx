@@ -14,7 +14,7 @@ import randomColor from "randomcolor";
 import LineChart from "./LineChart";
 import Leetcode from "../images/LC_logo.png";
 import Gfg from "../images/GFG_logo.png";
-import Tabs from "./Tabs";
+import NavTabs from "./Tabs";
 function ShowMockResults({ setShowMockdata, selectedmockdata }) {
   console.log(selectedmockdata);
   const correctq = selectedmockdata.correct_q;
@@ -47,7 +47,9 @@ function ShowMockResults({ setShowMockdata, selectedmockdata }) {
             </svg>
           </button>
         </div>
-        <div className="w-[93%] mt-4"><Tabs setToggleresult = {setToggleresult}/></div>
+        <div className="w-[90%] mt-4">
+          <NavTabs setToggleresult={setToggleresult} />
+        </div>
         {!toggleresult ? (
           <div className="mt-6 flex-col w-[90%] h-[90%]">
             <div className=" text-zinc-300 bg-zinc-600 rounded-lg shadow-sm shadow-zinc-600 p-4">
@@ -86,11 +88,25 @@ function ShowMockResults({ setShowMockdata, selectedmockdata }) {
             </div>
           </div>
         ) : (
-          <div className="mt-6 flex-col w-[90%] max-h-96 overflow-auto space-y-2">
-            {selectedmockdata.questions.map((question,index) => (
-              <div key= {question._id} className="flex flex-col py-2">
-                <h1 className=" text-zinc-300">{index+1 +") "}{question.problem}</h1>
-                <h2 className="text-green-400 text-sm"><h2 className="text-zinc-400">Correct Answer: </h2> {question.answer}</h2>
+          <div
+            className="mt-6 flex-col w-[90%] max-h-96 overflow-auto space-y-2"
+            style={{
+              overflowY: "scroll",
+              scrollbarWidth: "thin",
+              msOverflowStyle: "none",
+              scrollbarColor: "#10B981 transparent",
+            }}
+          >
+            {selectedmockdata.questions.map((question, index) => (
+              <div key={question._id} className="flex flex-col py-2">
+                <h1 className=" text-zinc-300">
+                  {index + 1 + ") "}
+                  {question.problem}
+                </h1>
+                <h2 className="text-green-400 text-sm">
+                  <h2 className="text-zinc-400">Correct Answer: </h2>{" "}
+                  {question.answer}
+                </h2>
               </div>
             ))}
           </div>
@@ -444,9 +460,9 @@ export default function Dashboard() {
                 Mock Assessment Analysis:
               </div>
               <div className="w-full h-full flex flex-row">
-                <div className=" flex w-[62.5%] h-full items-center justify-center border-r border-zinc-700">
+                <div className=" flex w-[55%] h-full items-center border-r border-zinc-700">
                   <div className="h-[98%] py-2 w-[95%]">
-                    <div className="h-full w-full mt-1">
+                    <div className="h-full w-full mt-1 flex justify-center items-center">
                       <LineChart mockdata={mockdata} mocklabels={mocklabels} />
                     </div>
                   </div>
@@ -455,7 +471,7 @@ export default function Dashboard() {
                   <h1 className="text-lg text-zinc-300 py-2 px-4 w-full border-b border-zinc-700">
                     History:
                   </h1>
-                  <div className=" w-full items mt-6">
+                  <div className=" w-full items mt-4">
                     <div
                       className=" flex flex-col ml-4 mr-1 overflow-auto max-h-40"
                       style={{
@@ -467,14 +483,14 @@ export default function Dashboard() {
                     >
                       {mockresults.map((result) => (
                         <div
-                          className="w-full  rounded-lg py-1 space-y-2 text-sm text-zinc-300  hover:cursor-pointer mb-2 px-2  hover:bg-zinc-700"
+                          className="w-full  rounded-lg py-2 space-y-2 text-sm text-zinc-300  hover:cursor-pointer mb-1 px-2  hover:bg-zinc-700"
                           onClick={() => {
                             setSelectedmocckdata(result);
                             setShowMockdata(true);
                           }}
                           key={result._id}
                         >
-                          <div className="flex flex-row">
+                          <div className="flex flex-row ">
                             <p>{result.name}</p>{" "}
                             <p className="ml-auto  font-extralight py-0.5 bg-zinc-900 rounded-lg min-w-10 flex items-center justify-center ">
                               {result.correct_q}/{result.total_q}
