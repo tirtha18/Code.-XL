@@ -6,27 +6,30 @@ export const togglestatus = async (req, res) => {
     if (!sheets) {
       return res.status(400).json({ message: "Sheets not found" });
     }
-    let flag = false;
+    let flag = false,
+      pos = -1;
     for (let i = 0; i < sheets.sheets.length; i++) {
       if (sheets.sheets[i]._id.toString() === sheet_id) {
-        for (let j = 0; j < sheets.sheets[i].sheet.length; j++) {
-          if (sheets.sheets[i].sheet[j]._id.toString() === problem_id) {
-            flag = true;
-            sheets.sheets[i].sheet[j].status =
-              sheets.sheets[i].sheet[j].status === "PENDING"
-                ? "DONE"
-                : "PENDING";
-            break;
-          }
-        }
-        if(flag)
+        pos = i;
         break;
+      }
+    }
+    if (pos !== -1) {
+      for (let i = 0; i < sheets.sheets[pos].sheet.length; i++) {
+        if (sheets.sheets[pos].sheet[i]._id.toString() === problem_id) {
+          flag = true;
+          sheets.sheets[pos].sheet[i].status =
+            sheets.sheets[pos].sheet[i].status === "PENDING"
+              ? "DONE"
+              : "PENDING";
+          break;
+        }
       }
     }
     if (flag) {
       await sheets.save();
       res.json({
-        message: "Problem status toggled successfully"
+        message: "Problem status toggled successfully",
       });
     } else {
       return res
