@@ -1,5 +1,9 @@
 import express, { response } from "express";
 
+import {connectRedis} from "./config/reddiscache.js"
+
+import { createClient } from 'redis';
+
 import router from "./routes/auth.js";
 
 import router1 from "./routes/sheetupload.js";
@@ -22,6 +26,8 @@ const app = express();
 
 connectToDatabase();
 
+connectRedis();
+
 app.use(express.json());
 
 app.use(cors());
@@ -36,9 +42,9 @@ app.use("/api/", router3);
 
 app.use("/api/", router4);
 
-app.use("/api/",router5);
+app.use("/api/", router5);
 
-app.use("/api/",router6);
+app.use("/api/", router6);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Express server initialized");
