@@ -3,7 +3,9 @@ export const cache = async (req, res, next) => {
   try {
     const key = req.originalUrl;
     const client = createClient();
-    await client.connect();
+    await client.connect().catch((error) => {
+      console.log("Connection error"), error;
+    });
     const cachedData = await client.get(key);
     if (cachedData) {
       console.log(JSON.parse(cachedData));
@@ -13,8 +15,7 @@ export const cache = async (req, res, next) => {
       next();
     }
   } catch (error) {
-    console.log("Error caching",error);
-    throw (error);
-    next();
+    console.log("Error caching", error);
+    next(error);
   }
 };
