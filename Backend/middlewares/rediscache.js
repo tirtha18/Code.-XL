@@ -13,7 +13,7 @@ export const cache = async (req, res, next) => {
       next();
     }
   } catch (error) {
-    console.log(error);
+    console.log("Error caching",error);
     next();
   }
 };
