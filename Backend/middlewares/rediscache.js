@@ -14,6 +14,7 @@ export const cache = async (req, res, next) => {
     }
   } catch (error) {
     console.log("Error caching",error);
+    throw (error);
     next();
   }
 };
