@@ -12,7 +12,7 @@ export const getMock = async (req, res) => {
       return res.status(404).json({ message: "No Mock results found for this user" });
     }
     await client.set(key, JSON.stringify(mockresults));
-    client.expire(key, 30);
+    client.expire(key, 600);
     res.json(mockresults);
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });

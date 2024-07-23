@@ -8,7 +8,7 @@ export const getVideoLink = async (query) => {
         params: {
           part: "snippet",
           q: query,
-          key: "AIzaSyB30gEL3b3E3qzhxANpPDc1P725DxQL6C0",
+          key: process.env.YOUTUBE_API_KEY,
           type: "video",
         },
       }

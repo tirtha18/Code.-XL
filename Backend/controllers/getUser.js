@@ -8,7 +8,7 @@ export const getUser = async (req, res) => {
     const user = await User.findById(user_id);
     if (!user) return res.status(404).json({ message: "No valid user found" });
     await client.set(key, JSON.stringify(user));
-    client.expire(key,30);
+    client.expire(key,600);
     res.json(user);
   } catch (error) {
     console.log(error);
