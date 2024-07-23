@@ -1,9 +1,5 @@
 import express, { response } from "express";
 
-import {connectRedis} from "./config/reddiscache.js"
-
-import { createClient } from 'redis';
-
 import router from "./routes/auth.js";
 
 import router1 from "./routes/sheetupload.js";
@@ -25,8 +21,6 @@ import cors from "cors";
 const app = express();
 
 connectToDatabase();
-
-connectRedis();
 
 app.use(express.json());
 
