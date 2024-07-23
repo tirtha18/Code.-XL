@@ -1,7 +1,13 @@
-import express from 'express';
-const router2 = express.Router();
-import { togglestatus } from '../controllers/togglestatus.js';
+import express from "express";
+import { togglestatus } from "../controllers/togglestatus.js";
+import { delcacheData } from "../middlewares/delcachedata.js";
 
-router2.post('/toggleprobstatus',togglestatus);
+const router2 = express.Router();
+
+router2.post(
+  "/toggleprobstatus",
+  (req, res, next) => delcacheData(req, res, next, "/api/getSheets?user_id="),
+  togglestatus
+);
 
 export default router2;

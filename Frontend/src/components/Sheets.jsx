@@ -187,6 +187,7 @@ export default function Sheets() {
           sheet_id={sheet_id}
           sheets_id={sheets_id}
           setReload={setReload}
+          user_id={userid}
         />
       )}
       {fileshow && (

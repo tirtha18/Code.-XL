@@ -12,6 +12,7 @@ export default function Sheet({
   selectedsheet,
   sheet_id,
   sheets_id,
+  user_id,
 }) {
   const [problem_id, setProblem_id] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -28,7 +29,7 @@ export default function Sheet({
         try {
           const response = await axios.post(
             "https://code-xl.onrender.com/api/toggleprobstatus",
-            { problem_id, sheets_id, sheet_id }
+            { problem_id, sheets_id, sheet_id, user_id }
           );
           console.log(response);
           setProblem_id("");
