@@ -14,8 +14,7 @@ def scrape_gfg():
     response = requests.get(url, headers)
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, "html.parser")
-        contest = soup.find(
-            "div", class_="events_eventDescCnt__13_9K").text
+        contest = soup.find("div", class_="events_eventDescCnt__13_9K").text
         str = "GFG "
         start_ind = contest.index(str) + len(str)
         end_ind = contest.index("[")
@@ -33,31 +32,25 @@ def scrape_gfg():
             "November": "11",
             "December": "12"
         }
-
         contest_date = contest[0: start_ind - 4].strip()
         contest_ = contest_date.split(" ")
         contest_month = contest_[1]
         contest_day = contest_[0]
-        if len(contest_day) == 1:
-            contest_day = "0" + contest_day
+        if len(contest_day) == 1:contest_day = "0" + contest_day
         contest_name = contest[start_ind: end_ind].strip()
         contest_year = "2024"
         contest_time = "13:30:00"
-        contest_datetime = f"{
-            contest_year}-{month_map[contest_month]}-{contest_day} {contest_time}"
-        contest_datetime = datetime.strptime(
-            contest_datetime, "%Y-%m-%d %H:%M:%S")
+        contest_datetime = f"{contest_year}-{month_map[contest_month]}-{contest_day} {contest_time}"
+        contest_datetime = datetime.strptime(contest_datetime, "%Y-%m-%d %H:%M:%S")
         return {"contest_info": {"contest_name:": contest_name, "contest_datetime": contest_datetime, "contest_link": ""}}
     return {"message": "Error"}
-
 
 def scrape_cf():
     url = "https://codeforces.com/"
     response = requests.get(url, headers)
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, "html.parser")
-        contest = soup.find_all(
-            "div", class_="roundbox sidebox borderTopRound")[0].text
+        contest = soup.find_all("div", class_="roundbox sidebox borderTopRound")[0].text
         str = "Before contest"
         start_ind = contest.index(str) + len(str)
         end_ind = contest.index(')', start_ind)
@@ -68,7 +61,6 @@ def scrape_cf():
         h = int(temp[0])
         m = int(temp[1])
         s = int(temp[2])
-        contest_time = current_time + \
-            timedelta(days=0, hours=h, minutes=m, seconds=s)
+        contest_time = current_time + timedelta(days=0, hours=h, minutes=m, seconds=s)
         return {"contest_info": {"contest_name:": contest_name, "contest_datetime": contest_time, "contest_link": ""}}
     return {"message": "Error"}
