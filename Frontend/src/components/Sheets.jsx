@@ -76,8 +76,7 @@ function FileUploadForm({ setFileshow, user_id, setReload }) {
       {loading && <Spinner />}
     </div>
   );
-}
-
+} 
 export default function Sheets() {
   const [sheetshow, setSheetshow] = useState(false);
   const [selectedsheet, setSelectedsheet] = useState([]);
