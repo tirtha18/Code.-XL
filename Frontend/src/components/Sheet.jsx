@@ -7,6 +7,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import GFG_logo from "../images/GFG_logo1.png";
 import YT_logo from "../images/YT_logo.png";
 import LC_logo from "../images/LC_logo.png";
+import { IoChevronBackOutline } from "react-icons/io5";
 export default function Sheet({
   setSheetshow,
   selectedsheet,
@@ -70,11 +71,10 @@ export default function Sheet({
   return (
     <div className="p-4 capitalize m-6">
       <button
-        className="px-4 py-2 rounded-lg text-black bg-white mb-10 font-bold flex flex-row items-center space-x-1 hover:scale-105 duration-300"
+        className="px-3.5 py-3 rounded-lg text-gray-300  border border-zinc-600 bg-zinc-800 mb-10 font-bold flex flex-row items-center space-x-1 hover:scale-105 duration-300"
         onClick={() => setSheetshow(false)}
       >
-        <IoMdArrowRoundBack size={20} />
-        <div>Back</div>
+       <IoChevronBackOutline size={22}/>
       </button>
       <div className="">
         <div className=" ">

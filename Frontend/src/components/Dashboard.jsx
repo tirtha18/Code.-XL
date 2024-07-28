@@ -14,9 +14,10 @@ import randomColor from "randomcolor";
 import LineChart from "./LineChart";
 import Leetcode from "../images/LC_logo.png";
 import Gfg from "../images/GFG_logo.png";
+import Cflogo from "../images/cflogo.png";
 import NavTabs from "./Tabs";
 function ShowMockResults({ setShowMockdata, selectedmockdata }) {
-  console.log(selectedmockdata);
+  //console.log(selectedmockdata);
   const correctq = selectedmockdata.correct_q;
   const totalq = selectedmockdata.total_q;
   const attemptedq = selectedmockdata.attempted_q;
@@ -202,6 +203,45 @@ function ShowSheetDetails({ selectedsheet, setSheetshow }) {
     </div>
   );
 }
+function TimeLeft({ timeLeft }) {
+  timeLeft = Math.floor(timeLeft / 1000);
+  const h = Math.floor(timeLeft / 3600);
+  const m = Math.floor((timeLeft % 3600) / 60);
+  const s = (timeLeft % 3600) % 60;
+  const [hours, setHours] = useState(h);
+  const [minutes, setMinutes] = useState(m);
+  const [seconds, setSeconds] = useState(s);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds((prevSeconds) => prevSeconds - 1);
+      } else if (seconds === 0 && minutes > 0) {
+        setMinutes((prevMinutes) => prevMinutes - 1);
+        setSeconds(59);
+      } else if (seconds === 0 && minutes === 0 && hours > 0) {
+        setHours((prevhours) => prevhours - 1);
+        setMinutes(59);
+        setSeconds(59);
+      } else {
+        clearInterval(interval);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [minutes, seconds]);
+
+  const formatTime = (time) => {
+    return time.toString().padStart(2, "0");
+  };
+
+  return (
+    <div>
+      <h1>{`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(
+        seconds
+      )}`}</h1>
+    </div>
+  );
+}
 export default function Dashboard() {
   const [loading, setLoading] = useState(false);
   const [user_id, setUserid] = useState(null);
@@ -216,6 +256,30 @@ export default function Dashboard() {
   const [mockdata, setMockdata] = useState([]);
   const [showMockdata, setShowMockdata] = useState(false);
   const [selectedmockdata, setSelectedmocckdata] = useState(null);
+  const [cfdata, setcfdata] = useState(null);
+  const [gfgdata, setgfgdata] = useState(null);
+  const currentTime = new Date();
+  useEffect(() => {
+    const getCfdata = async () => {
+      try {
+        const response = await axios.get("https://code-xl-1.onrender.com/scrape_cf");
+        setcfdata(response.data.contest_info);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getGfgdata = async () => {
+      try {
+        const response = await axios.get("https://code-xl-1.onrender.com/scrape_gfg");
+        setgfgdata(response.data.contest_info);
+        //console.log(response.data.contest_info);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCfdata();
+    getGfgdata();
+  }, []);
   useEffect(() => {
     const getSheets = async () => {
       try {
@@ -268,7 +332,7 @@ export default function Dashboard() {
             params: { user_id: user_id },
           }
         );
-        console.log(response.data);
+        //console.log(response.data);
         setMockresults(response.data);
         const labels = [];
         const data = [];
@@ -401,13 +465,13 @@ export default function Dashboard() {
                   Upcoming Contests:
                 </div>
                 <div className=" flex flex-grow overflow-auto items-center">
-                  <div className="flex flex-col mx-2 w-full">
-                    <div className="flex flex-row w-full justify-between px-4 py-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 hover:cursor-pointer">
+                  <div className="flex flex-col mx-2 h-full w-full">
+                    <div className="flex flex-row w-full justify-between px-4 py-3 mt-2  rounded-lg hover:bg-zinc-800 hover:cursor-pointer">
                       <div className="flex flex-col">
                         <div className="flex flex-row items-center">
                           <h2 className="text-lg">Leetcode </h2>
                           <img
-                            className="w-6 h-6 ml-2"
+                            className="w-7 h-7 ml-2"
                             src={Leetcode}
                             alt="#"
                           />
@@ -416,41 +480,65 @@ export default function Dashboard() {
                       </div>
                       <div className="flex flex-col text-sm">
                         <h2>Starts in :</h2>
-                        <h2 className="text-zinc-400 mt-2">2d: 5h: 4m</h2>
+                        <h2 className="text-zinc-400 mt-2"></h2>
                       </div>
                     </div>
-
-                    <div className="flex flex-row w-full justify-between px-4 py-3 bg-zinc-900 rounded-lg mt-2 hover:bg-zinc-800 hover:cursor-pointer">
-                      <div className="flex flex-col">
-                        <div className="flex flex-row items-center">
-                          <h2 className="text-lg">Leetcode </h2>
-                          <img
-                            className="w-6 h-6 ml-2"
-                            src={Leetcode}
-                            alt="#"
-                          />
+                    <a href={cfdata!== null ?cfdata.contest_link : ""} target="blank">
+                      <div className="flex flex-row w-full justify-between px-4 py-3  rounded-lg mt-2 hover:bg-zinc-800 hover:cursor-pointer">
+                        <div className="flex flex-col">
+                          <div className="flex flex-row items-center">
+                            <h2 className="text-lg">Codeforces</h2>
+                            <img
+                              className="w-7 h-7 ml-2"
+                              src={Cflogo}
+                              alt="#"
+                            />
+                          </div>
+                          <h2 className="text-sm text-zinc-400">
+                            {cfdata !== null ? cfdata.contest_name : ""}
+                          </h2>
                         </div>
-                        <h2 className="text-sm text-zinc-400">Weekly-146</h2>
+                        <div className="flex flex-col text-sm">
+                          <h2>Starts in :</h2>
+                          <h2 className="text-zinc-400 mt-2">
+                            {cfdata !== null && (
+                              <TimeLeft
+                                timeLeft={
+                                  Date.parse(cfdata.contest_datetime) -
+                                  currentTime
+                                }
+                              />
+                            )}
+                          </h2>
+                        </div>
                       </div>
-                      <div className="flex flex-col text-sm">
-                        <h2>Starts in :</h2>
-                        <h2 className="text-zinc-400 mt-2">3d: 4h: 4m</h2>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-row w-full justify-between px-4 py-3 bg-zinc-900 rounded-lg mt-2 hover:bg-zinc-800 hover:cursor-pointer">
+                    </a>
+                    <a href={gfgdata !==null ? gfgdata.contest_link : ""} target="blank">
+                    <div className="flex flex-row w-full justify-between px-4 py-3  rounded-lg mt-2 hover:bg-zinc-800 hover:cursor-pointer">
                       <div className="flex flex-col">
                         <div className="flex flex-row items-center">
                           <h2 className="text-lg">GFG </h2>
-                          <img className=" w-14 h-7" src={Gfg} alt="#" />
+                          <img className=" w-7 h-7 ml-2" src={Gfg} alt="#" />
                         </div>
-                        <h2 className="text-sm text-zinc-400">Weekly-136</h2>
+                        <h2 className="text-sm text-zinc-400">
+                          {gfgdata !== null ? gfgdata.contest_name : ""}
+                        </h2>
                       </div>
                       <div className="flex flex-col text-sm">
                         <h2>Starts in :</h2>
-                        <h2 className="text-zinc-400 mt-2">3d: 5h: 1m</h2>
+                        <h2 className="text-zinc-400 mt-2">
+                          {gfgdata !== null && (
+                            <TimeLeft
+                              timeLeft={
+                                Date.parse(gfgdata.contest_datetime) -
+                                currentTime
+                              }
+                            />
+                          )}
+                        </h2>
                       </div>
                     </div>
+                    </a>
                   </div>
                 </div>
               </div>
