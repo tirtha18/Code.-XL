@@ -16,6 +16,7 @@ import Leetcode from "../images/LC_logo.png";
 import Gfg from "../images/GFG_logo.png";
 import Cflogo from "../images/cflogo.png";
 import NavTabs from "./Tabs";
+
 function ShowMockResults({ setShowMockdata, selectedmockdata }) {
   //console.log(selectedmockdata);
   const correctq = selectedmockdata.correct_q;
@@ -262,7 +263,9 @@ export default function Dashboard() {
   useEffect(() => {
     const getCfdata = async () => {
       try {
-        const response = await axios.get("https://code-xl-1.onrender.com/scrape_cf");
+        const response = await axios.get(
+          "https://code-xl-1.onrender.com/scrape_cf"
+        );
         setcfdata(response.data.contest_info);
       } catch (error) {
         console.log(error);
@@ -270,7 +273,9 @@ export default function Dashboard() {
     };
     const getGfgdata = async () => {
       try {
-        const response = await axios.get("https://code-xl-1.onrender.com/scrape_gfg");
+        const response = await axios.get(
+          "https://code-xl-1.onrender.com/scrape_gfg"
+        );
         setgfgdata(response.data.contest_info);
         //console.log(response.data.contest_info);
       } catch (error) {
@@ -483,7 +488,10 @@ export default function Dashboard() {
                         <h2 className="text-zinc-400 mt-2"></h2>
                       </div>
                     </div>
-                    <a href={cfdata!== null ?cfdata.contest_link : ""} target="blank">
+                    <a
+                      href={cfdata !== null ? cfdata.contest_link : ""}
+                      target="blank"
+                    >
                       <div className="flex flex-row w-full justify-between px-4 py-3  rounded-lg mt-2 hover:bg-zinc-800 hover:cursor-pointer">
                         <div className="flex flex-col">
                           <div className="flex flex-row items-center">
@@ -513,31 +521,34 @@ export default function Dashboard() {
                         </div>
                       </div>
                     </a>
-                    <a href={gfgdata !==null ? gfgdata.contest_link : ""} target="blank">
-                    <div className="flex flex-row w-full justify-between px-4 py-3  rounded-lg mt-2 hover:bg-zinc-800 hover:cursor-pointer">
-                      <div className="flex flex-col">
-                        <div className="flex flex-row items-center">
-                          <h2 className="text-lg">GFG </h2>
-                          <img className=" w-7 h-7 ml-2" src={Gfg} alt="#" />
+                    <a
+                      href={gfgdata !== null ? gfgdata.contest_link : ""}
+                      target="blank"
+                    >
+                      <div className="flex flex-row w-full justify-between px-4 py-3  rounded-lg mt-2 hover:bg-zinc-800 hover:cursor-pointer">
+                        <div className="flex flex-col">
+                          <div className="flex flex-row items-center">
+                            <h2 className="text-lg">GFG </h2>
+                            <img className=" w-7 h-7 ml-2" src={Gfg} alt="#" />
+                          </div>
+                          <h2 className="text-sm text-zinc-400">
+                            {gfgdata !== null ? gfgdata.contest_name : ""}
+                          </h2>
                         </div>
-                        <h2 className="text-sm text-zinc-400">
-                          {gfgdata !== null ? gfgdata.contest_name : ""}
-                        </h2>
+                        <div className="flex flex-col text-sm">
+                          <h2>Starts in :</h2>
+                          <h2 className="text-zinc-400 mt-2">
+                            {gfgdata !== null && (
+                              <TimeLeft
+                                timeLeft={
+                                  Date.parse(gfgdata.contest_datetime) -
+                                  currentTime
+                                }
+                              />
+                            )}
+                          </h2>
+                        </div>
                       </div>
-                      <div className="flex flex-col text-sm">
-                        <h2>Starts in :</h2>
-                        <h2 className="text-zinc-400 mt-2">
-                          {gfgdata !== null && (
-                            <TimeLeft
-                              timeLeft={
-                                Date.parse(gfgdata.contest_datetime) -
-                                currentTime
-                              }
-                            />
-                          )}
-                        </h2>
-                      </div>
-                    </div>
                     </a>
                   </div>
                 </div>

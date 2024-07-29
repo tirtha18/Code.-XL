@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-from datetime import datetime
+from datetime import datetime, timezone
 from datetime import timedelta
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
@@ -44,7 +44,7 @@ def scrape_gfg():
         contest_datetime = datetime.strptime(contest_datetime, "%Y-%m-%d %H:%M:%S")
         temp_name = contest_name.replace(" ", "").lower()
         contest_link = f"https://practice.geeksforgeeks.org/contest/gfg-{temp_name}-rated-contest"
-        return {"contest_info": {"contest_name": contest_name, "contest_datetime": contest_datetime.isoformat(), "contest_link": contest_link}}
+        return {"contest_info": {"contest_name": contest_name, "contest_datetime": contest_datetime.isoformat()+"+00:00", "contest_link": contest_link}}
     return {"message": "Error"}
 
 def scrape_cf():
@@ -58,8 +58,8 @@ def scrape_cf():
         str = "Before contest"
         start_ind = contest.index(str) + len(str)
         end_ind = contest.index(')', start_ind)
-        contest_name = contest[start_ind: end_ind + 1].strip()
-        current_time = datetime.now()
+        contest_name = contest[start_ind: end_ind + 1].strip().replace("Codeforces ", "")
+        current_time = datetime.now(timezone.utc)
         contest_time = contest[end_ind + 1: end_ind + 9].strip()
         temp = contest_time.split(":")
         h = int(temp[0])
@@ -67,5 +67,5 @@ def scrape_cf():
         s = int(temp[2])
         contest_time = current_time + timedelta(days=0, hours=h, minutes=m, seconds=s)
         contest_link = f"https://codeforces.com{link}"
-        return {"contest_info": {"contest_name": contest_name, "contest_datetime": contest_time.isoformat(), "contest_link": contest_link}}
+        return {"contest_info": {"contest_name": contest_name, "contest_datetime": contest_time.isoformat(), "contest_link": contest_link, "cuurent_time": current_time.isoformat()}}
     return {"message": "Error"}
