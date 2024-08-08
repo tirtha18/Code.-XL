@@ -27,7 +27,7 @@ function FileUploadForm({ setFileshow, user_id, setReload }) {
 
     try {
       const response = await axios.post(
-        "https://code-xl.onrender.com/api/upload",
+        "/api/upload",
         formData,
         {
           headers: {
@@ -86,7 +86,6 @@ export default function Sheets() {
   const [userid, setUserid] = useState("");
   const [reload, setReload] = useState(false);
   const [sheet_id, setSheet_id] = useState("");
-  const [sheets_id, setSheets_id] = useState("");
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getSheets = async () => {
@@ -97,14 +96,14 @@ export default function Sheets() {
         setUserid(user_id);
         setLoading(true);
         const response = await axios.get(
-          "https://code-xl.onrender.com/api/getSheets",
+          "/api/getSheets",
           {
             params: { user_id: user_id },
           }
         );
+
         setSheets(response.data.sheets);
-        console.log("sheets_id ", response.data._id);
-        setSheets_id(response.data._id);
+        console.log(response.data.sheets);
       } catch (error) {
         console.log(error);
       } finally {
@@ -158,9 +157,9 @@ export default function Sheets() {
               <FiPlus className="hover:scale-105 duration-200" size={100} />
             </div>
 
-            {sheets.map((it) => (
+            {sheets.map((it,index) => (
               <div
-                key={it._id}
+                key={index}
                 onClick={() => {
                   setSelectedsheet(it);
                   setSheetshow(true);
@@ -184,7 +183,6 @@ export default function Sheets() {
           setSheetshow={setSheetshow}
           selectedsheet={selectedsheet}
           sheet_id={sheet_id}
-          sheets_id={sheets_id}
           setReload={setReload}
           user_id={userid}
         />

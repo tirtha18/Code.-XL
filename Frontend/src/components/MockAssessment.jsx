@@ -39,7 +39,7 @@ function Result({
     const uploadMocktest = async () => {
       try {
         const response = await axios.post(
-          "https://code-xl.onrender.com/api/uploadMock",
+          "/api/uploadMock",
           {
             user_id: user._id,
             name: testName,

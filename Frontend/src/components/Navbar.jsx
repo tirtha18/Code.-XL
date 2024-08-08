@@ -51,7 +51,6 @@ const navItems = [
 ];
 
 export default function Navbar() {
-  const navigate = useNavigate();
   const { activeNav, changeActiveNav } = useContext(navContext);
   const { user, logout } = useContext(AuthContext);
   const handleNavclick = (index) => {
@@ -60,19 +59,19 @@ export default function Navbar() {
   };
   return (
     <>
-      <div className="md:flex flex-col bg-black text-white md:h-screen items-center text-xl shadow-md shadow-gray-500 hidden">
-        <div className="flex flex-col items-center">
-          <div className="text-3xl mt-4 py-3 px-10 rounded-lg text-gray-800 bg-white font-semibold ">
+      <div className="md:flex flex-col bg-black text-white md:h-screen items-center text-xl shadow-md shadow-zinc-500 hidden w-full">
+        <div className="flex flex-col items-center w-full">
+          <div className="text-[40px] mt-8 rounded-lg text-white font-semibold ">
             Code. XL
           </div>
-          <div className="mt-20">
+          <div className="mt-[30%] ">
             {navItems.map((item) => (
               <Link key={item.ind} to={item.link}>
                 <div
                   onClick={() => handleNavclick(item.ind)}
                   className={`flex flex-row space-x-5 items-center ${
                     activeNav[item.ind] ? "bg-white text-black scale-105" : ""
-                  }   lg:py-4 py-4 px-4 w-full rounded-lg hover:cursor-pointer hover:scale-105 mb-1`}
+                  }   py-[8%] px-4 w-full rounded-lg hover:cursor-pointer hover:scale-105 mb-1`}
                 >
                   {item.icon}
                   <div>{item.name}</div>
@@ -86,7 +85,7 @@ export default function Navbar() {
             onClick={() => {
               logout();
             }}
-            className="flex items-center text mt-auto text-lg mb-4 py-2 px-10 rounded-lg text-zinc-900 bg-white flex-row space-x-2 hover:cursor-pointer hover:scale-105 duration-200 hover:bg-red-600 hover:text-zinc-300"
+            className="flex items-center text mt-auto text-lg mb-4 py-2 px-[10%] rounded-lg text-zinc-900 bg-white flex-row space-x-2 hover:cursor-pointer duration-200 hover:bg-red-600 hover:text-zinc-300"
           >
             <div>Logout |</div> <MdOutlineLogout />
           </div>

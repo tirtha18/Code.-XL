@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 import Navbar from "./LandNavbar";
 import { AiOutlineRight } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +12,7 @@ import mongodb from "../../images/mongo.png";
 import tailwind from "../../images/tailwind.png";
 import js from "../../images/js.png";
 import { useContext } from "react";
-import { NavContextProvider,navContext } from "../NavContextProvider";
+import { NavContextProvider, navContext } from "../NavContextProvider";
 import { FaArrowRight } from "react-icons/fa";
 const techstack = [
   {
@@ -58,8 +59,30 @@ const techstack = [
   },
 ];
 export default function LandHome() {
-  const {changeActiveNav} = useContext(navContext);
+  const { changeActiveNav } = useContext(navContext);
   const navigate = useNavigate();
+  useEffect(() => {
+    const startExpressServer = async () => {
+      try{
+        const response = axios.get("/api/start_server");
+        console.log(response.data.message);
+      }
+      catch(error){
+        console.log(error);
+      }
+    }
+    const startFlaskServer =async () => {
+      try{
+        const response = axios.get("https://code-xl-1.onrender.com/start_server");
+        console.log(response.data.message);
+      }
+      catch(error){
+        console.log(error);
+      }
+    }
+    startExpressServer();
+    startFlaskServer();
+  },[])
   return (
     <div className="absolute z-10 top-0 left-0 min-h-screen w-screen bg-black ">
       <Navbar />
@@ -79,7 +102,8 @@ export default function LandHome() {
             </p>
             <div
               onClick={() => {
-                navigate("/sheets");changeActiveNav(2);
+                navigate("/sheets");
+                changeActiveNav(2);
               }}
               className="group text-white w-fit px-6 py-3 my-2 flex items-center rounded-md bg-gradient-to-r from-green-600 to hover:cursor-pointer bg-green-500 hover:scale-105 duration-300"
             >
@@ -99,7 +123,13 @@ export default function LandHome() {
         className="min-h-screen bg-gradient-to-b from-gray-900 to-black flex flex-col text-gray-300 items-center justify-center py-24"
       >
         <div className=" grid grid-cols-3 gap-6 h-full mb-16">
-          <div onClick={() => {changeActiveNav(2);navigate("/sheets");}} className="flex bg-black flex-col max-w-56 p-4 pt-12 pb-8 rounded-3xl items-center text-center m-2 border hover:scale-105 duration-200 hover:cursor-pointer">
+          <div
+            onClick={() => {
+              changeActiveNav(2);
+              navigate("/sheets");
+            }}
+            className="flex bg-black flex-col max-w-56 p-4 pt-12 pb-8 rounded-3xl items-center text-center m-2 border hover:scale-105 duration-200 hover:cursor-pointer"
+          >
             <h1 className="text-lg text-white font-semibold">
               Personalized Sheets
             </h1>
@@ -110,10 +140,16 @@ export default function LandHome() {
               study needs.
             </p>
             <div className="mt-auto">
-              <FaArrowRight size={18}/>
+              <FaArrowRight size={18} />
             </div>
           </div>
-          <div onClick={() => {changeActiveNav(4);navigate("/mockassessment");}} className="flex bg-black flex-col max-w-56 p-4 pt-12 pb-8 rounded-3xl items-center text-center m-2 border hover:scale-105 duration-200 hover:cursor-pointer">
+          <div
+            onClick={() => {
+              changeActiveNav(4);
+              navigate("/mockassessment");
+            }}
+            className="flex bg-black flex-col max-w-56 p-4 pt-12 pb-8 rounded-3xl items-center text-center m-2 border hover:scale-105 duration-200 hover:cursor-pointer"
+          >
             <h1 className="text-lg text-white font-semibold">
               Custom Mock Assesment
             </h1>
@@ -126,7 +162,13 @@ export default function LandHome() {
               <FaArrowRight size={18} />
             </div>
           </div>
-          <div onClick={() => {changeActiveNav(3);navigate("/coresub");}} className="flex bg-black flex-col max-w-56 p-4 pt-12 pb-8 rounded-3xl items-center text-center m-2 border hover:scale-105 duration-200 hover:cursor-pointer ">
+          <div
+            onClick={() => {
+              changeActiveNav(3);
+              navigate("/coresub");
+            }}
+            className="flex bg-black flex-col max-w-56 p-4 pt-12 pb-8 rounded-3xl items-center text-center m-2 border hover:scale-105 duration-200 hover:cursor-pointer "
+          >
             <h1 className="text-lg text-white font-semibold">Core Subjects</h1>
             <p className="text-sm mt-4 text-gray-400 ">
               Code.XL's core subjects feature provides expertly crafted
@@ -134,10 +176,16 @@ export default function LandHome() {
               solid foundation for aspiring software developers.
             </p>
             <div className="mt-auto">
-              <FaArrowRight size={18}/>
+              <FaArrowRight size={18} />
             </div>
           </div>
-          <div onClick={() => {changeActiveNav(5);navigate("/community");}} className="flex bg-black flex-col max-w-56 p-4 pt-12 pb-8 rounded-3xl items-center text-center m-2 border hover:scale-105 duration-200 hover:cursor-pointer">
+          <div
+            onClick={() => {
+              changeActiveNav(5);
+              navigate("/community");
+            }}
+            className="flex bg-black flex-col max-w-56 p-4 pt-12 pb-8 rounded-3xl items-center text-center m-2 border hover:scale-105 duration-200 hover:cursor-pointer"
+          >
             <h1 className="text-lg text-white font-semibold">Community</h1>
             <p className="text-sm mt-4 text-gray-400 ">
               Code.XL's community feature connects users with peers, fostering
@@ -145,7 +193,7 @@ export default function LandHome() {
               through shared knowledge and support.
             </p>
             <div className="mt-8">
-              <FaArrowRight size={18}/>
+              <FaArrowRight size={18} />
             </div>
           </div>
         </div>
@@ -177,47 +225,47 @@ export default function LandHome() {
         </div>
       </div>
       <div
-      name="contact"
-      className="w-full h-screen bg-gradient-to-b from-gray-900 to-black text-white"
-    >
-      <div className="flex flex-col p-4 justify-center max-w-screen-lg mx-auto h-full">
-        <div className="pb-8">
-          <p className="text-4xl font-bold inline border-b-4 border-gray-500">
-            Contact
-          </p>
-          <p className="py-6">Submit the form to get in touch with us</p>
-        </div>
-        <div className="flex justify-center items-center">
-          <form
-            action="https://getform.io/f/awngngwb"
-            className="flex flex-col w-full md:w-1/2"
-            method="POST"
-          >
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter your name"
-              className="p-2 bg-transparent border-2 rounded-md text-white focus-outline-none"
-            ></input>
-            <input
-              type="text"
-              name="email"
-              placeholder="Enter your email"
-              className="p-2 bg-transparent border-2 rounded-md text-white focus-outline-none my-4"
-            ></input>
-            <textarea
-              placeholder="Enter your message!"
-              name="message"
-              rows="10"
-              className="p-2 bg-transparent border-2 rounded-md text-white focus-outline-none"
-            ></textarea>
-            <button className="text-white bg-gradient-to-r  from-green-700 to-green-500 mx-auto flex items-center rounded-md hover:scale-110 duration-300 px-6 py-3 my-6">
-              Submit
-            </button>
-          </form>
+        name="contact"
+        className="w-full h-screen bg-gradient-to-b from-gray-900 to-black text-white"
+      >
+        <div className="flex flex-col p-4 justify-center max-w-screen-lg mx-auto h-full">
+          <div className="pb-8">
+            <p className="text-4xl font-bold inline border-b-4 border-gray-500">
+              Contact
+            </p>
+            <p className="py-6">Submit the form to get in touch with us</p>
+          </div>
+          <div className="flex justify-center items-center">
+            <form
+              action="https://getform.io/f/awngngwb"
+              className="flex flex-col w-full md:w-1/2"
+              method="POST"
+            >
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                className="p-2 bg-transparent border-2 rounded-md text-white focus-outline-none"
+              ></input>
+              <input
+                type="text"
+                name="email"
+                placeholder="Enter your email"
+                className="p-2 bg-transparent border-2 rounded-md text-white focus-outline-none my-4"
+              ></input>
+              <textarea
+                placeholder="Enter your message!"
+                name="message"
+                rows="10"
+                className="p-2 bg-transparent border-2 rounded-md text-white focus-outline-none"
+              ></textarea>
+              <button className="text-white bg-gradient-to-r  from-green-700 to-green-500 mx-auto flex items-center rounded-md hover:scale-110 duration-300 px-6 py-3 my-6">
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }

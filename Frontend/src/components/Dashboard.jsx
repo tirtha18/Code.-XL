@@ -237,9 +237,16 @@ function TimeLeft({ timeLeft }) {
 
   return (
     <div>
-      <h1>{`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(
-        seconds
-      )}`}</h1>
+      {formatTime(hours) <= 48 ? (
+        <h1>
+          {`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`}
+        </h1>
+      ) : (
+        <h1>
+          {Math.floor(hours/24)}
+          {" days"}
+        </h1>
+      )}
     </div>
   );
 }
@@ -257,8 +264,16 @@ export default function Dashboard() {
   const [mockdata, setMockdata] = useState([]);
   const [showMockdata, setShowMockdata] = useState(false);
   const [selectedmockdata, setSelectedmocckdata] = useState(null);
-  const [cfdata, setcfdata] = useState(null);
-  const [gfgdata, setgfgdata] = useState(null);
+  const [cfdata, setcfdata] = useState({
+    contest_name: "",
+    contest_link: "",
+    contest_datetime: "",
+  });
+  const [gfgdata, setgfgdata] = useState({
+    contest_name: "",
+    contest_link: "",
+    contest_datetime: "",
+  });
   const currentTime = new Date();
   useEffect(() => {
     const getCfdata = async () => {
@@ -292,12 +307,9 @@ export default function Dashboard() {
         const user_id = user._id;
         setUserid(user_id);
         setLoading(true);
-        const response = await axios.get(
-          "https://code-xl.onrender.com/api/getSheets",
-          {
-            params: { user_id: user_id },
-          }
-        );
+        const response = await axios.get("/api/getSheets", {
+          params: { user_id: user_id },
+        });
         setSheets(response.data.sheets);
       } catch (error) {
         console.log(error);
@@ -311,12 +323,9 @@ export default function Dashboard() {
         const user_id = user._id;
         setUserid(user_id);
         setLoading(true);
-        const response = await axios.get(
-          "https://code-xl.onrender.com/api/getUser",
-          {
-            params: { user_id: user_id },
-          }
-        );
+        const response = await axios.get("http://localhost:3000/api/getUser", {
+          params: { user_id: user_id },
+        });
         setName(response.data.name);
         setUsername(response.data.username);
       } catch (error) {
@@ -331,12 +340,9 @@ export default function Dashboard() {
         const user_id = user._id;
         setUserid(user_id);
         setLoading(true);
-        const response = await axios.get(
-          "https://code-xl.onrender.com/api/getMock",
-          {
-            params: { user_id: user_id },
-          }
-        );
+        const response = await axios.get("/api/getMock", {
+          params: { user_id: user_id },
+        });
         //console.log(response.data);
         setMockresults(response.data);
         const labels = [];
@@ -469,10 +475,18 @@ export default function Dashboard() {
                 <div className="text-lg font-semibold p-4 border-b border-zinc-600 text-zinc-300">
                   Upcoming Contests:
                 </div>
-                <div className=" flex flex-grow overflow-auto items-center">
-                  <div className="flex flex-col mx-2 h-full w-full">
-                    <div className="flex flex-row w-full justify-between px-4 py-3 mt-2  rounded-lg hover:bg-zinc-800 hover:cursor-pointer">
-                      <div className="flex flex-col">
+                <div
+                  style={{
+                    overflowY: "scroll",
+                    scrollbarWidth: "thin",
+                    msOverflowStyle: "none",
+                    scrollbarColor: "#10B981 transparent",
+                  }}
+                  className=" flex flex-grow overflow-auto items-center"
+                >
+                  <div className="flex flex-col mx-2 h-full w-full  my-2">
+                    <div className="flex flex-row w-full justify-between px-4 py-3 mt-2  rounded-lg hover:bg-zinc-800 hover:cursor-pointer ">
+                      <div className="flex flex-col w-[70%]">
                         <div className="flex flex-row items-center">
                           <h2 className="text-lg">Leetcode </h2>
                           <img
@@ -481,19 +495,27 @@ export default function Dashboard() {
                             alt="#"
                           />
                         </div>
-                        <h2 className="text-sm text-zinc-400">Biweekly-236</h2>
+                        <h2 className="text-sm text-zinc-400">Biweekly-410</h2>
                       </div>
                       <div className="flex flex-col text-sm">
-                        <h2>Starts in :</h2>
+                        <span>
+                          <h2>Starts in :</h2>
+                          <h2 className="text-zinc-400 mt-2">
+                            <TimeLeft
+                              timeLeft={
+                                Date.parse("2024-08-11T05:30:00.000") -
+                                currentTime
+                              }
+                            />
+                          </h2>
+                        </span>
                         <h2 className="text-zinc-400 mt-2"></h2>
                       </div>
                     </div>
-                    <a
-                      href={cfdata !== null ? cfdata.contest_link : ""}
-                      target="blank"
-                    >
-                      <div className="flex flex-row w-full justify-between px-4 py-3  rounded-lg mt-2 hover:bg-zinc-800 hover:cursor-pointer">
-                        <div className="flex flex-col">
+
+                    <a href={""} target="blank">
+                      <div className="flex flex-row w-full justify-between px-4 py-3 rounded-lg mt-2 hover:bg-zinc-800 hover:cursor-pointer">
+                        <div className="flex flex-col w-[70%]">
                           <div className="flex flex-row items-center">
                             <h2 className="text-lg">Codeforces</h2>
                             <img
@@ -503,30 +525,31 @@ export default function Dashboard() {
                             />
                           </div>
                           <h2 className="text-sm text-zinc-400">
-                            {cfdata !== null ? cfdata.contest_name : ""}
+                            {cfdata.contest_name}
                           </h2>
                         </div>
                         <div className="flex flex-col text-sm">
-                          <h2>Starts in :</h2>
+                          <span className="">
+                            <h2>Starts in:</h2>
+                          </span>
                           <h2 className="text-zinc-400 mt-2">
-                            {cfdata !== null && (
+                            {cfdata.contest_datetime !== "" ? (
                               <TimeLeft
                                 timeLeft={
                                   Date.parse(cfdata.contest_datetime) -
                                   currentTime
                                 }
                               />
+                            ) : (
+                              ""
                             )}
                           </h2>
                         </div>
                       </div>
                     </a>
-                    <a
-                      href={gfgdata !== null ? gfgdata.contest_link : ""}
-                      target="blank"
-                    >
+                    <a href={gfgdata.contest_link} target="blank">
                       <div className="flex flex-row w-full justify-between px-4 py-3  rounded-lg mt-2 hover:bg-zinc-800 hover:cursor-pointer">
-                        <div className="flex flex-col">
+                        <div className="flex flex-col w-[70%]">
                           <div className="flex flex-row items-center">
                             <h2 className="text-lg">GFG </h2>
                             <img className=" w-7 h-7 ml-2" src={Gfg} alt="#" />
@@ -538,7 +561,7 @@ export default function Dashboard() {
                         <div className="flex flex-col text-sm">
                           <h2>Starts in :</h2>
                           <h2 className="text-zinc-400 mt-2">
-                            {gfgdata !== null && (
+                            {gfgdata.contest_datetime !== "" && (
                               <TimeLeft
                                 timeLeft={
                                   Date.parse(gfgdata.contest_datetime) -
@@ -550,6 +573,37 @@ export default function Dashboard() {
                         </div>
                       </div>
                     </a>
+                    <div className="flex flex-row w-full justify-between px-4 py-3 mt-2  rounded-lg hover:bg-zinc-800 hover:cursor-pointer ">
+                      <div className="flex flex-col w-[70%]">
+                        <div className="flex flex-row items-center">
+                          <h2 className="text-lg">Leetcode </h2>
+                          <img
+                            className="w-7 h-7 ml-2"
+                            src={Leetcode}
+                            alt="#"
+                          />
+                        </div>
+                        <h2 className="text-sm text-zinc-400">Biweekly-137</h2>
+                      </div>
+                      <div className="flex flex-col text-sm">
+                        <span>
+                          <h2>Starts in :</h2>
+                          <h2 className="text-zinc-400 mt-2">
+                            {cfdata.contest_datetime !== "" ? (
+                              <TimeLeft
+                                timeLeft={
+                                  Date.parse("2024-08-17T05:30:00.000") -
+                                  currentTime
+                                }
+                              />
+                            ) : (
+                              ""
+                            )}
+                          </h2>
+                        </span>
+                        <h2 className="text-zinc-400 mt-2"></h2>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -566,13 +620,10 @@ export default function Dashboard() {
                     </div>
                   </div>
                 </div>
-                <div className=" flex flex-grow flex-col h-full items-center  ">
-                  <h1 className="text-lg text-zinc-300 py-2 px-4 w-full border-b border-zinc-700">
-                    History:
-                  </h1>
+                <div className=" flex flex-grow flex-col h-full items-center">
                   <div className=" w-full items mt-4">
                     <div
-                      className=" flex flex-col ml-4 mr-1 overflow-auto max-h-40"
+                      className=" flex flex-col ml-4 mr-1 overflow-auto max-h-52"
                       style={{
                         overflowY: "scroll",
                         scrollbarWidth: "thin",
@@ -582,7 +633,7 @@ export default function Dashboard() {
                     >
                       {mockresults.map((result) => (
                         <div
-                          className="w-full  rounded-lg py-2 space-y-2 text-sm text-zinc-300  hover:cursor-pointer mb-1 px-2  hover:bg-zinc-700"
+                          className="w-full rounded-lg py-3 space-y-2 text-sm text-zinc-300 hover:cursor-pointer mb-1 px-2  hover:bg-zinc-700"
                           onClick={() => {
                             setSelectedmocckdata(result);
                             setShowMockdata(true);
@@ -591,7 +642,7 @@ export default function Dashboard() {
                         >
                           <div className="flex flex-row ">
                             <p>{result.name}</p>{" "}
-                            <p className="ml-auto  font-extralight py-0.5 bg-zinc-900 rounded-lg min-w-10 flex items-center justify-center ">
+                            <p className="ml-auto font-extralight py-0.5 bg-zinc-900 rounded-lg min-w-10 flex items-center justify-center ">
                               {result.correct_q}/{result.total_q}
                             </p>{" "}
                           </div>

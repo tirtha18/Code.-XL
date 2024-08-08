@@ -12,7 +12,7 @@ headers = {
 def scrape_gfg():
     url = "https://www.geeksforgeeks.org/events/rec/gfg-weekly-coding-contest"
     response = requests.get(url, headers)
-    if response.status_code == 200:
+    try:
         soup = BeautifulSoup(response.text, "html.parser")
         contest = soup.find("div", class_="events_eventDescCnt__13_9K").text
         str = "GFG "
@@ -45,7 +45,8 @@ def scrape_gfg():
         temp_name = contest_name.replace(" ", "").lower()
         contest_link = f"https://practice.geeksforgeeks.org/contest/gfg-{temp_name}-rated-contest"
         return {"contest_info": {"contest_name": contest_name, "contest_datetime": contest_datetime.isoformat()+"+00:00", "contest_link": contest_link}}
-    return {"message": "Error"}
+    except (ValueError, TypeError) as e:
+        return {"message": "Error", "Error" : e}
 
 def scrape_cf():
     url = "https://codeforces.com/"
@@ -54,18 +55,23 @@ def scrape_cf():
         soup = BeautifulSoup(response.text, "html.parser")
         contest = soup.find_all("div", class_="roundbox sidebox borderTopRound")[0].text
         link = soup.find_all("div", class_="roundbox sidebox borderTopRound")[0].find_all("a")[0].get("href")
-        print(link)
         str = "Before contest"
         start_ind = contest.index(str) + len(str)
         end_ind = contest.index(')', start_ind)
         contest_name = contest[start_ind: end_ind + 1].strip().replace("Codeforces ", "")
         current_time = datetime.now(timezone.utc)
-        contest_time = contest[end_ind + 1: end_ind + 9].strip()
-        temp = contest_time.split(":")
-        h = int(temp[0])
-        m = int(temp[1])
-        s = int(temp[2])
-        contest_time = current_time + timedelta(days=0, hours=h, minutes=m, seconds=s)
-        contest_link = f"https://codeforces.com{link}"
+        time_ind = contest.find("days")
+        if time_ind==-1:
+            contest_time = contest[end_ind + 1: end_ind + 9].strip()
+            temp = contest_time.split(":")
+            h = int(temp[0])
+            m = int(temp[1])
+            s = int(temp[2])
+            time_left = timedelta(days=0, hours=h, minutes=m, seconds=s)
+            contest_link = f"https://codeforces.com{link}"
+        else :
+            contest_link = {"https://codeforces.com"}
+            time_left = timedelta(days=int(contest[time_ind-1]), hours=0, mintutes=0, seconds=0)
+        contest_time = current_time + time_left 
         return {"contest_info": {"contest_name": contest_name, "contest_datetime": contest_time.isoformat(), "contest_link": contest_link, "cuurent_time": current_time.isoformat()}}
     return {"message": "Error"}

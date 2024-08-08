@@ -1,6 +1,7 @@
 import exceljs from "exceljs";
 import fs from "fs";
-import Sheets from "../models/Sheet.js";
+import Sheet from "../models/Sheet.js";
+import Problem from "../models/SheetProblems.js";
 import { getVideoLink } from "./getVideoLink.js";
 export const extract = async (req, res) => {
   try {
@@ -164,7 +165,7 @@ export const extract = async (req, res) => {
             console.log(error);
           }
           extractedData[i]["videoLink"] = videoUrl;
-          extractedData[i]["status"]= "PENDING";
+          extractedData[i]["status"] = "PENDING";
           finalData.push(extractedData[i]);
         }
       }
@@ -172,30 +173,31 @@ export const extract = async (req, res) => {
     }
     getfinalData(extractedData)
       .then((temp) => {
-        finalData = temp;
-        let newSheet = { name: req.file.originalname, sheet: [] };
-        for (let i = 0; i < finalData.length; i++)
-          newSheet.sheet.push(finalData[i]);
         const user_id = req.body.user_id;
         if (!user_id)
           return res.status(400).json({ Message: "User not logged in" });
-        Sheets.findOneAndUpdate({ user_id }, { $push: { sheets: newSheet } })
-          .then((sheets) => {
-            if (sheets) console.log("New Sheet added");
-            else {
-              const sheets = new Sheets({ user_id: user_id, sheets: [newSheet] });
-              console.log("First sheet is inserted into sheets");
-              sheets.save();
-            }
-          })
-          .catch((error) => console.log(error));
-        fs.unlinkSync(filePath);
-        return res.json({
-          message: "Excel sheet extracted succefully!",finalData
+        finalData = temp;
+        Sheet.create({
+          user_id: user_id,
+          name: req.file.originalname,
+        }).then ((sheet) => {
+          console.log(sheet)
+          const sheet_id = sheet._id;
+          for (let i = 0; i < finalData.length; i++)
+            finalData[i]["sheet_id"] = sheet_id;
+          Problem.insertMany(finalData);
+          fs.unlinkSync(filePath);
+          return res.json({
+            message: "Excel sheet extracted succefully!",
+            finalData,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
         });
+        
       })
       .catch((error) => console.log(error));
-    
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error extracting Excel sheet" });
