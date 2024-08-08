@@ -27,7 +27,7 @@ function FileUploadForm({ setFileshow, user_id, setReload }) {
 
     try {
       const response = await axios.post(
-        "/api/upload",
+        "https://code-xl.onrender.com/api/upload",
         formData,
         {
           headers: {
@@ -96,7 +96,7 @@ export default function Sheets() {
         setUserid(user_id);
         setLoading(true);
         const response = await axios.get(
-          "/api/getSheets",
+          "https://code-xl.onrender.com/api/getSheets",
           {
             params: { user_id: user_id },
           }

@@ -64,7 +64,7 @@ export default function LandHome() {
   useEffect(() => {
     const startExpressServer = async () => {
       try{
-        const response = axios.get("/api/start_server");
+        const response = axios.get("https://code-xl.onrender.com/api/start_server");
         console.log(response.data.message);
       }
       catch(error){

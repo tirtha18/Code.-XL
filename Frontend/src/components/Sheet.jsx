@@ -25,7 +25,7 @@ function Notes({
     if (selectedProblem && user_id) {
       try {
         console.log(selectedProblem);
-        const response = await axios.post("/api/addNotes", {
+        const response = await axios.post("https://code-xl.onrender.com/api/addNotes", {
           problem_id: selectedProblem._id,
           user_id: user_id,
           notes: selectedProblem.notes,
@@ -112,7 +112,7 @@ export default function Sheet({ setSheetshow, selectedsheet, user_id }) {
     if (problem_id && user_id) {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/toggleprobstatus",
+          "https://code-xl.onrender.com/api/toggleprobstatus",
           { problem_id: problem_id, user_id: user_id }
         );
         console.log(response.data);

@@ -307,7 +307,7 @@ export default function Dashboard() {
         const user_id = user._id;
         setUserid(user_id);
         setLoading(true);
-        const response = await axios.get("/api/getSheets", {
+        const response = await axios.get("https://code-xl.onrender.com/api/getSheets", {
           params: { user_id: user_id },
         });
         setSheets(response.data.sheets);
@@ -323,7 +323,7 @@ export default function Dashboard() {
         const user_id = user._id;
         setUserid(user_id);
         setLoading(true);
-        const response = await axios.get("http://localhost:3000/api/getUser", {
+        const response = await axios.get("https://code-xl.onrender.com/api/getUser", {
           params: { user_id: user_id },
         });
         setName(response.data.name);
@@ -340,7 +340,7 @@ export default function Dashboard() {
         const user_id = user._id;
         setUserid(user_id);
         setLoading(true);
-        const response = await axios.get("/api/getMock", {
+        const response = await axios.get("https://code-xl.onrender.com/api/getMock", {
           params: { user_id: user_id },
         });
         //console.log(response.data);

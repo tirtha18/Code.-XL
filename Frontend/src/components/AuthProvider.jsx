@@ -27,7 +27,7 @@ const AuthProvider = ({ children }) => {
     }
     try {
       const response = await axios.post(
-        "/api/auth/login",
+        "https://code-xl.onrender.com/api/auth/login",
         credentials
       );
       console.log("Login successful:");
