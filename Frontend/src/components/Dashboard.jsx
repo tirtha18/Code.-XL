@@ -494,7 +494,10 @@ export default function Dashboard() {
                   className=" flex flex-grow overflow-auto items-center"
                 >
                   <div className="flex flex-col mx-2 h-full w-full  my-2">
-                    <a href={"https://leetcode.com/contest/weekly-contest-410/"}>
+                    <a
+                      href={"https://leetcode.com/contest/weekly-contest-410/"}
+                      target="blank"
+                    >
                       <div className="flex flex-row w-full justify-between px-4 py-3 mt-2  rounded-lg hover:bg-zinc-800 hover:cursor-pointer ">
                         <div className="flex flex-col w-[70%]">
                           <div className="flex flex-row items-center">
@@ -585,7 +588,10 @@ export default function Dashboard() {
                         </div>
                       </div>
                     </a>
-                    <a href="https://leetcode.com/contest/biweekly-contest-137/">
+                    <a
+                      href="https://leetcode.com/contest/biweekly-contest-137/"
+                      target="blank"
+                    >
                       <div className="flex flex-row w-full justify-between px-4 py-3 mt-2  rounded-lg hover:bg-zinc-800 hover:cursor-pointer ">
                         <div className="flex flex-col w-[70%]">
                           <div className="flex flex-row items-center">
