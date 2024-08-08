@@ -243,7 +243,7 @@ function TimeLeft({ timeLeft }) {
         </h1>
       ) : (
         <h1>
-          {Math.floor(hours/24)}
+          {Math.floor(hours / 24)}
           {" days"}
         </h1>
       )}
@@ -307,9 +307,12 @@ export default function Dashboard() {
         const user_id = user._id;
         setUserid(user_id);
         setLoading(true);
-        const response = await axios.get("https://code-xl.onrender.com/api/getSheets", {
-          params: { user_id: user_id },
-        });
+        const response = await axios.get(
+          "https://code-xl.onrender.com/api/getSheets",
+          {
+            params: { user_id: user_id },
+          }
+        );
         setSheets(response.data.sheets);
       } catch (error) {
         console.log(error);
@@ -323,9 +326,12 @@ export default function Dashboard() {
         const user_id = user._id;
         setUserid(user_id);
         setLoading(true);
-        const response = await axios.get("https://code-xl.onrender.com/api/getUser", {
-          params: { user_id: user_id },
-        });
+        const response = await axios.get(
+          "https://code-xl.onrender.com/api/getUser",
+          {
+            params: { user_id: user_id },
+          }
+        );
         setName(response.data.name);
         setUsername(response.data.username);
       } catch (error) {
@@ -340,9 +346,12 @@ export default function Dashboard() {
         const user_id = user._id;
         setUserid(user_id);
         setLoading(true);
-        const response = await axios.get("https://code-xl.onrender.com/api/getMock", {
-          params: { user_id: user_id },
-        });
+        const response = await axios.get(
+          "https://code-xl.onrender.com/api/getMock",
+          {
+            params: { user_id: user_id },
+          }
+        );
         //console.log(response.data);
         setMockresults(response.data);
         const labels = [];
@@ -485,35 +494,38 @@ export default function Dashboard() {
                   className=" flex flex-grow overflow-auto items-center"
                 >
                   <div className="flex flex-col mx-2 h-full w-full  my-2">
-                    <div className="flex flex-row w-full justify-between px-4 py-3 mt-2  rounded-lg hover:bg-zinc-800 hover:cursor-pointer ">
-                      <div className="flex flex-col w-[70%]">
-                        <div className="flex flex-row items-center">
-                          <h2 className="text-lg">Leetcode </h2>
-                          <img
-                            className="w-7 h-7 ml-2"
-                            src={Leetcode}
-                            alt="#"
-                          />
-                        </div>
-                        <h2 className="text-sm text-zinc-400">Biweekly-410</h2>
-                      </div>
-                      <div className="flex flex-col text-sm">
-                        <span>
-                          <h2>Starts in :</h2>
-                          <h2 className="text-zinc-400 mt-2">
-                            <TimeLeft
-                              timeLeft={
-                                Date.parse("2024-08-11T05:30:00.000") -
-                                currentTime
-                              }
+                    <a href={"https://leetcode.com/contest/weekly-contest-410/"}>
+                      <div className="flex flex-row w-full justify-between px-4 py-3 mt-2  rounded-lg hover:bg-zinc-800 hover:cursor-pointer ">
+                        <div className="flex flex-col w-[70%]">
+                          <div className="flex flex-row items-center">
+                            <h2 className="text-lg">Leetcode </h2>
+                            <img
+                              className="w-7 h-7 ml-2"
+                              src={Leetcode}
+                              alt="#"
                             />
+                          </div>
+                          <h2 className="text-sm text-zinc-400">
+                            Biweekly-410
                           </h2>
-                        </span>
-                        <h2 className="text-zinc-400 mt-2"></h2>
+                        </div>
+                        <div className="flex flex-col text-sm">
+                          <span>
+                            <h2>Starts in :</h2>
+                            <h2 className="text-zinc-400 mt-2">
+                              <TimeLeft
+                                timeLeft={
+                                  Date.parse("2024-08-11T05:30:00.000") -
+                                  currentTime
+                                }
+                              />
+                            </h2>
+                          </span>
+                          <h2 className="text-zinc-400 mt-2"></h2>
+                        </div>
                       </div>
-                    </div>
-
-                    <a href={""} target="blank">
+                    </a>
+                    <a href={cfdata.contest_link} target="blank">
                       <div className="flex flex-row w-full justify-between px-4 py-3 rounded-lg mt-2 hover:bg-zinc-800 hover:cursor-pointer">
                         <div className="flex flex-col w-[70%]">
                           <div className="flex flex-row items-center">
@@ -573,37 +585,38 @@ export default function Dashboard() {
                         </div>
                       </div>
                     </a>
-                    <div className="flex flex-row w-full justify-between px-4 py-3 mt-2  rounded-lg hover:bg-zinc-800 hover:cursor-pointer ">
-                      <div className="flex flex-col w-[70%]">
-                        <div className="flex flex-row items-center">
-                          <h2 className="text-lg">Leetcode </h2>
-                          <img
-                            className="w-7 h-7 ml-2"
-                            src={Leetcode}
-                            alt="#"
-                          />
+                    <a href="https://leetcode.com/contest/biweekly-contest-137/">
+                      <div className="flex flex-row w-full justify-between px-4 py-3 mt-2  rounded-lg hover:bg-zinc-800 hover:cursor-pointer ">
+                        <div className="flex flex-col w-[70%]">
+                          <div className="flex flex-row items-center">
+                            <h2 className="text-lg">Leetcode </h2>
+                            <img
+                              className="w-7 h-7 ml-2"
+                              src={Leetcode}
+                              alt="#"
+                            />
+                          </div>
+                          <h2 className="text-sm text-zinc-400">
+                            Biweekly-137
+                          </h2>
                         </div>
-                        <h2 className="text-sm text-zinc-400">Biweekly-137</h2>
-                      </div>
-                      <div className="flex flex-col text-sm">
-                        <span>
-                          <h2>Starts in :</h2>
-                          <h2 className="text-zinc-400 mt-2">
-                            {cfdata.contest_datetime !== "" ? (
+
+                        <div className="flex flex-col text-sm">
+                          <span>
+                            <h2>Starts in :</h2>
+                            <h2 className="text-zinc-400 mt-2">
                               <TimeLeft
                                 timeLeft={
                                   Date.parse("2024-08-17T05:30:00.000") -
                                   currentTime
                                 }
                               />
-                            ) : (
-                              ""
-                            )}
-                          </h2>
-                        </span>
-                        <h2 className="text-zinc-400 mt-2"></h2>
+                            </h2>
+                          </span>
+                          <h2 className="text-zinc-400 mt-2"></h2>
+                        </div>
                       </div>
-                    </div>
+                    </a>
                   </div>
                 </div>
               </div>
