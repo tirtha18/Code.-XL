@@ -42,12 +42,6 @@ const navItems = [
     name: "Mock Assesment",
     link: "/mockassessment",
   },
-  {
-    ind: 5,
-    icon: <FaUsers />,
-    name: "Community",
-    link: "/community",
-  },
 ];
 
 export default function Navbar() {

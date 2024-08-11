@@ -45,13 +45,13 @@ def scrape_gfg():
         temp_name = contest_name.replace(" ", "").lower()
         contest_link = f"https://practice.geeksforgeeks.org/contest/gfg-{temp_name}-rated-contest"
         return {"contest_info": {"contest_name": contest_name, "contest_datetime": contest_datetime.isoformat()+"+00:00", "contest_link": contest_link}}
-    except (ValueError, TypeError) as e:
-        return {"message": "Error", "Error" : e}
+    except Exception as e:
+        return {"contest_info" : {"contest_name": "", "contest_datetime": "", "contest_link": ""}}
 
 def scrape_cf():
     url = "https://codeforces.com/"
     response = requests.get(url, headers)
-    if response.status_code == 200:
+    try:
         soup = BeautifulSoup(response.text, "html.parser")
         contest = soup.find_all("div", class_="roundbox sidebox borderTopRound")[0].text
         link = soup.find_all("div", class_="roundbox sidebox borderTopRound")[0].find_all("a")[0].get("href")
@@ -74,4 +74,5 @@ def scrape_cf():
             time_left = timedelta(days=int(contest[time_ind-1]), hours=0, mintutes=0, seconds=0)
         contest_time = current_time + time_left 
         return {"contest_info": {"contest_name": contest_name, "contest_datetime": contest_time.isoformat(), "contest_link": contest_link, "cuurent_time": current_time.isoformat()}}
-    return {"message": "Error"}
+    except Exception as e:
+        return {"contest_info" : {"contest_name": "", "contest_datetime": "", "contest_link": ""}}
