@@ -398,9 +398,9 @@ export default function Dashboard() {
       }}
     >
       {!loading ? (
-        <div className="m-4 h-full flex ">
-          <div className="flex flex-row h-[110%] ">
-            <div className="w border border-zinc-700  flex flex-col  items-center bg-zinc-800 px-2 h-full min-w-1/3 rounded-lg">
+        <div className="m-4 h-full flex  ">
+          <div className="flex flex-row h-[110%] w-full ">
+            <div className="w border border-zinc-700  flex flex-col items-center bg-zinc-800 px-2 h-full min-w-1/3 rounded-lg">
               <div className="m-2 flex flex-col h-full items-center">
                 <div className="my-4">
                   <img width="120" height="120" src={User_img} alt="User" />

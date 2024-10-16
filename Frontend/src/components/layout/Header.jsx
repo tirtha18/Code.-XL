@@ -62,7 +62,7 @@ export default function Header() {
     "In a world that's changing really quickly, the only strategy that is guaranteed to fail is not taking risks. - Mark Zuckerberg",
     "Technology is a word that describes something that doesn’t work yet. - Douglas Adams"
 ];
-  
+
   const showQuote = () => {
     setQuote(techQuotes[Math.floor(Math.random()*50)]);
   }
