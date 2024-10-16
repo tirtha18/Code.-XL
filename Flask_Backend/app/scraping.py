@@ -1,7 +1,10 @@
 from bs4 import BeautifulSoup
 import requests
-from datetime import datetime, timezone
-from datetime import timedelta
+from datetime import datetime, timezone, timedelta
+from flask import jsonify
+from selenium import webdriver
+from bs4 import BeautifulSoup
+import time
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
     "Accept-Language": "en-US,en;q=0.9",
@@ -49,30 +52,13 @@ def scrape_gfg():
         return {"contest_info" : {"contest_name": "", "contest_datetime": "", "contest_link": ""}}
 
 def scrape_cf():
-    url = "https://codeforces.com/"
-    response = requests.get(url, headers)
     try:
-        soup = BeautifulSoup(response.text, "html.parser")
-        contest = soup.find_all("div", class_="roundbox sidebox borderTopRound")[0].text
-        link = soup.find_all("div", class_="roundbox sidebox borderTopRound")[0].find_all("a")[0].get("href")
-        str = "Before contest"
-        start_ind = contest.index(str) + len(str)
-        end_ind = contest.index(')', start_ind)
-        contest_name = contest[start_ind: end_ind + 1].strip().replace("Codeforces ", "")
-        current_time = datetime.now(timezone.utc)
-        time_ind = contest.find("days")
-        if time_ind==-1:
-            contest_time = contest[end_ind + 1: end_ind + 9].strip()
-            temp = contest_time.split(":")
-            h = int(temp[0])
-            m = int(temp[1])
-            s = int(temp[2])
-            time_left = timedelta(days=0, hours=h, minutes=m, seconds=s)
-            contest_link = f"https://codeforces.com{link}"
-        else :
-            contest_link = {"https://codeforces.com"}
-            time_left = timedelta(days=int(contest[time_ind-1]), hours=0, mintutes=0, seconds=0)
-        contest_time = current_time + time_left 
-        return {"contest_info": {"contest_name": contest_name, "contest_datetime": contest_time.isoformat(), "contest_link": contest_link, "cuurent_time": current_time.isoformat()}}
+        driver = webdriver.Chrome()
+        url = "https://codeforces.com/"
+        driver.get(url)
+        elem = driver.find_element(By.Name, "q")
+        return {"fe":"fwe"}
     except Exception as e:
-        return {"contest_info" : {"contest_name": "", "contest_datetime": "", "contest_link": ""}}
+        return {"error": str(e)}
+
+

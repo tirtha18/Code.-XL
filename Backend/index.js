@@ -16,9 +16,16 @@ import router6 from "./routes/getMock.js";
 
 import router7 from "./routes/addNotes.js";
 
+import routerRevision_toggle from "./routes/toggleRevision.js";
+
 import { connectToDatabase } from "./config/database.js";
 
+import getrevRouter from "./routes/getRevision.js";
+
+import resumeRouter from "./routes/ResumeAI.js";
+
 import cors from "cors";
+
 
 const app = express();
 
@@ -43,6 +50,12 @@ app.use("/api/", router5);
 app.use("/api/", router6);
 
 app.use("/api/", router7);
+
+app.use("/api/", routerRevision_toggle);
+
+app.use("/api/", getrevRouter);
+
+app.use("/api/", resumeRouter);
 
 app.get("/api/start_server", async (req, res) => {
   console.log("Server started Successfully");

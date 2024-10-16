@@ -17,9 +17,17 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
+  },
+  collegeName: {
+    type: String,
+  },
+  avatar: {
+    type: String,
+  },
+  location: {
+    type: String
   }
 })
-
 userSchema.pre('save',async function (next) {
   if(!this.isModified('password'))
     return next();

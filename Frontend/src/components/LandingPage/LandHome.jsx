@@ -12,7 +12,7 @@ import mongodb from "../../images/mongo.png";
 import tailwind from "../../images/tailwind.png";
 import js from "../../images/js.png";
 import { useContext } from "react";
-import { NavContextProvider, navContext } from "../NavContextProvider";
+import { NavContextProvider, navContext } from "../context/NavContextProvider";
 import { FaArrowRight } from "react-icons/fa";
 const techstack = [
   {
@@ -84,11 +84,11 @@ export default function LandHome() {
     startFlaskServer();
   },[])
   return (
-    <div className="absolute z-10 top-0 left-0 min-h-screen w-screen bg-black ">
+    <div className="absolute z-40 top-0 left-0 min-h-screen w-screen bg-black ">
       <Navbar />
       <div
         name="home"
-        className="h-screen bg-gradient-to-b from-black to-gray-900 flex flex-col text-gray-300"
+        className="h-screen bg-black flex flex-col text-gray-300"
       >
         <div className="max-w-screen mx-auto flex items-center justify-center h-full px-4 ml-[9%]">
           <div className="flex flex-col w-[50%] justify-center h-full">
@@ -120,7 +120,7 @@ export default function LandHome() {
       </div>
       <div
         name="features"
-        className="min-h-screen bg-gradient-to-b from-gray-900 to-black flex flex-col text-gray-300 items-center justify-center py-24"
+        className="min-h-screen bg-gradient-to-bbg-black flex flex-col text-gray-300 items-center justify-center py-24"
       >
         <div className=" grid grid-cols-3 gap-6 h-full mb-16">
           <div
@@ -200,7 +200,7 @@ export default function LandHome() {
       </div>
       <div
         name="technologies"
-        className="h-screen bg-gradient-to-b from-black to-gray-900 flex flex-col text-gray-300"
+        className="h-screen bg-black flex flex-col text-gray-300"
       >
         <div className="max-w-screen-lg mx-auto p-4 flex flex-col justify-center w-full h-ful text-white">
           <div>
@@ -226,7 +226,7 @@ export default function LandHome() {
       </div>
       <div
         name="contact"
-        className="w-full h-screen bg-gradient-to-b from-gray-900 to-black text-white"
+        className="w-full h-screen bg-gradient-to-bbg-black text-white"
       >
         <div className="flex flex-col p-4 justify-center max-w-screen-lg mx-auto h-full">
           <div className="pb-8">
