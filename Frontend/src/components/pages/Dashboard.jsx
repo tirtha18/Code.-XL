@@ -16,14 +16,16 @@ import Gfg from "../../images/GFG_logo.png";
 import Cflogo from "../../images/cflogo.png";
 import NavTabs from "../ui/reusables/Tabs";
 import DashboardSkeleton from "../ui/skeleton/DashboardSkeleton";
+import { AvatarContext } from "../context/AvatarContext"
 function ShowMockResults({ setShowMockdata, selectedmockdata }) {
   //console.log(selectedmockdata);
+  
   const correctq = selectedmockdata.correct_q;
   const totalq = selectedmockdata.total_q;
   const attemptedq = selectedmockdata.attempted_q;
   const [toggleresult, setToggleresult] = useState(false);
   return (
-    <div className="fixed top-0 left-0 flex justify-center items-center h-screen w-screen z-50 bg-opacity-50 backdrop-blur-sm we">
+    <div className="fixed top-0 left-0 flex justify-center items-center h-screen w-screen z-50 bg-opacity-50 backdrop-blur-sm">
       <div className="relative bg-zinc-800 border-zinc-600 border  rounded-lg shadow-lg text-zinc-300 flex-col flex items-center w-[40%] min-h-[40%]">
         <div className="text-lg font-semibold  border-b border-zinc-600 text-zinc-300 w-full  p-4">
           {selectedmockdata.name}
@@ -267,6 +269,7 @@ export default function Dashboard() {
   const [mockdata, setMockdata] = useState([]);
   const [showMockdata, setShowMockdata] = useState(false);
   const [selectedmockdata, setSelectedmocckdata] = useState(null);
+  const {avatar, updateAvatar} = useContext(AvatarContext);
   const [cfdata, setcfdata] = useState({
     contest_name: "",
     contest_link: "",
@@ -304,6 +307,7 @@ export default function Dashboard() {
     getGfgdata();
   }, []);
   useEffect(() => {
+    
     const getSheets = async () => {
       try {
         if (!user) return console.log("User ID not available");
@@ -337,6 +341,7 @@ export default function Dashboard() {
         );
         setName(response.data.name);
         setUsername(response.data.username);
+        updateAvatar(response.data.avatar);
       } catch (error) {
         console.log(error);
       } finally {
@@ -402,8 +407,12 @@ export default function Dashboard() {
           <div className="flex flex-row h-[110%] w-full ">
             <div className="w border border-zinc-700  flex flex-col items-center bg-zinc-800 px-2 h-full min-w-1/3 rounded-lg">
               <div className="m-2 flex flex-col h-full items-center">
-                <div className="my-4">
-                  <img width="120" height="120" src={User_img} alt="User" />
+                <div className="my-4 w-32 h-32 rounded-full border-green-500 p-1 bg-white border-4">
+                  <img
+                    className="rounded-full w-full h-full object-cover"
+                    src={avatar}
+                    alt={User_img}
+                  />
                 </div>
                 <div className="mt-1 flex flex-col items-center">
                   <h1 className="text-2xl font-bold">{name}</h1>
@@ -642,10 +651,15 @@ export default function Dashboard() {
                   Mock Assessment Analysis:
                 </div>
                 <div className="w-full flex flex-grow flex-row overflow-y-hidden">
-                  <div className="flex w-[90%]  border-r flex-row border-zinc-700 justify-center items-center">
-                    {!loading&&(<div className="w-full px-4 items-center justify-center">
-                      <LineChart mockdata={mockdata} mocklabels={mocklabels} />
-                    </div>)}
+                  <div className="flex w-[90%] flex-row border-zinc-700 justify-center items-center">
+                    {!loading && (
+                      <div className="w-full px-4 items-center justify-center">
+                        <LineChart
+                          mockdata={mockdata}
+                          mocklabels={mocklabels}
+                        />
+                      </div>
+                    )}
                   </div>
                   <div className="flex w-[60%] flex-col items-center">
                     <div className="w-full h-full flex flex-col">
@@ -659,7 +673,7 @@ export default function Dashboard() {
                       >
                         {mockresults.map((result) => (
                           <div
-                            className="w-full rounded-lg py-3 space-y-2 text-sm text-zinc-300 hover:cursor-pointer mb-1 px-2 hover:bg-zinc-700"
+                            className="w-full rounded-lg py-3 space-y-2 bg-zinc-900 text-sm text-zinc-300 hover:cursor-pointer mb-1 px-2 hover:bg-zinc-700"
                             onClick={() => {
                               setSelectedmocckdata(result);
                               setShowMockdata(true);

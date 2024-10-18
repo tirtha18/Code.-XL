@@ -69,9 +69,9 @@ export default function Navbar() {
         } md:translate-x-0 duration-300`}
       >
         <div className="flex flex-col  items-center  w-full">
-          <div className=" w-full md:justify-center flex-row py-133  flex mt-8 rounded-lg text-white font-semibold items-center" >
-            <h1 className="px-2 text-3xl md:text-[40px]">Code.XL</h1>
-            {isOpen && (<button onClick={() => setIsOpen(false)} className="md:hidden ml-auto mr-2 p-1 rounded-lg bg-green-900 border border-green-500 text-green-400"><IoIosArrowBack size={22}/></button>)}
+          <div className=" w-full md:justify-center flex-row py-133  flex mt-8 rounded-lg text-white font-semibold items-center h-8 " >
+            <h1 className="px-3 text-3xl md:text-[40px]">Code.XL</h1>
+            {isOpen && (<button onClick={() => setIsOpen(false)} className="md:hidden ml-auto mr-2 p-1  rounded-lg bg-green-900 translate-y-[-2.5px] border border-green-500 text-green-400"><IoIosArrowBack size={22}/></button>)}
           </div>
           <div className="mt-[30%] w-[93%]">
             {navItems.map((item) => (

@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { useEffect } from "react";
 import Timer from "../ui/reusables/Timer";
 import ProgressBar from "../ui/reusables/ProgressBar";
-import rawQuestions from "../../questions.json";
+import rawQuestions from "../../../dummy_dbs/questions.json";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContextProvider";
 import axios from "axios";
@@ -134,14 +134,16 @@ function Result({
             />
           </div>
           <div className="w-full space-x-2 mb-6 flex flex-row">
-            {!disableSave&&(<button
-              onClick={() => {
-                handleSaveResult();
-              }}
-              className="px-2 py-1 bg-green-600 rounded-lg ml-auto hover:bg-green-800"
-            >
-              <h1>Save Results</h1>
-            </button>)}
+            {!disableSave && (
+              <button
+                onClick={() => {
+                  handleSaveResult();
+                }}
+                className="px-2 py-1 bg-green-600 rounded-lg ml-auto hover:bg-green-800"
+              >
+                <h1>Save Results</h1>
+              </button>
+            )}
             <button
               className="px-3 py-1 bg-zinc-600 rounded-lg  ml-auto hover:bg-zinc-900  "
               onClick={() => {

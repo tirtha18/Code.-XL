@@ -196,7 +196,7 @@ export default function Sheets() {
         {loading ? (
           <SheetSkeletonLoader />
         ) : !sheetshow ? (
-          <div className="grid sm:grid-cols-1 md:grid-cols-3 md:gap-8 gap-4">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-8 gap-4">
             <div
               onClick={() => setFileshow(true)}
               className="hover:cursor-pointer hover:scale-105 duration-200 bg p-5 rounded-xl h-44 flex flex-col items-center justify-center text-3xl font-bold border border-green-500 hover:border-2 bg-zinc-900 text-green-500"

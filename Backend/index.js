@@ -26,6 +26,7 @@ import resumeRouter from "./routes/ResumeAI.js";
 
 import cors from "cors";
 
+import uploadAvatarRouter from "./routes/uploadAvatar.js";
 
 const app = express();
 
@@ -56,6 +57,8 @@ app.use("/api/", routerRevision_toggle);
 app.use("/api/", getrevRouter);
 
 app.use("/api/", resumeRouter);
+
+app.use("/api/", uploadAvatarRouter);
 
 app.get("/api/start_server", async (req, res) => {
   console.log("Server started Successfully");

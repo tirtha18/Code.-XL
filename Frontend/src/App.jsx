@@ -14,59 +14,61 @@ import LandHome from "./components/LandingPage/LandHome";
 import CoreSub from "./components/pages/CoreSub";
 import Community from "./components/pages/Community";
 import { NavContextProvider } from "./components/context/NavContextProvider";
-
+import { AvatarProvider } from "./components/context/AvatarContext";
 function App() {
   return (
     <Router>
       <AuthProvider>
-        <NavContextProvider>
-          <div className="flex flex-row bg-black h-screen w-screen">
-            <div >
-              <Navbar />
+        <AvatarProvider>
+          <NavContextProvider>
+            <div className="flex flex-row bg-black h-screen w-screen">
+              <div>
+                <Navbar />
+              </div>
+              <div className="flex flex-col w-screen max-h-full h-screen">
+                <Header />
+                <Routes>
+                  <Route path="/login" element={<LoginRegister />} />
+                  <Route
+                    path="/sheets"
+                    element={
+                      <ProtectedRoute>
+                        <Sheets />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/dashboard"
+                    element={
+                      <ProtectedRoute>
+                        <Dashboard />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/mockassessment"
+                    element={
+                      <ProtectedRoute>
+                        <MockAssessment />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="/" element={<LandHome />}></Route>
+                  <Route path="/coresub" element={<CoreSub />}></Route>
+                  <Route
+                    path="/community"
+                    element={
+                      <ProtectedRoute>
+                        <Community />
+                      </ProtectedRoute>
+                    }
+                  />
+                </Routes>
+              </div>
             </div>
-            <div className="flex flex-col w-screen max-h-full h-screen">
-              <Header />
-              <Routes>
-                <Route path="/login" element={<LoginRegister />} />
-                <Route
-                  path="/sheets"
-                  element={
-                    <ProtectedRoute>
-                      <Sheets />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/dashboard"
-                  element={
-                    <ProtectedRoute>
-                      <Dashboard />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/mockassessment"
-                  element={
-                    <ProtectedRoute>
-                      <MockAssessment />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route path="/" element={<LandHome />}></Route>
-                <Route path="/coresub" element={<CoreSub />}></Route>
-                <Route
-                  path="/community"
-                  element={
-                    <ProtectedRoute>
-                      <Community />
-                    </ProtectedRoute>
-                  }
-                />
-              </Routes>
-            </div>
-          </div>
-          <ToastContainer position="bottom-center" autoClose={2000} />
-        </NavContextProvider>
+            <ToastContainer position="bottom-center" autoClose={2000} />
+          </NavContextProvider>
+        </AvatarProvider>
       </AuthProvider>
     </Router>
   );

@@ -21,25 +21,25 @@ export default function CoreSub() {
             </p>
           </div>
           <div className="grid grid-cols-4 h-full w-full mt-24 gap-x-8 gap-y-4 text-lg">
-            <div className=" h-[40%] bg-green-600 p-4 rounded-lg font-semibold hover:scale-105 duration-300 hover:cursor-pointer flex-col flex">
+            <div className=" h-28 bg-green-600 p-4 rounded-lg font-semibold hover:scale-105 duration-300 hover:cursor-pointer flex-col flex">
               <h1>Operating System</h1>{" "}
               <div className="mt-auto  ml-auto mr-1 p-1 hover:bg-white hover:rounded-full hover:text-green-700">
                 <FaArrowRight />
               </div>
             </div>
-            <div className=" h-[40%] bg-green-600 p-4 rounded-lg font-semibold hover:scale-105 duration-200 hover:cursor-pointer flex-col flex">
+            <div className=" h-28 bg-green-600 p-4 rounded-lg font-semibold hover:scale-105 duration-200 hover:cursor-pointer flex-col flex">
               <h1>DBMS</h1>{" "}
               <div className="mt-auto  ml-auto mr-1 p-1 hover:bg-white hover:rounded-full hover:text-green-700">
                 <FaArrowRight />
               </div>
             </div>
-            <div className=" h-[40%] bg-green-600 p-4 rounded-lg font-semibold hover:scale-105 duration-200 hover:cursor-pointer flex-col flex">
+            <div className=" h-28 bg-green-600 p-4 rounded-lg font-semibold hover:scale-105 duration-200 hover:cursor-pointer flex-col flex">
               <h1>Computer Networks</h1>{" "}
               <div className="mt-auto  ml-auto mr-1 p-1 hover:bg-white hover:rounded-full hover:text-green-700">
                 <FaArrowRight />
               </div>
             </div>
-            <div className=" h-[40%] bg-green-600 p-4 rounded-lg font-semibold hover:scale-105 duration-200 hover:cursor-pointer flex-col flex">
+            <div className=" h-28 bg-green-600 p-4 rounded-lg font-semibold hover:scale-105 duration-200 hover:cursor-pointer flex-col flex">
               <h1>OOPs</h1>{" "}
               <div className="mt-auto ml-auto mr-1 p-1 hover:bg-white hover:rounded-full hover:text-green-700 ">
                 <FaArrowRight />
