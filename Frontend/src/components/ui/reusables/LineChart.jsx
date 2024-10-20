@@ -28,7 +28,7 @@ export default function LineChart({
   showAxes = false,
   chartTitle = "",
   lineColor = "rgb(34 197 94)", 
-  delay = 50, 
+  delay = 0,
 }) {
   const [showChart, setShowChart] = useState(false);
 

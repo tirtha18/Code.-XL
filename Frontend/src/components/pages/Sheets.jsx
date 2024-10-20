@@ -5,9 +5,9 @@ import axios from "axios";
 import { AuthContext } from "../context/AuthContextProvider";
 import { FileUploader } from "react-drag-drop-files";
 import Sheet from "./Sheet";
-import Spinner from "../ui/reusables/SpinnerAni";
 import { CiSearch } from "react-icons/ci";
 import { FaCode } from "react-icons/fa";
+import {FiTrash } from "react-icons/fi";
 import SheetSkeletonLoader from "../ui/skeleton/SheetSkeleton";
 function FileUploadForm({ setFileshow, user_id, setReload }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -92,7 +92,14 @@ export default function Sheets() {
   const [sheet_id, setSheet_id] = useState("");
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
-
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`https://code-xl.onrender.com/api/sheets/${id}`);
+      setReload(true); // Trigger reload after deletion
+    } catch (error) {
+      console.log("Error deleting sheet:", error);
+    }
+  };
   useEffect(() => {
     const getSheets = async () => {
       try {
@@ -220,12 +227,23 @@ export default function Sheets() {
                   </div>
                   <div>{it.name.substring(0, it.name.length - 5)}</div>
                 </div>
-
-                <div className="text-sm font-sans font mt-auto underline flex flex-row items-center">
+                <div className="w-full justify-between flex flex-row mt-auto">
+                <div className="text-sm font-sans font flex flex-row items-center">
                   View all
                   <div className="px-1">
                     <FaArrowRight />
                   </div>
+                </div>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDelete(it._id);
+                  }}
+                  className="ml-auto mt-auto text-zinc-700 hover:text-red-700"
+                >
+                  
+                  <FiTrash size={24} />
+                </button>
                 </div>
               </div>
             ))}

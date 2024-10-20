@@ -404,9 +404,9 @@ export default function Dashboard() {
     >
       {!loading ? (
         <div className="m-4 h-full flex  ">
-          <div className="flex flex-row h-[110%] w-full ">
-            <div className="w border border-zinc-700  flex flex-col items-center bg-zinc-800 px-2 h-full min-w-1/3 rounded-lg">
-              <div className="m-2 flex flex-col h-full items-center">
+          <div className="flex flex-col items-center lg:justify-center lg:flex-row h-[110%] w-full lg:space-y-0 space-y-4">
+            <div className="w border border-zinc-700  flex flex-col items-center bg-zinc-800 px-4 lg:h-full w-full min-w-72 lg:justify-center  lg:w-1/3 rounded-lg">
+              <div className="m-2 flex flex-col w-full h-full items-center">
                 <div className="my-4 w-32 h-32 rounded-full border-green-500 p-1 bg-white border-4">
                   <img
                     className="rounded-full w-full h-full object-cover"
@@ -418,7 +418,7 @@ export default function Dashboard() {
                   <h1 className="text-2xl font-bold">{name}</h1>
                   <h2 className="text-zinc-400 mt-1">{username}</h2>
                 </div>
-                <div className="mt-8 flex flex-col border-t border-zinc-700 items-center text-zinc-500">
+                <div className="mt-8 flex flex-col border-t w-full border-zinc-700 items-center text-zinc-500">
                   <div>
                     <div className="mt-12 flex flex-row">
                       <div className="p-2 bg-black rounded-lg">
@@ -443,13 +443,13 @@ export default function Dashboard() {
                       </div>
                     </div>
                   </div>
-                  <div className="border-t w-72 border-zinc-700"></div>
+                  <div className="border-t w-full border-zinc-700"></div>
                 </div>
               </div>
             </div>
-            <div className="flex flex-col w-full h-full pl-4  ">
-              <div className="flex flex-row h-1/2">
-                <div className=" border h-full border-zinc-700 bg-zinc-800 rounded-lg mr-4 w-2/3 ">
+            <div className="flex flex-col w-full lg:h-full lg:pl-4 ">
+              <div className="flex lg:flex-row lg:h-1/2 flex-col w-full lg:space-y-0 space-y-4">
+                <div className=" border h-full border-zinc-700 bg-zinc-800 rounded-lg mr-4 lg:w-2/3 w-full overflow-hidden">
                   <div className="text-lg text-zinc-100 font-semibold p-4 border-b border-zinc-600">
                     Progress:
                   </div>
@@ -462,7 +462,7 @@ export default function Dashboard() {
                       scrollbarColor: "#10B981 transparent",
                     }}
                   >
-                    <div className=" grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-x-4 w-full h-full place-items-center mx-4 my-4">
+                    <div className="grid lg:grid-cols-3 md:grid-cols-2 col-1 grid-cols-1 gap-x-4 w-full lg:h-full h-96 place-items-center">
                       {editedsheets.map((sheet) => (
                         <div
                           key={sheet._id}
@@ -493,7 +493,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                 </div>
-                <div className=" border border-zinc-700 flex flex-col rounded-lg h-full ml-auto w-2/5 bg-zinc-800">
+                <div className=" border border-zinc-700 flex flex-col rounded-lg lg:h-full ml-auto lg:w-2/5 w-full bg-zinc-800">
                   <div className="text-lg font-semibold p-4 border-b border-zinc-600 text-zinc-300">
                     Upcoming Contests:
                   </div>
@@ -650,8 +650,8 @@ export default function Dashboard() {
                 <div className="text-lg font-semibold px-4 h-auto py-4 border-b border-zinc-600 text-zinc-300">
                   Mock Assessment Analysis:
                 </div>
-                <div className="w-full flex flex-grow flex-row overflow-y-hidden">
-                  <div className="flex w-[90%] flex-row border-zinc-700 justify-center items-center">
+                <div className="w-full flex lg:flex-grow flex-row overflow-y-hidden justify-center">
+                  <div className="flex w-[90%] border-zinc-700 justify-center items-center">
                     {!loading && (
                       <div className="w-full px-4 items-center justify-center">
                         <LineChart
@@ -661,7 +661,7 @@ export default function Dashboard() {
                       </div>
                     )}
                   </div>
-                  <div className="flex w-[60%] flex-col items-center">
+                  <div className="w-[60%] flex-col items-center lg:flex hidden">
                     <div className="w-full h-full flex flex-col">
                       <div
                         className="flex flex-col ml-4 mr-1 h-full overflow-y-auto py-3"
@@ -673,7 +673,7 @@ export default function Dashboard() {
                       >
                         {mockresults.map((result) => (
                           <div
-                            className="w-full rounded-lg py-3 space-y-2 bg-zinc-900 text-sm text-zinc-300 hover:cursor-pointer mb-1 px-2 hover:bg-zinc-700"
+                            className="w-full rounded-lg py-3 space-y-2 bg-zinc-900 text-sm text-zinc-300 hover:cursor-pointer mb-3 px-2 hover:bg-zinc-700"
                             onClick={() => {
                               setSelectedmocckdata(result);
                               setShowMockdata(true);

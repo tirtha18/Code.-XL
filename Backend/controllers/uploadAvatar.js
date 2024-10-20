@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import cloudinary from "../config/cloudinaryconfig.js";
+import fs from "fs";
 export const uploadAvatar = async (req, res) => {
   try {
     const user_id = req.body.user_id;
@@ -19,5 +20,8 @@ export const uploadAvatar = async (req, res) => {
     res.status(200).json({ message: "Avatar uploaded successfully" });
   } catch (error) {
     console.log(error);
+  }
+  finally {
+    fs.unlinkSync(req.file.path);
   }
 };

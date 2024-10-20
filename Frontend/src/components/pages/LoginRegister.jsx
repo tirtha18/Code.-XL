@@ -68,7 +68,11 @@ const LoginRegister = () => {
   };
 
   const handleClose = () => {
+
+    if(user)
     navigate("/sheets");
+    else
+    navigate("/home");
   };
 
   const togglePasswordVisibility = () => {
@@ -91,7 +95,7 @@ const LoginRegister = () => {
       <div className="relative bg-zinc-100 p-8 rounded-lg shadow-lg w-full max-w-md text-black flex-col flex items-center">
         <button
           onClick={() => {
-            user ? handleClose : navigate("/");
+             handleClose();
           }}
           className="absolute top-4 right-4 text-black"
           aria-label="Close"

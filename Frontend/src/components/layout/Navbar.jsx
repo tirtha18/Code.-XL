@@ -4,7 +4,7 @@ import { RiClipboardFill } from "react-icons/ri";
 import { MdOutlineComputer } from "react-icons/md";
 import { IoIosHome } from "react-icons/io";
 import { MdOutlineLogout } from "react-icons/md";
-import { ImBooks } from "react-icons/im";
+
 import { MdOutlineAssessment } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
@@ -94,7 +94,7 @@ export default function Navbar() {
             onClick={() => {
               logout();
             }}
-            className="  flex items-center mt-auto w-[98%] justify-center text-lg mb-4 py-2 px-[10%] rounded-lg text-zinc-900 bg-white flex-row space-x-2 hover:cursor-pointer duration-200 hover:bg-red-600 hover:text-zinc-300"
+            className="  flex items-center mt-auto w-[98%] justify-center text-lg mb-4 py-1.5 px-[10%] rounded-lg text-zinc-900 bg-white flex-row space-x-2 hover:cursor-pointer duration-200 hover:bg-red-600 hover:text-zinc-300"
           >
             <div>Logout |</div> <MdOutlineLogout />
           </div>

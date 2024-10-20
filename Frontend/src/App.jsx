@@ -25,7 +25,7 @@ function App() {
               <div>
                 <Navbar />
               </div>
-              <div className="flex flex-col w-screen max-h-full h-screen">
+              <div className="flex flex-col w-screen max-h-full overflow-auto bg-black">
                 <Header />
                 <Routes>
                   <Route path="/login" element={<LoginRegister />} />
