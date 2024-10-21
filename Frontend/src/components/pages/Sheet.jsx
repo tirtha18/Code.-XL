@@ -271,7 +271,7 @@ export default function Sheet({ setSheetshow, selectedsheet, user_id }) {
                 </div>
               </div>
               {dropdown[index] && (
-                <div className=" bg-zinc-900  m-8 border rounded-lg border-zinc-600">
+                <div className=" bg-zinc-900  m-8 border rounded-lg border-zinc-600 overflow-auto">
                   <table className="w-full text-gray-400 min-h-full ">
                     <thead>
                       <tr className="text-sm">

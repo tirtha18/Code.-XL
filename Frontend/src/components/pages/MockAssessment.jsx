@@ -376,7 +376,7 @@ export default function MockAssessment() {
   return (
     <div className="flex h-full w-full justify-center items-center overflow-scroll">
       <div className="flex items-center w-[90%] h-[90%] justify-center">
-        <div className="text-zinc-300 h-full w-full flex flex-col overflow-hidden">
+        <div className="text-zinc-300 h-full w-full flex flex-col ">
           <div>
             <h1 className="text-3xl font-bold">
               Custom Online Mock Assessment
@@ -392,133 +392,128 @@ export default function MockAssessment() {
             </p>
           </div>
           {!showAssessment && (
-              <div className="w-full rounded-lg mt-16 flex flex-row items-center h-1/3">
-                <div className="pl-6 py-4 w-[20%] bg-zinc-900 rounded-xl h-full">
-                  {options.map((option) => (
-                    <label
-                      key={option.value}
-                      className="flex items-center mb-2"
-                    >
-                      <input
-                        type="checkbox"
-                        name="checkbox-group"
-                        value={option.value}
-                        className="form-checkbox"
-                        onChange={handleCheckboxChange}
-                      />
-                      <span className="ml-2">{option.label}</span>
-                    </label>
-                  ))}
-                </div>
-
-                <div className="ml-4 rounded-xl w-[60%] h-full flex text-zinc-400 flex-col">
-                  <div className="w-full h-full rounded-xl bg-zinc-800">
-                    <h1 className="mx-6 mt-6 mb-5 capitalize">
-                      Select your preferences:
-                    </h1>
-                    <div className="flex flex-row mx-5 w-full space-x-2">
-                      <div className="w-[40%] bg-zinc-950 rounded-2xl border border-zinc-800">
-                        <select
-                          name="number-of-questions"
-                          id="number-of-questions"
-                          className="w-[95%] bg-zinc-950 rounded-2xl py-2 pl-5 text-sm font-light"
-                          onChange={(e) => {
-                            setNumber(
-                              e.target.value !== "0" ? e.target.value : null
-                            );
-                          }}
-                        >
-                          <option value="0">No of Questions:</option>
-                          <option value="5">5</option>
-                          <option value="10">10</option>
-                          <option value="15">15</option>
-                          <option value="30">30</option>
-                        </select>
-                      </div>
-                      <div className="w-[40%] bg-zinc-950 rounded-2xl border border-zinc-800">
-                        <select
-                          name="duration"
-                          id="duration"
-                          className="w-[95%] bg-zinc-950 rounded-2xl py-2 pl-5 text-sm font-light"
-                          onChange={(e) => {
-                            setDuration(
-                              e.target.value !== "Duration:"
-                                ? e.target.value
-                                : null
-                            );
-                          }}
-                        >
-                          <option value="Duration:">Duration:</option>
-                          <option value="1">1</option>
-                          <option value="5">5</option>
-                          <option value="10">10</option>
-                          <option value="15">15</option>
-                          <option value="30">30</option>
-                          <option value="45">45</option>
-                          <option value="60">60</option>
-                        </select>
-                      </div>
+            <div className="w-full rounded-lg mt-16 flex lg:flex-row flex-col items-center lg:h-[190px] lg:space-y-0 space-y-4">
+              <div className="pl-6 py-4 w-full lg:w-[20%] bg-zinc-900 rounded-xl h-full">
+                {options.map((option) => (
+                  <label key={option.value} className="flex items-center mb-2">
+                    <input
+                      type="checkbox"
+                      name="checkbox-group"
+                      value={option.value}
+                      className="form-checkbox"
+                      onChange={handleCheckboxChange}
+                    />
+                    <span className="ml-2">{option.label}</span>
+                  </label>
+                ))}
+              </div>
+              <div className="lg:ml-4 rounded-xl lg:w-[60%] w-full lg:h-full lg:bg-black bg-zinc-800  flex text-zinc-400 flex-col items-center ">
+                <div className="w-full h-full rounded-xl bg-zinc-800 lg:mb-0 mb-3">
+                  <h1 className="mx-6 mt-6 mb-5 capitalize">
+                    Select your preferences:
+                  </h1>
+                  <div className="flex flex-row mx-5 w-full space-x-2">
+                    <div className="w-[40%] bg-zinc-950 rounded-2xl border border-zinc-800">
+                      <select
+                        name="number-of-questions"
+                        id="number-of-questions"
+                        className="w-[95%] bg-zinc-950 rounded-2xl py-2 pl-5 text-sm font-light"
+                        onChange={(e) => {
+                          setNumber(
+                            e.target.value !== "0" ? e.target.value : null
+                          );
+                        }}
+                      >
+                        <option value="0">No of Questions:</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="30">30</option>
+                      </select>
+                    </div>
+                    <div className="w-[40%] bg-zinc-950 rounded-2xl border border-zinc-800">
+                      <select
+                        name="duration"
+                        id="duration"
+                        className="w-[95%] bg-zinc-950 rounded-2xl py-2 pl-5 text-sm font-light"
+                        onChange={(e) => {
+                          setDuration(
+                            e.target.value !== "Duration:"
+                              ? e.target.value
+                              : null
+                          );
+                        }}
+                      >
+                        <option value="Duration:">Duration:</option>
+                        <option value="1">1</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+                        <option value="60">60</option>
+                      </select>
                     </div>
                   </div>
-                  <button
-                    className="hover:cursor-pointer capitalize h-[25%] w-full bg-gradient-to-br from-green-700 to-green-600 text-zinc-200 mx-auto mt-4 px-3 flex items-center justify-center rounded-2xl font-semibold text-lg"
-                    onClick={() => {
-                      if (
-                        duration !== null &&
-                        number !== null &&
-                        difficulty !== null &&
-                        topics.length !== 0
-                      ) {
-                        toast.success("Best of Luck");
-                        setShowAssessment(true);
-                      } else {
-                        toast.error("Fill in all the details!");
-                      }
-                    }}
-                  >
-                    Start your mock assessment
-                  </button>
                 </div>
-                <div className="pl-6 w-[20%] ml-4 bg-zinc-900 rounded-xl h-full text-zinc-400">
-                  <div className="mt-6">Difficulty:</div>
-                  <div className="mt-4">
-                    <label className="flex flex-row mb-3">
-                      <input
-                        type="radio"
-                        name="difficulty"
-                        value="easy"
-                        onChange={(e) => setDifficulty(e.target.value)}
-                      />
-                      <span className="ml-4 text-center px-2 rounded-2xl bg-green-800 text-green-300 min-w-[60%]">
-                        Easy
-                      </span>
-                    </label>
-                    <label className="flex flex-row mb-3">
-                      <input
-                        type="radio"
-                        name="difficulty"
-                        value="medium"
-                        onChange={(e) => setDifficulty(e.target.value)}
-                      />
-                      <span className="ml-4 text-center px-2 rounded-2xl bg-yellow-800 text-yellow-300 min-w-[60%]">
-                        Medium
-                      </span>
-                    </label>
-                    <label className="flex flex-row">
-                      <input
-                        type="radio"
-                        name="difficulty"
-                        value="hard"
-                        onChange={(e) => setDifficulty(e.target.value)}
-                      />
-                      <span className="ml-4 text-center px-2 rounded-2xl bg-red-800 text-red-300 min-w-[60%]">
-                        Hard
-                      </span>
-                    </label>
-                  </div>
+                <button
+                  className="hover:cursor-pointer capitalize lg:h-[25%] w-full bg-gradient-to-br from-green-700 to-green-600 text-zinc-200 mx-auto mt-4 px-3 flex items-center justify-center lg:py-0 py-0.5 l rounded-b-lg lg:rounded-2xl font-semibold text-lg"
+                  onClick={() => {
+                    if (
+                      duration !== null &&
+                      number !== null &&
+                      difficulty !== null &&
+                      topics.length !== 0
+                    ) {
+                      toast.success("Best of Luck");
+                      setShowAssessment(true);
+                    } else {
+                      toast.error("Fill in all the details!");
+                    }
+                  }}
+                >
+                  Start your mock assessment
+                </button>
+              </div>
+              <div className="pl-6 lg:w-[20%] w-full lg:ml-4 bg-zinc-900 rounded-xl  lg:h-full text-zinc-400">
+                <div className="mt-6">Difficulty:</div>
+                <div className="mt-4 mb-4 w-[95%] flex flex-col items-center justify-center">
+                  <label className="flex flex-row mb-3 w-full ">
+                    <input
+                      type="radio"
+                      name="difficulty"
+                      value="easy"
+                      onChange={(e) => setDifficulty(e.target.value)}
+                    />
+                    <span className="ml-4 text-center px-2 rounded-2xl bg-green-800 text-green-300 w-full lg:w-[65%]">
+                      Easy
+                    </span>
+                  </label>
+                  <label className="flex flex-row mb-3 w-full">
+                    <input
+                      type="radio"
+                      name="difficulty"
+                      value="medium"
+                      onChange={(e) => setDifficulty(e.target.value)}
+                    />
+                    <span className="ml-4 text-center px-2 rounded-2xl bg-yellow-800 text-yellow-300 lg:w-[65%] w-full">
+                      Medium
+                    </span>
+                  </label>
+                  <label className="flex flex-row w-full">
+                    <input
+                      type="radio"
+                      name="difficulty"
+                      value="hard"
+                      onChange={(e) => setDifficulty(e.target.value)}
+                    />
+                    <span className="ml-4 text-center px-2 rounded-2xl bg-red-800 text-red-300 lg:w-[65%] w-full ">
+                      Hard
+                    </span>
+                  </label>
                 </div>
               </div>
-           
+            </div>
           )}
           {showAssessment && (
             <AssesmentQuestions

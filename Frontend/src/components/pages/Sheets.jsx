@@ -139,7 +139,7 @@ export default function Sheets() {
   };
   return (
     <div
-      className="overflow-auto"
+      className="overflow-auto w-full h-full"
       style={{
         overflowY: "scroll",
         scrollbarWidth: "thin",
@@ -147,7 +147,7 @@ export default function Sheets() {
         scrollbarColor: "#10B981 transparent",
       }}
     >
-      <div className="px-10 py-10 h-full w-full">
+      <div className=" px-4 md:px-8 py-10 h-full w-full">
         <div className="mb-4">
           <h1 className="text-3xl font-bold text-zinc-300">
             Personalized Sheets
