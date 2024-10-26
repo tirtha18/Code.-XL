@@ -58,7 +58,7 @@ export default function Navbar() {
 
   return (
     <>
-      {!isOpen&&(<div className="md:hidden fixed top-4 left-4 z-30  ">
+      {!isOpen&&(<div className="md:hidden fixed top-4 left-4 z-30 font-heading  ">
         <button onClick={() => setIsOpen(!isOpen)}>
           <FaBars className="text-white text-3xl" />
         </button>

@@ -1,0 +1,125 @@
+{
+    "os_questions": [
+      {
+        "id": 1,
+        "question": "What is an operating system?",
+        "answer": "An operating system is software that acts as an interface between computer hardware and the user, managing resources and providing services to applications.",
+        "completed": false
+      },
+      {
+        "id": 2,
+        "question": "What are the main functions of an operating system?",
+        "answer": "The main functions include process management, memory management, file system management, device management, and security.",
+        "completed": false
+      },
+      {
+        "id": 3,
+        "question": "What is a process in the context of an operating system?",
+        "answer": "A process is a program in execution, which includes the program code, current activity, and state.",
+        "completed": false
+      },
+      {
+        "id": 4,
+        "question": "What is the difference between a process and a thread?",
+        "answer": "A process is an independent program in execution, while a thread is the smallest unit of a process that can be scheduled by the OS, sharing resources with other threads within the same process.",
+        "completed": false
+      },
+      {
+        "id": 5,
+        "question": "What is multitasking in operating systems?",
+        "answer": "Multitasking is the ability of an OS to run multiple tasks (or processes) concurrently, improving system efficiency and user experience.",
+        "completed": false
+      },
+      {
+        "id": 6,
+        "question": "Explain the concept of virtual memory.",
+        "answer": "Virtual memory is a memory management technique that allows the execution of processes that may not be entirely in the physical memory, using disk space as additional memory.",
+        "completed": false
+      },
+      {
+        "id": 7,
+        "question": "What is a kernel in an operating system?",
+        "answer": "The kernel is the core part of an operating system, responsible for managing system resources, communication between hardware and software, and ensuring system stability and security.",
+        "completed": false
+      },
+      {
+        "id": 8,
+        "question": "What is the purpose of CPU scheduling?",
+        "answer": "CPU scheduling optimizes the use of the CPU by allocating it to various processes based on scheduling algorithms to ensure efficient execution of tasks.",
+        "completed": false
+      },
+      {
+        "id": 9,
+        "question": "What is a deadlock?",
+        "answer": "A deadlock is a situation where a set of processes are in a state of waiting for resources held by each other, leading to an indefinite waiting period and halting progress.",
+        "completed": false
+      },
+      {
+        "id": 10,
+        "question": "Explain the concept of paging in memory management.",
+        "answer": "Paging is a memory management scheme that eliminates the need for contiguous allocation of physical memory, dividing memory into fixed-size pages to prevent fragmentation.",
+        "completed": false
+      },
+      {
+        "id": 11,
+        "question": "What is the purpose of a device driver?",
+        "answer": "A device driver acts as a translator between the OS and hardware devices, enabling the OS to communicate with and control the hardware effectively.",
+        "completed": false
+      },
+      {
+        "id": 12,
+        "question": "What are system calls in an operating system?",
+        "answer": "System calls are the interface between a process and the OS, allowing programs to request services, such as file manipulation, process control, and communication.",
+        "completed": false
+      },
+      {
+        "id": 13,
+        "question": "What is swapping in memory management?",
+        "answer": "Swapping is a process management technique in which processes are temporarily moved from main memory to disk and brought back as needed, helping manage memory efficiently.",
+        "completed": false
+      },
+      {
+        "id": 14,
+        "question": "What is a bootloader?",
+        "answer": "A bootloader is a program that loads the OS into memory when a computer starts, initializing the system and enabling it to become operational.",
+        "completed": false
+      },
+      {
+        "id": 15,
+        "question": "Explain the concept of a real-time operating system (RTOS).",
+        "answer": "An RTOS is designed to handle real-time applications by processing data as it comes in, often with stringent timing and reliability requirements.",
+        "completed": false
+      },
+      {
+        "id": 16,
+        "question": "What is a file system in an operating system?",
+        "answer": "A file system is a method used by the OS to store, retrieve, and organize files on storage devices, managing how data is stored and accessed.",
+        "completed": false
+      },
+      {
+        "id": 17,
+        "question": "What is memory segmentation?",
+        "answer": "Memory segmentation is a memory management technique that divides the memory into segments, each with a logical grouping of data and code to facilitate organization and protection.",
+        "completed": false
+      },
+      {
+        "id": 18,
+        "question": "What is multiprocessing?",
+        "answer": "Multiprocessing refers to the use of two or more CPUs within a single system to run multiple processes simultaneously, improving performance and reliability.",
+        "completed": false
+      },
+      {
+        "id": 19,
+        "question": "What is a shell in an operating system?",
+        "answer": "A shell is a user interface that allows users to interact with the OS, typically through commands entered in a command-line interface.",
+        "completed": false
+      },
+      {
+        "id": 20,
+        "question": "What is the purpose of inter-process communication (IPC)?",
+        "answer": "IPC is a mechanism that allows processes to communicate and synchronize with each other, sharing data or signaling events as needed for cooperative tasks.",
+        "completed": false
+      }
+    ]
+  }
+  

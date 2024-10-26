@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sheets from "./components/pages/Sheets";
 import Navbar from "./components/layout/Navbar";
 import Header from "./components/layout/Header";
@@ -16,12 +16,13 @@ import Community from "./components/pages/Community";
 import { NavContextProvider } from "./components/context/NavContextProvider";
 import { AvatarProvider } from "./components/context/AvatarContext";
 function App() {
+
   return (
     <Router>
       <AuthProvider>
         <AvatarProvider>
           <NavContextProvider>
-            <div className="flex flex-row bg-black h-screen w-screen">
+            <div className="flex flex-row bg-black h-screen w-screen font-sans">
               <div>
                 <Navbar />
               </div>

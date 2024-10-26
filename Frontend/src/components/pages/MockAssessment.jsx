@@ -121,7 +121,7 @@ function Result({
               />
             </div>
           </div>
-          <div className=" text-zinc-400 bg-zinc-700 rounded-lg  p-4 mt-4 mb-6">
+          <div className=" text-zinc-400 bg-zinc-700 rounded-lg p-4 mt-4 mb-6">
             <h1 className="ml-1">Name your test:</h1>
             <input
               onChange={(e) => {
@@ -375,7 +375,7 @@ export default function MockAssessment() {
 
   return (
     <div className="flex h-full w-full justify-center items-center overflow-scroll">
-      <div className="flex items-center w-[90%] h-[90%] justify-center">
+      <div className="flex items-center m-4 lg:m-8 h-[90%] justify-center">
         <div className="text-zinc-300 h-full w-full flex flex-col ">
           <div>
             <h1 className="text-3xl font-bold">

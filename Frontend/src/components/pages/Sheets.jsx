@@ -7,7 +7,7 @@ import { FileUploader } from "react-drag-drop-files";
 import Sheet from "./Sheet";
 import { CiSearch } from "react-icons/ci";
 import { FaCode } from "react-icons/fa";
-import {FiTrash } from "react-icons/fi";
+import { FiTrash } from "react-icons/fi";
 import SheetSkeletonLoader from "../ui/skeleton/SheetSkeleton";
 function FileUploadForm({ setFileshow, user_id, setReload }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -95,7 +95,7 @@ export default function Sheets() {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`https://code-xl.onrender.com/api/sheets/${id}`);
-      setReload(true); // Trigger reload after deletion
+      setReload(true);
     } catch (error) {
       console.log("Error deleting sheet:", error);
     }
@@ -137,6 +137,7 @@ export default function Sheets() {
       setFilteredSheets(filtered);
     }
   };
+  
   return (
     <div
       className="overflow-auto w-full h-full"
@@ -152,7 +153,7 @@ export default function Sheets() {
           <h1 className="text-3xl font-bold text-zinc-300">
             Personalized Sheets
           </h1>
-          <p className="mt-4 text-md text-zinc-400">
+          <p className="mt-4 text-md text-zinc-400 font-heading">
             Our Personalized Sheets feature revolutionizes study efficiency by
             allowing users to upload Excel or similar sheets. Automatically
             extracting and categorizing problems by topic, it seamlessly
@@ -163,7 +164,9 @@ export default function Sheets() {
           </p>
         </div>
         <div className="mb-9">
-          <h2 className="text-xl font-bold text-zinc-300 ">Sample Sheets:</h2>
+          <h2 className="text-xl font-bold text-zinc-300 font-heading">
+            Sample Sheets:
+          </h2>
           <ul className="mt-4 space-x-3 flex flex-row mb-4">
             <li>
               <a
@@ -177,7 +180,7 @@ export default function Sheets() {
             </li>
             <li>
               <a
-                href="https://docs.google.com/spreadsheets/d/test"
+                href="https://docs.google.com/spreadsheets/d/1jVwt5re-jxnMXvOz2s-CHNm5-Xp8YT6C/edit?usp=sharing&ouid=104446117698915010531&rtpof=true&sd=true"
                 target="_blank"
                 rel="noopener noreferrer"
                 className=" text-sm px-2 py-1 rounded-md font-semibold  hover:scale-105 duration-200 shadow-sm border  border-green-500 text-green-500 flex items-center"
@@ -228,22 +231,21 @@ export default function Sheets() {
                   <div>{it.name.substring(0, it.name.length - 5)}</div>
                 </div>
                 <div className="w-full justify-between flex flex-row mt-auto">
-                <div className="text-sm font-sans font flex flex-row items-center">
-                  View all
-                  <div className="px-1">
-                    <FaArrowRight />
+                  <div className="text-sm font-sans font flex flex-row items-center">
+                    View all
+                    <div className="px-1">
+                      <FaArrowRight />
+                    </div>
                   </div>
-                </div>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleDelete(it._id);
-                  }}
-                  className="ml-auto mt-auto text-zinc-700 hover:text-red-700"
-                >
-                  
-                  <FiTrash size={24} />
-                </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDelete(it._id);
+                    }}
+                    className="ml-auto mt-auto text-zinc-700 hover:text-red-700"
+                  >
+                    <FiTrash size={24} />
+                  </button>
                 </div>
               </div>
             ))}

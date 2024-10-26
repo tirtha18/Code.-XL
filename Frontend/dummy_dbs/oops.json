@@ -1,0 +1,185 @@
+{
+    "oop_questions": [
+      {
+        "id": 1,
+        "question": "What is Object-Oriented Programming?",
+        "answer": "Object-Oriented Programming (OOP) is a programming paradigm based on the concept of objects, which can contain data and code that manipulates that data.",
+        "completed": false
+      },
+      {
+        "id": 2,
+        "question": "What are the main principles of OOP?",
+        "answer": "The main principles of OOP are encapsulation, inheritance, polymorphism, and abstraction.",
+        "completed": false
+      },
+      {
+        "id": 3,
+        "question": "What is a class?",
+        "answer": "A class is a blueprint for creating objects, defining attributes and methods that the created objects will have.",
+        "completed": false
+      },
+      {
+        "id": 4,
+        "question": "What is an object?",
+        "answer": "An object is an instance of a class that contains data and methods to manipulate that data.",
+        "completed": false
+      },
+      {
+        "id": 5,
+        "question": "What is encapsulation?",
+        "answer": "Encapsulation is the principle of bundling data and methods that operate on that data within one unit, restricting direct access to some components.",
+        "completed": false
+      },
+      {
+        "id": 6,
+        "question": "What is inheritance?",
+        "answer": "Inheritance is a mechanism where a new class derives properties and behavior from an existing class, promoting code reuse.",
+        "completed": false
+      },
+      {
+        "id": 7,
+        "question": "What is polymorphism?",
+        "answer": "Polymorphism allows methods to perform different tasks based on the object that it is acting upon, enabling a single interface to control access to a general class of actions.",
+        "completed": false
+      },
+      {
+        "id": 8,
+        "question": "What is abstraction?",
+        "answer": "Abstraction is the concept of hiding complex implementation details and showing only the necessary features of an object.",
+        "completed": false
+      },
+      {
+        "id": 9,
+        "question": "What is a constructor?",
+        "answer": "A constructor is a special method invoked when an object is instantiated, used to initialize the object's properties.",
+        "completed": false
+      },
+      {
+        "id": 10,
+        "question": "What is method overloading?",
+        "answer": "Method overloading allows multiple methods in the same class to have the same name with different parameters.",
+        "completed": false
+      },
+      {
+        "id": 11,
+        "question": "What is method overriding?",
+        "answer": "Method overriding occurs when a subclass provides a specific implementation of a method that is already defined in its superclass.",
+        "completed": false
+      },
+      {
+        "id": 12,
+        "question": "What is a destructor?",
+        "answer": "A destructor is a method that is called when an object is destroyed, used to free resources allocated to the object.",
+        "completed": false
+      },
+      {
+        "id": 13,
+        "question": "What is an interface?",
+        "answer": "An interface is a reference type in OOP that defines a contract of methods that implementing classes must provide.",
+        "completed": false
+      },
+      {
+        "id": 14,
+        "question": "What is a virtual function?",
+        "answer": "A virtual function is a method in a base class that can be overridden in a derived class, allowing for dynamic dispatch of method calls.",
+        "completed": false
+      },
+      {
+        "id": 15,
+        "question": "What is a static method?",
+        "answer": "A static method belongs to the class rather than any object instance and can be called without creating an instance of the class.",
+        "completed": false
+      },
+      {
+        "id": 16,
+        "question": "What is the difference between a class and an object?",
+        "answer": "A class is a blueprint for creating objects, while an object is an instance of a class.",
+        "completed": false
+      },
+      {
+        "id": 17,
+        "question": "What is the purpose of access modifiers?",
+        "answer": "Access modifiers (like public, private, protected) control the visibility of class members, defining who can access them.",
+        "completed": false
+      },
+      {
+        "id": 18,
+        "question": "What is multiple inheritance?",
+        "answer": "Multiple inheritance is a feature where a class can inherit from more than one base class, combining their properties and methods.",
+        "completed": false
+      },
+      {
+        "id": 19,
+        "question": "What is a namespace?",
+        "answer": "A namespace is a container that holds a set of identifiers and allows the organization of code elements to avoid name collisions.",
+        "completed": false
+      },
+      {
+        "id": 20,
+        "question": "What is a base class?",
+        "answer": "A base class is a class that is inherited from by another class, serving as a parent to one or more derived classes.",
+        "completed": false
+      },
+      {
+        "id": 21,
+        "question": "What is a derived class?",
+        "answer": "A derived class is a class that inherits from one or more base classes, gaining their attributes and behaviors.",
+        "completed": false
+      },
+      {
+        "id": 22,
+        "question": "What is composition?",
+        "answer": "Composition is a design principle where a class is composed of one or more objects of other classes, establishing a 'has-a' relationship.",
+        "completed": false
+      },
+      {
+        "id": 23,
+        "question": "What is aggregation?",
+        "answer": "Aggregation is a form of association where one class is a part of another class but can exist independently.",
+        "completed": false
+      },
+      {
+        "id": 24,
+        "question": "What is a singleton class?",
+        "answer": "A singleton class restricts the instantiation of a class to one single instance, providing a global point of access.",
+        "completed": false
+      },
+      {
+        "id": 25,
+        "question": "What is a callback function?",
+        "answer": "A callback function is a function that is passed as an argument to another function and is invoked after some operation.",
+        "completed": false
+      },
+      {
+        "id": 26,
+        "question": "What is the significance of the 'this' keyword?",
+        "answer": "'this' refers to the current instance of a class, allowing access to instance variables and methods.",
+        "completed": false
+      },
+      {
+        "id": 27,
+        "question": "What is a design pattern?",
+        "answer": "A design pattern is a general reusable solution to a commonly occurring problem in software design.",
+        "completed": false
+      },
+      {
+        "id": 28,
+        "question": "What is a proxy class?",
+        "answer": "A proxy class acts as a surrogate or placeholder for another class to control access to it.",
+        "completed": false
+      },
+      {
+        "id": 29,
+        "question": "What is a facade pattern?",
+        "answer": "The facade pattern provides a simplified interface to a complex subsystem, making it easier to use.",
+        "completed": false
+      },
+      {
+        "id": 30,
+        "question": "What is a decorator pattern?",
+        "answer": "The decorator pattern allows behavior to be added to individual objects dynamically, without affecting the behavior of other objects from the same class.",
+        "completed": false
+      }
+    ]
+  }
+  

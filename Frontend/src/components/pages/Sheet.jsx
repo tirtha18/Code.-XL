@@ -9,7 +9,7 @@ import { LiaRandomSolid } from "react-icons/lia";
 import GFG_logo from "../../images/GFG_logo1.png";
 import YT_logo from "../../images/YT_logo.png";
 import LC_logo from "../../images/LC_logo.png";
-import { FaRandom } from "react-icons/fa";
+
 import { IoChevronBackOutline } from "react-icons/io5";
 import { FaStar } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -204,7 +204,11 @@ export default function Sheet({ setSheetshow, selectedsheet, user_id }) {
         >
           <IoChevronBackOutline size={22} />
         </button>
-        <span className=" text-zinc-400 text-xl "><h1>{selectedsheet.name.substring(0,selectedsheet.name.length-5)}</h1></span>
+        <span className=" text-zinc-400 text-xl ">
+          <h1>
+            {selectedsheet.name.substring(0, selectedsheet.name.length - 5)}
+          </h1>
+        </span>
         <div className=" items-center flex space-x-4">
           <button className="py-2 px-2.5 text-zinc-300 border rounded-lg border-zinc-600  bg-zinc-800 hover:cursor-pointer hover:scale-105 duration-200">
             <LiaRandomSolid size={22} />

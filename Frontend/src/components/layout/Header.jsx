@@ -50,11 +50,12 @@ export default function Header() {
     showQuote();
   }, []);
   return (
-    <div className="">
-      <div className="fixed-header h-[64px] flex shadow-sm shadow-gray-700 flex-row items-center  z-10 max-w-full">
+    <div className="w-full">
+      <div className="fixed-header h-[64px] flex shadow-sm shadow-gray-700 flex-row items-center  z-10 w-full ">
         <div className=" hidden lg:flex justify-center py-1 w-4/5 border border-zinc-700 text-sm text-center rounded-3xl text-blue-200 ml-auto bg-zinc-900 ">
-          {quotes[quoteIndex]["quote"]} {quotes[quoteIndex]["author"]}
+          {quotes[quoteIndex]["quote"]}{" " + quotes[quoteIndex]["author"]}
         </div>
+        <div className="text-white font-semibold text-3xl lg:hidden w-full  justify-center items-center flex z-50 font-heading absolute sm:relative"><h1>Code.XL</h1></div>
         <div className="ml-auto flex flex-row">
           {!user ? (
             <Link to={"/login"}>

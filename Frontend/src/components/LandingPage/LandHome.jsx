@@ -59,6 +59,11 @@ const techstack = [
   },
 ];
 export default function LandHome() {
+  useEffect(() => {
+    alert(
+      "If you are a recruiter, please wait for 50 seconds as the backend is deployed on render for free. And as it is a free tier plan it has certain limitations. Also download the sheets from the google drive links by clicking on the sample sheets and add one."
+    );
+  }, []);
   const { changeActiveNav } = useContext(navContext);
   const navigate = useNavigate();
   useEffect(() => {

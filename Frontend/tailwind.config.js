@@ -4,7 +4,10 @@ export default {
   content: [ "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",],
   theme: {
-    extend: {},
+    extend: {fontFamily: {
+      'sans': ['Roboto', 'sans-serif'], // Body text
+      'heading': ['Poppins', 'sans-serif'], // Headings
+    },},
   },
   plugins: [daisyui,],
 }
