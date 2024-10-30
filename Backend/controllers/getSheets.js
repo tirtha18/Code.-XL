@@ -17,8 +17,6 @@ export const getSheets = async (req, res) => {
       sheets[i] = sheets[i].toObject();
       sheets[i]["sheet"] = problems;
     }
-    console.log(sheets);
-
     await client.set(key, JSON.stringify({ sheets: sheets }));
     client.expire(key, 600);
     res.json({ sheets: sheets });
