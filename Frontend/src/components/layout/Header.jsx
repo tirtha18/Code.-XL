@@ -70,7 +70,7 @@ const QRSidebar = ({ isOpen, onClose }) => {
             </p>
 
             <a
-              href="https://www.buymeacoffee.com/YourUsername"
+              href="https://buymeacoffee.com/tirthamunar"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-6 py-3 bg-yellow-500 text-yellow-900 rounded-xl font-medium hover:bg-yellow-400 transition-colors"
