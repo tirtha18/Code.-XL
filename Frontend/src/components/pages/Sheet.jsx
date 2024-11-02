@@ -53,51 +53,48 @@ function Notes({
   };
 
   return (
-    <div className="fixed top-0 left-0 flex justify-center items-center h-screen w-screen z-50 bg-opacity-50 backdrop-blur-sm">
-      <div className="relative bg-zinc-800 border-zinc-600 border  rounded-lg shadow-lg text-zinc-300 flex-col flex items-center w-[50%] ">
-        <div className="text-lg font-semibold  border-b border-zinc-600 text-zinc-300 w-full  p-4">
-          Notes
-        </div>
-        <button
-          onClick={() => setShownotes(false)}
-          className="absolute top-4 right-4"
-          aria-label="Close"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
+    <div className="fixed top-0 left-0 flex justify-center items-center h-screen w-screen z-50 bg-opacity-50 backdrop-blur-sm p-4">
+      <div className="relative bg-zinc-900 border border-zinc-700 rounded-lg shadow-lg text-zinc-300 flex-col flex items-center w-full max-w-2xl">
+        <div className="text-lg font-semibold border-b border-zinc-700 text-zinc-300 w-full p-4 flex justify-between items-center">
+          <span>Notes</span>
+          <button
+            onClick={() => setShownotes(false)}
+            className="text-zinc-400 hover:text-red-500 transition-colors duration-300"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-        <div className="mt-4 w-full h-[90%] px-4 rounded-lg">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div className="w-full p-4">
           <textarea
             name="notes"
             id={selectedProblem._id}
-            className=" border bg-zinc-800 border-zinc-600 w-full h-96 text-zinc-400 rounded-lg p-3 mb-4"
-            onChange={(e) => handleChange(e)}
+            className="w-full h-96 bg-zinc-800 border border-zinc-700 rounded-lg p-4 text-zinc-300 focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none"
+            onChange={handleChange}
             value={selectedProblem.notes}
-          >
-            {selectedProblem.notes}
-          </textarea>
+          />
         </div>
-        <button
-          onClick={() => {
-            addNotes();
-          }}
-          className="ml-auto mr-4 mt-auto mb-4 px-4 py-2 bg-green-700 rounded-lg"
-        >
-          {" "}
-          Save Notes
-        </button>
+
+        <div className="w-full p-4 border-t border-zinc-700">
+          <button
+            onClick={addNotes}
+            className="ml-auto bg-gradient-to-r from-green-600 to-green-500 text-white px-4 py-2 rounded-lg hover:from-green-500 hover:to-green-400 transition-all duration-300 flex items-center justify-center"
+          >
+            Save Notes
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -139,10 +136,17 @@ export default function Sheet({ setSheetshow, selectedsheet, user_id }) {
       }
     }
   };
+  /*************  ✨ Codeium Command ⭐  *************/
+  /**
+   * Toggles the revision status of a problem
+   * @param {string} problem_id
+   * @returns {Promise<void>}
+   */
+  /******  179719f8-a96c-44f5-bfbf-667bc200436b  *******/
   const toggleRevisionstatus = async (problem_id) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/toggle_rev_probstatus",
+        "https://code-xl.onrender.com/api/toggle_rev_probstatus",
         { problem_id, user_id }
       );
       console.log(response);
@@ -197,24 +201,24 @@ export default function Sheet({ setSheetshow, selectedsheet, user_id }) {
   };
   return (
     <div className=" capitalize ">
-      <div className="mb-6 min-w-full flex flex-row justify-between items-center">
+      <div className="mb-6 min-w-full flex flex-row justify-between items-center ">
         <button
-          className="px-3.5 py-3 rounded-lg text-gray-300 border border-zinc-600 bg-zinc-800 font-bold flex flex-row items-center space-x-1 hover:scale-105 duration-300"
+          className=" md:scale-100 scale-90 px-3.5 py-3 rounded-lg text-gray-300 border border-zinc-600 bg-zinc-800 font-bold flex flex-row items-center space-x-1 hover:scale-105 duration-300"
           onClick={() => setSheetshow(false)}
         >
           <IoChevronBackOutline size={22} />
         </button>
         <span className=" text-zinc-400 text-xl ">
-          <h1>
+          <h1 className="bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-2xl font-bold text-transparent">
             {selectedsheet.name.substring(0, selectedsheet.name.length - 5)}
           </h1>
         </span>
-        <div className=" items-center flex space-x-4">
-          <button className="py-2 px-2.5 text-zinc-300 border rounded-lg border-zinc-600  bg-zinc-800 hover:cursor-pointer hover:scale-105 duration-200">
+        <div className=" items-center flex lg:space-x-3 md:space-x-2 space-x-1   ">
+          <button className="md:scale-100 scale-90 py-2 px-2.5 md:block hidden text-zinc-300 border rounded-lg border-zinc-600  bg-zinc-800 hover:cursor-pointer hover:scale-105 duration-200">
             <LiaRandomSolid size={22} />
           </button>
           <button
-            className="px-2 py-2 h-10 rounded-lg bg-green-700 font-medium font-sans text-zinc-200 hover:cursor-pointer hover:scale-105 duration-200"
+            className=" md:scale-100 scale-90 px-2 py-2 h-10 rounded-lg bg-green-700 font-medium font-sans text-zinc-200 hover:cursor-pointer hover:scale-105 duration-200"
             onClick={() => {
               setShowRevision(!showRevision);
             }}
@@ -239,7 +243,7 @@ export default function Sheet({ setSheetshow, selectedsheet, user_id }) {
                 className={`w-full bg-zinc-900 flex px-4 py-3 flex-row hover:cursor-pointer text-gray-300 rounded-t-lg justify-between items-center ${
                   dropdown[index]
                     ? "border-b border-zinc-500"
-                    : "duration-200 rounded-b-lg shadow-md shadow-zinc-700"
+                    : "duration-200 rounded-b-lg "
                 }`}
               >
                 <div

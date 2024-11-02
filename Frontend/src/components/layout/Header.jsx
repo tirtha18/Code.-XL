@@ -70,7 +70,7 @@ const QRSidebar = ({ isOpen, onClose }) => {
             </p>
 
             <a
-              href="https://buymeacoffee.com/tirthamunar"
+              href="https://buymeacoffee.com/tirthamunar nsd"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-6 py-3 bg-yellow-500 text-yellow-900 rounded-xl font-medium hover:bg-yellow-400 transition-colors"
@@ -142,7 +142,7 @@ export default function Header() {
   }, []);
 
   return (
-    <div className="w-full animate-fadeIn">
+    <div className="w-full animate-fadeIn z-30">
       <div className="fixed-header h-16 flex items-center lg:justify-between justify-center px-4 md:px-8 bg-zinc-950/95 backdrop-blur-sm border-b border-zinc-800/50 shadow-lg z-50">
         {/* Logo */}
         <div className="flex items-center">
@@ -186,7 +186,7 @@ export default function Header() {
           {!user ? (
             <Link to="/login">
               <button className="group flex items-center gap-2 px-6 py-2.5 bg-zinc-900 text-green-400 rounded-xl border border-green-500/30 hover:border-green-500 transition-all duration-300 hover:scale-105">
-                <span>Login</span>
+                <span className="hidden xl:block">Login</span>
                 <MdOutlineLogin className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </button>
             </Link>
@@ -194,7 +194,7 @@ export default function Header() {
             <div className="relative">
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="relative group"
+                className="relative group mt-1.5"
               >
                 <div className="w-12 h-12 rounded-xl border-2 border-green-500/30 group-hover:border-green-500 overflow-hidden transition-all duration-300 hover:scale-105">
                   <img

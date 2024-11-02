@@ -6,6 +6,7 @@ import axios from "axios";
 import { AuthContext } from "../context/AuthContextProvider";
 import Hero from "../../images/Heroimg.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { navContext } from "../context/NavContextProvider";
 const LoginRegister = () => {
   const [activeCard, setActiveCard] = useState("login");
   const [username, setUsername] = useState("");
@@ -18,7 +19,7 @@ const LoginRegister = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
   const { user, login } = useContext(AuthContext);
-
+  const { changeActiveNav } = useContext(navContext);
   const toggleCard = (cardType) => {
     setActiveCard(cardType);
   };
@@ -75,8 +76,13 @@ const LoginRegister = () => {
   };
 
   const handleClose = () => {
-    if (user) navigate("/sheets");
-    else navigate("/home");
+    if (user) {
+      changeActiveNav(1);
+      navigate("/sheets");
+    } else {
+      changeActiveNav(0);
+      navigate("/");
+    }
   };
 
   const togglePasswordVisibility = () => {
@@ -88,11 +94,11 @@ const LoginRegister = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 flex justify-center items-center min-h-screen w-screen bg-zinc-950 z-10">
+    <div className="fixed top-0 left-0 flex justify-center items-center min-h-screen w-screen bg-zinc-950 z-40">
       <div className="relative w-full max-w-lg mx-4 ">
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 z-50 text-zinc-500 hover:text-zinc-300 transition-colors"
+          className=" z-10 top-4 right-3 absolute text-zinc-500 hover:text-zinc-300 transition-colors"
         >
           <svg
             className="w-6 h-6"
@@ -113,7 +119,7 @@ const LoginRegister = () => {
         <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/50 rounded-2xl p-8 shadow-xl">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent mb-3">
+            <h1 className="text-4xl font-bold bg-gradient-to-r mt-4 from-green-400 to-green-600 bg-clip-text text-transparent mb-3">
               {activeCard === "login" ? "Welcome Back" : "Join Code.XL"}
             </h1>
             <p className="text-zinc-400">

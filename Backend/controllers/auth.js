@@ -3,11 +3,11 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 export const register = async (req, res) => {
   try {
-    const { name, username, password } = req.body;
+    const { name, username, password, collegeName, location } = req.body;
     const isfound = await User.findOne({ username });
     if (isfound)
       return res.status(400).json({ message: "Username already exists" });
-    const user = new User({ name, username, password });
+    const user = new User({ name, username, password, collegeName, location });
     await user.save();
     res.json({ message: "User registered succesfully" });
   } catch (error) {
@@ -24,9 +24,13 @@ export const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch)
       return res.status(400).json({ message: "Invalid credentials" });
-    const token = jwt.sign({ _id: user._id, avatar: user.avatar }, process.env.JWT_SECRET_KEY, {
-      expiresIn: "7h",
-    });
+    const token = jwt.sign(
+      { _id: user._id, avatar: user.avatar },
+      process.env.JWT_SECRET_KEY,
+      {
+        expiresIn: "7h",
+      }
+    );
     res.json({ token });
   } catch (error) {
     console.error(error);

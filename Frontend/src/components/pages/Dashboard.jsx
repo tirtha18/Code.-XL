@@ -28,7 +28,7 @@ function ShowMockResults({ setShowMockdata, selectedmockdata }) {
 
   return (
     <div className="fixed top-0 left-0 flex justify-center items-center h-screen w-screen z-50 bg-opacity-50 backdrop-blur-sm">
-      <div className="relative bg-zinc-900 border border-zinc-700 rounded-lg shadow-lg text-zinc-300 flex-col flex items-center w-[40%] min-h-[40%]">
+      <div className="relative bg-zinc-900 border border-zinc-700 rounded-lg shadow-lg text-zinc-300 flex-col flex items-center lg:w-[40%] lg:min-h-[40%] ">
         <div className="text-lg font-semibold border-b border-zinc-600 text-zinc-300 w-full p-4">
           {selectedmockdata.name}
           <button
@@ -146,7 +146,7 @@ function ShowSheetDetails({ selectedsheet, setSheetshow }) {
   return (
     <div className="fixed top-0 left-0 flex justify-center items-center min-h-screen w-screen z-50 bg-opacity-50 backdrop-blur-sm">
       <div className="relative bg-zinc-900 border border-zinc-700 rounded-lg shadow-lg text-zinc-300 flex-col flex items-center">
-        <div className="text-lg font-semibold p-4 border-b border-zinc-600 text-zinc-300 w-full">
+        <div className="text-lg font-semibold p-4 border-b border-zinc-600 text-zinc-300 w-full  ">
           Progress:
           <button
             onClick={() => setSheetshow(false)}

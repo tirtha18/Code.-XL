@@ -164,7 +164,7 @@ export default function Sheets() {
           <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
             Personalized Sheets
           </h1>
-          <p className="text-lg text-zinc-400 font-heading leading-relaxed">
+          <p className="t text-zinc-400 font-heading leading-relaxed mt-4 ">
             Our Personalized Sheets feature revolutionizes study efficiency by
             allowing users to upload Excel or similar sheets. Automatically
             extracting and categorizing problems by topic, it seamlessly
@@ -208,7 +208,6 @@ export default function Sheets() {
             <CiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-zinc-500" size={22} />
           </div>
         </div>
-
         {loading ? (
           <SheetSkeletonLoader />
         ) : !sheetshow ? (
