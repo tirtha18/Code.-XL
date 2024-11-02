@@ -62,7 +62,7 @@ function Result({
   const [testName, setTestName] = useState("");
   return (
     <div className="fixed top-0 left-0 flex justify-center items-center h-screen w-screen z-50 bg-opacity-50 backdrop-blur-sm">
-      <div className="relative bg-zinc-800 border-zinc-600 border  w-[40%] rounded-lg shadow-lg text-zinc-300 flex-col flex items-center">
+      <div className="relative bg-zinc-800 border-zinc-600 border w-full lg:w-[40%] rounded-lg shadow-lg text-zinc-300 flex-col flex items-center">
         <div className="text-lg font-semibold p-4 border-b border-zinc-600 text-zinc-300 w-full">
           <div className="ml-4">Report Card</div>
           <button
@@ -232,7 +232,7 @@ function AssesmentQuestions({
     setTimesup(true);
   };
   return (
-    <div className="h-full w-full flex flex-row justify-between items-center overflow-auto bg-black">
+    <div className="h-full w-full bg-zinc-950 flex lg:flex-row flex-col justify-between items-center lg:overflow-auto ">
       {ShowResult && (
         <Result
           setShowResult={setShowResult}
@@ -242,7 +242,7 @@ function AssesmentQuestions({
           questionsfetched={questionsfetched}
         />
       )}
-      <div className="w-[60%] bg-zinc-900 rounded-lg h-[70%] p-4 ">
+      <div className="lg:w-[60%] lg:mt-0 mt-8 bg-zinc-900 rounded-lg lg:h-[70%] p-4 ">
         {questionShow && (
           <div className="mx-2 my-1" key={quesno}>
             <div className="">
@@ -287,7 +287,7 @@ function AssesmentQuestions({
           </div>
         )}
       </div>
-      <div className="h-[70%] w-[20%] rounded-lg flex flex-col">
+      <div className="h-[70%] lg:w-[20%] w-full mt-4 rounded-lg flex flex-col">
         <div className="text-center text-xl">
           <div className="py-1 bg-white text-black rounded-lg mb-5 font-semibold">
             <Timer
@@ -374,25 +374,35 @@ export default function MockAssessment() {
   };
 
   return (
-    <div className="flex h-full w-full justify-center items-center overflow-scroll">
+    <div className="flex h-full w-full bg-zinc-950 justify-center items-center overflow-scroll">
       <div className="flex items-center m-4 lg:m-8 h-[90%] justify-center">
         <div className="text-zinc-300 h-full w-full flex flex-col ">
           <div>
-            <h1 className="text-3xl font-bold">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
               Custom Online Mock Assessment
             </h1>
-            <p className="mt-4 text-lg text-zinc-400">
+            <p className="mt-4 text-zinc-400 text-md">
               This feature enables users to create meticulously crafted mock
               tests modeled after those used by leading software companies.
               Leveraging premier resources, it facilitates the design of
-              assessments covering key subjects such as Database Management
-              Systems (DBMS), Operating Systems (OS), and Aptitude, ensuring
-              comprehensive preparation and assessment for aspiring
+              assessments covering key subjects such as{" "}
+              <span className="text-green-400 hover:text-green-300 transition-colors duration-300">
+                Database Management Systems (DBMS)
+              </span>
+              ,{" "}
+              <span className="text-green-400 hover:text-green-300 transition-colors duration-300">
+                Operating Systems (OS)
+              </span>
+              , and{" "}
+              <span className="text-green-400 hover:text-green-300 transition-colors duration-300">
+                Aptitude
+              </span>
+              , ensuring comprehensive preparation and assessment for aspiring
               professionals.
             </p>
           </div>
           {!showAssessment && (
-            <div className="w-full rounded-lg mt-16 flex lg:flex-row flex-col items-center lg:h-[190px] lg:space-y-0 space-y-4">
+            <div className="w-full rounded-lg mt-12 flex lg:flex-row flex-col items-center lg:h-[190px] lg:space-y-0 space-y-4">
               <div className="pl-6 py-4 w-full lg:w-[20%] bg-zinc-900 rounded-xl h-full">
                 {options.map((option) => (
                   <label key={option.value} className="flex items-center mb-2">
@@ -407,7 +417,7 @@ export default function MockAssessment() {
                   </label>
                 ))}
               </div>
-              <div className="lg:ml-4 rounded-xl lg:w-[60%] w-full lg:h-full lg:bg-black bg-zinc-800  flex text-zinc-400 flex-col items-center ">
+              <div className="lg:ml-4 rounded-xl lg:w-[60%] w-full lg:h-full lg:bg-zinc-950 bg-zinc-800  flex text-zinc-400 flex-col items-center ">
                 <div className="w-full h-full rounded-xl bg-zinc-800 lg:mb-0 mb-3">
                   <h1 className="mx-6 mt-6 mb-5 capitalize">
                     Select your preferences:

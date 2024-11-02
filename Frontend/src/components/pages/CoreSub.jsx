@@ -4,6 +4,7 @@ import osData from "../../../dummy_dbs/os.json";
 import dbmsdata from "../../../dummy_dbs/dbms.json";
 import cnData from "../../../dummy_dbs/cn.json";
 import oopData from "../../../dummy_dbs/oops.json";
+
 const ITEMS_PER_PAGE = 5;
 
 const questionsData = {
@@ -14,7 +15,6 @@ const questionsData = {
 };
 
 export default function CoreSub() {
-  // Set default selected topic to "Operating System"
   const [selectedTopic, setSelectedTopic] = useState("Operating System");
   const [currentPage, setCurrentPage] = useState(1);
   const [completedQuestions, setCompletedQuestions] = useState({});
@@ -79,41 +79,57 @@ export default function CoreSub() {
   };
 
   return (
-    <div className="flex h-full w-full justify-center items-center">
-      <div className="flex items-center m-8 h-[90%] justify-center">
-        <div className="text-zinc-300 h-full w-full flex flex-col ">
+    <div className="flex h-full w-full justify-center items-center overflow-auto bg-zinc-950 text-zinc-300">
+      <div className="flex items-center m-4 lg:m-8 h-[90%] justify-center">
+        <div className="h-full w-full flex flex-col max-w-7xl">
           <div>
-            <h1 className="text-3xl font-bold font-heading">Core Concepts Archive</h1>
-            <p className="mt-4  text-zinc-400">
+            <h1 className="text-4xl font-bold font-heading bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+              Core Concepts Archive
+            </h1>
+            <p className="mt-4 text-zinc-400 leading-relaxed">
               Code.XL's Core Concepts Archive provides users with a wealth of
               expertly crafted materials on essential topics in computer
-              science, including Operating Systems (OS), Object-Oriented
-              Programming (OOP), Database Management Systems (DBMS), and other
-              critical subjects. This archive serves as a comprehensive resource
-              for learners, offering clear explanations, practical examples, and
-              insightful explanations to deepen understanding and enhance
-              skills. Users can explore key concepts, engage with interactive
-              content, and access valuable study materials that support their
-              educational journey in the dynamic field of technology.
+              science, including{" "}
+              <span className="text-green-400 hover:text-green-300 transition-colors duration-300">
+                Operating Systems (OS)
+              </span>
+              ,{" "}
+              <span className="text-green-400 hover:text-green-300 transition-colors duration-300">
+                Object-Oriented Programming (OOP)
+              </span>
+              ,{" "}
+              <span className="text-green-400 hover:text-green-300 transition-colors duration-300">
+                Database Management Systems (DBMS)
+              </span>
+              , and other critical subjects. This archive serves as a
+              comprehensive resource for learners, offering{" "}
+              <span className="text-zinc-300">
+                clear explanations, practical examples, and insightful
+                explanations
+              </span>{" "}
+              to deepen understanding and enhance skills. Users can explore key
+              concepts, engage with interactive content, and access valuable
+              study materials that support their educational journey in the
+              dynamic field of technology.
             </p>
           </div>
 
           <div className="mt-12 space-y-8">
-            <div className="grid grid-cols-4 gap-x-8 gap-y-4 text-lg">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-x-8 lg:gap-y-4 text-lg">
               {Object.keys(questionsData).map((topic) => (
                 <div
                   key={topic}
                   onClick={() => handleTopicClick(topic)}
-                  className={`h-28 p-4 rounded-lg font-semibold shadow-lg  hover:scale-105 duration-300 hover:cursor-pointer flex-col flex ${
+                  className={`h-28 p-4 rounded-lg font-semibold shadow-lg hover:scale-105 duration-300 hover:cursor-pointer flex-col flex ${
                     selectedTopic === topic
-                      ? "bg-zinc-900 ring-2 ring-green-700"
-                      : "bg-zinc-900"
+                      ? "bg-zinc-800 ring-2 ring-green-500"
+                      : "bg-zinc-900 hover:bg-zinc-800"
                   }`}
                 >
-                  <h1>{topic}</h1>
-                  <div className="w-full bg-zinc-600 rounded-full h-2 mt-auto mb-3">
+                  <h1 className="text-green-400">{topic}</h1>
+                  <div className="w-full bg-zinc-700 rounded-full h-2 mt-auto mb-3">
                     <div
-                      className="bg-green-500 h-2 rounded-full"
+                      className="bg-green-500 h-2 rounded-full transition-all duration-500 ease-in-out"
                       style={{ width: `${calculateProgress(topic)}%` }}
                     ></div>
                   </div>
@@ -122,8 +138,10 @@ export default function CoreSub() {
             </div>
 
             {selectedTopic && (
-              <div className="rounded-lg">
-                <h2 className="text-2xl font-bold mb-6">{selectedTopic}</h2>
+              <div className="rounded-lg bg-zinc-900 p-6 shadow-xl">
+                <h2 className="text-2xl font-bold mb-6 text-green-400">
+                  {selectedTopic}
+                </h2>
 
                 <div className="w-full">
                   <table className="w-full border-collapse">
@@ -131,9 +149,9 @@ export default function CoreSub() {
                       {getCurrentPageItems().map((item) => (
                         <tr
                           key={item.id}
-                          className="border border-zinc-700 group bg-black text-md "
+                          className="border-b border-zinc-800 group text-md hover:bg-zinc-800/50 transition-colors duration-300"
                         >
-                          <td className="border border-zinc-700 w-20 text-center">
+                          <td className="py-4 px-4 w-20 text-center">
                             <input
                               type="checkbox"
                               checked={
@@ -144,31 +162,28 @@ export default function CoreSub() {
                               onChange={() =>
                                 toggleQuestionComplete(selectedTopic, item.id)
                               }
-                              className="appearance-none h-5 w-5 border-2 border-zinc-600 rounded-md checked:bg-green-500 checked:border-zinc-600 checked:after:content-['✔'] checked:after:text-white checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:transform checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 cursor-pointer transition duration-200 relative"
+                              className="appearance-none h-5 w-5 border-2 border-zinc-600 rounded-md checked:bg-green-500 checked:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 cursor-pointer transition duration-200"
                             />
                           </td>
-                          <td className="border border-zinc-700 py-4">
+                          <td className="py-4 px-4">
                             <div className="space-y-2">
-                              <p className="font-semibold text-zinc-300 px-4">
+                              <p className="font-semibold text-zinc-300">
                                 {item.question}
                               </p>
-                              {visibleAnswers.has(item.id) && (
-                                <div className="w-full border-t border-zinc-700"></div>
-                              )}
                               <div
-                                className={`transition-all duration-300 ${
+                                className={`transition-all duration-300 overflow-hidden ${
                                   visibleAnswers.has(item.id)
                                     ? "max-h-40 opacity-100"
-                                    : "max-h-0 opacity-0 overflow-hidden"
+                                    : "max-h-0 opacity-0"
                                 }`}
                               >
-                                <p className="text-zinc-400 pt-2 px-4">
+                                <p className="text-zinc-400 pt-2">
                                   {item.answer}
                                 </p>
                               </div>
                             </div>
                           </td>
-                          <td className="border border-zinc-700 px-2 py-4 w-24 text-center">
+                          <td className="py-4 px-4 w-24 text-center">
                             <button
                               onClick={() => toggleAnswer(item.id)}
                               className="flex items-center justify-center w-full hover:bg-zinc-700 py-2 rounded-lg transition-colors"
@@ -185,7 +200,7 @@ export default function CoreSub() {
                               )}
                             </button>
                           </td>
-                          <td className="border border-zinc-700 px-2 py-4 w-20 text-center">
+                          <td className="py-4 px-4 w-20 text-center">
                             <button
                               onClick={() => toggleRevisionMark(item.id)}
                               className={`p-2 rounded-lg transition-colors ${

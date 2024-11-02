@@ -37,7 +37,14 @@ const LoginRegister = () => {
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-    if (!fullName || !username || !password || !confirmPassword || !location || !college) {
+    if (
+      !fullName ||
+      !username ||
+      !password ||
+      !confirmPassword ||
+      !location ||
+      !college
+    ) {
       toast.error("Please fill all fields!");
       return;
     }
@@ -68,11 +75,8 @@ const LoginRegister = () => {
   };
 
   const handleClose = () => {
-
-    if(user)
-    navigate("/sheets");
-    else
-    navigate("/home");
+    if (user) navigate("/sheets");
+    else navigate("/home");
   };
 
   const togglePasswordVisibility = () => {
@@ -84,28 +88,17 @@ const LoginRegister = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 flex justify-center items-center min-h-screen w-screen bg-zinc-200 z-10">
-      <div className="top-0 right-0 fixed h-full w-1/2 overflow-hidden border-l-4 border-black">
-        <img
-          src={Hero}
-          alt="#"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-      </div>
-      <div className="relative bg-zinc-100 p-8 rounded-lg shadow-lg w-full max-w-md text-black flex-col flex items-center">
+    <div className="fixed top-0 left-0 flex justify-center items-center min-h-screen w-screen bg-zinc-950 z-10">
+      <div className="relative w-full max-w-lg mx-4 ">
         <button
-          onClick={() => {
-             handleClose();
-          }}
-          className="absolute top-4 right-4 text-black"
-          aria-label="Close"
+          onClick={handleClose}
+          className="absolute top-4 right-4 z-50 text-zinc-500 hover:text-zinc-300 transition-colors"
         >
           <svg
             className="w-6 h-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               strokeLinecap="round"
@@ -115,154 +108,171 @@ const LoginRegister = () => {
             />
           </svg>
         </button>
-        <h2 className="text-2xl font-bold mb-6">
-          {activeCard === "login" ? "Login" : "Create Account"}
-        </h2>
-        {activeCard === "login" ? (
-          <form className="w-4/5" onSubmit={handleLoginSubmit}>
-            <div className="form-group mb-4">
-              <input
-                type="text"
-                id="username"
-                placeholder="Username"
-                className="mt-1 p-2 w-full border rounded-lg bg-white text-black placeholder-gray-400 shadow-md"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </div>
-            <div className="form-group mb-8 relative">
-              <input
-                type={showPassword ? "text" : "password"}
-                id="password"
-                placeholder="Password"
-                className="mt-1 p-2 w-full border rounded-lg bg-white text-black placeholder-gray-400 shadow-md"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <button
-                type="button"
-                onClick={togglePasswordVisibility}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center justify-center h-full translate-y-[2.7px]"
-              >
-                {showPassword ? <FaEyeSlash size={22} /> : <FaEye size={22} />}
-              </button>
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-gray-900 text-white py-2 rounded-lg"
-            >
-              Login
-            </button>
-          </form>
-        ) : (
-          <form className="w-4/5" onSubmit={handleRegisterSubmit}>
-            <div className="form-group mb-4">
-              <input
-                type="text"
-                id="full-name"
-                placeholder="Full Name"
-                className="mt-1 p-2 w-full border rounded-lg bg-white text-black placeholder-gray-400 shadow-md"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-              />
-            </div>
-            <div className="form-group mb-4">
-              <input
-                type="text"
-                id="username"
-                placeholder="Username"
-                className="mt-1 p-2 w-full border rounded-lg bg-white text-black placeholder-gray-400 shadow-md"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </div>
-            <div className="form-group mb-4">
-              <input
-                type="text"
-                id="location"
-                placeholder="Location"
-                className="mt-1 p-2 w-full border rounded-lg bg-white text-black placeholder-gray-400 shadow-md"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-              />
-            </div>
-            <div className="form-group mb-4">
-              <input
-                type="text"
-                id="college"
-                placeholder="College"
-                className="mt-1 p-2 w-full border rounded-lg bg-white text-black placeholder-gray-400 shadow-md"
-                value={college}
-                onChange={(e) => setCollege(e.target.value)}
-              />
-            </div>
-            <div className="form-group mb-4 relative">
-              <input
-                type={showPassword ? "text" : "password"}
-                id="password"
-                placeholder="Password"
-                className="mt-1 p-2 w-full border rounded-lg bg-white text-black placeholder-gray-400 shadow-md"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <button
-                type="button"
-                onClick={togglePasswordVisibility}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center justify-center h-full translate-y-[2.7px]"
-              >
-                {showPassword ? <FaEyeSlash size={22} /> : <FaEye size={22} />}
-              </button>
-            </div>
-            <div className="form-group mb-8 relative">
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                id="confirm-password"
-                placeholder="Confirm Password"
-                className="mt-1 p-2 w-full border rounded-lg bg-white text-black placeholder-gray-400 shadow-md"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-              <button
-                type="button"
-                onClick={toggleConfirmPasswordVisibility}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center justify-center h-full translate-y-[2.7px]"
-              >
-                {showConfirmPassword ? <FaEyeSlash size={22} /> : <FaEye size={22} />}
-              </button>
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-gray-900 text-white py-2 rounded-lg"
-            >
-              Create Account
-            </button>
-          </form>
-        )}
-        <p className="mt-4 text-center font-extralight text-gray-400">
+
+        {/* Main Card */}
+        <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/50 rounded-2xl p-8 shadow-xl">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent mb-3">
+              {activeCard === "login" ? "Welcome Back" : "Join Code.XL"}
+            </h1>
+            <p className="text-zinc-400">
+              {activeCard === "login"
+                ? "Enter your credentials to access your account"
+                : "Create your account and start your coding journey"}
+            </p>
+          </div>
+
+          {/* Forms */}
+
+          {/* Login Form */}
           {activeCard === "login" ? (
-            <span>
-              Don't have an account?{" "}
-              <a
-                href="#"
-                onClick={() => toggleCard("register")}
-                className="text-gray-900 hover:underline font-semibold"
+            <form onSubmit={handleLoginSubmit} className="space-y-4">
+              <div>
+                <input
+                  type="text"
+                  placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="w-full px-4 py-3 bg-zinc-800/50 rounded-xl border border-zinc-700 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-green-500 transition-colors"
+                />
+              </div>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-3 bg-zinc-800/50 rounded-xl border border-zinc-700 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-green-500 transition-colors"
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-200"
+                >
+                  {showPassword ? (
+                    <FaEyeSlash size={20} />
+                  ) : (
+                    <FaEye size={20} />
+                  )}
+                </button>
+              </div>
+              <button
+                type="submit"
+                className="w-full py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl hover:opacity-90 transition-opacity"
+              >
+                Sign In
+              </button>
+            </form>
+          ) : (
+            /* Register Form */
+            <form onSubmit={handleRegisterSubmit} className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  className="w-full px-4 py-3 bg-zinc-800/50 rounded-xl border border-zinc-700 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-green-500 transition-colors"
+                />
+                <input
+                  type="text"
+                  placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="w-full px-4 py-3 bg-zinc-800/50 rounded-xl border border-zinc-700 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-green-500 transition-colors"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  placeholder="Location"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  className="w-full px-4 py-3 bg-zinc-800/50 rounded-xl border border-zinc-700 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-green-500 transition-colors"
+                />
+                <input
+                  type="text"
+                  placeholder="College"
+                  value={college}
+                  onChange={(e) => setCollege(e.target.value)}
+                  className="w-full px-4 py-3 bg-zinc-800/50 rounded-xl border border-zinc-700 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-green-500 transition-colors"
+                />
+              </div>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-3 bg-zinc-800/50 rounded-xl border border-zinc-700 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-green-500 transition-colors"
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-200"
+                >
+                  {showPassword ? (
+                    <FaEyeSlash size={20} />
+                  ) : (
+                    <FaEye size={20} />
+                  )}
+                </button>
+              </div>
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="w-full px-4 py-3 bg-zinc-800/50 rounded-xl border border-zinc-700 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-green-500 transition-colors"
+                />
+                <button
+                  type="button"
+                  onClick={toggleConfirmPasswordVisibility}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-200"
+                >
+                  {showConfirmPassword ? (
+                    <FaEyeSlash size={20} />
+                  ) : (
+                    <FaEye size={20} />
+                  )}
+                </button>
+              </div>
+              <button
+                type="submit"
+                className="w-full py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl hover:opacity-90 transition-opacity"
               >
                 Create Account
-              </a>
-            </span>
-          ) : (
-            <span>
-              Already have an account?{" "}
-              <a
-                href="#"
-                onClick={() => toggleCard("login")}
-                className="text-gray-900 hover:underline font-semibold"
-              >
-                Login
-              </a>
-            </span>
+              </button>
+            </form>
           )}
-        </p>
+
+          {/* Toggle Form Type */}
+          <div className="mt-6 text-center text-zinc-400">
+            {activeCard === "login" ? (
+              <p>
+                Don't have an account?{" "}
+                <button
+                  onClick={() => toggleCard("register")}
+                  className="text-green-400 hover:text-green-300 transition-colors"
+                >
+                  Create Account
+                </button>
+              </p>
+            ) : (
+              <p>
+                Already have an account?{" "}
+                <button
+                  onClick={() => toggleCard("login")}
+                  className="text-green-400 hover:text-green-300 transition-colors"
+                >
+                  Sign In
+                </button>
+              </p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

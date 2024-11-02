@@ -10,13 +10,12 @@ import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./components/pages/Dashboard";
 import ProtectedRoute from "./components/utils/ProtectedRoute";
 import MockAssessment from "./components/pages/MockAssessment";
-import LandHome from "./components/LandingPage/LandHome";
+import LandingPage from "./components/pages/LandingPage";
 import CoreSub from "./components/pages/CoreSub";
 import Community from "./components/pages/Community";
 import { NavContextProvider } from "./components/context/NavContextProvider";
 import { AvatarProvider } from "./components/context/AvatarContext";
 function App() {
-
   return (
     <Router>
       <AuthProvider>
@@ -26,7 +25,7 @@ function App() {
               <div>
                 <Navbar />
               </div>
-              <div className="flex flex-col w-screen max-h-full overflow-auto bg-black">
+              <div className="flex flex-col w-screen max-h-full overflow-hidden bg-black">
                 <Header />
                 <Routes>
                   <Route path="/login" element={<LoginRegister />} />
@@ -54,7 +53,7 @@ function App() {
                       </ProtectedRoute>
                     }
                   />
-                  <Route path="/" element={<LandHome />}></Route>
+                  <Route path="/" element={<LandingPage />}></Route>
                   <Route path="/coresub" element={<CoreSub />}></Route>
                   <Route
                     path="/community"

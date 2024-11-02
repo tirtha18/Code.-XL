@@ -1,29 +1,51 @@
 import { React, useContext, useState } from "react";
-import { MdDashboard } from "react-icons/md";
+import {
+  MdDashboard,
+  MdOutlineComputer,
+  MdOutlineLogout,
+  MdOutlineAssessment,
+} from "react-icons/md";
 import { RiClipboardFill } from "react-icons/ri";
-import { MdOutlineComputer } from "react-icons/md";
-import { IoIosHome } from "react-icons/io";
-import { MdOutlineLogout } from "react-icons/md";
-import { MdOutlineAssessment } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { IoIosHome, IoIosArrowBack } from "react-icons/io";
 import { FaBars } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContextProvider";
 import { navContext } from "../context/NavContextProvider";
-import { IoIosArrowBack } from "react-icons/io";
 import "react-toastify/dist/ReactToastify.css";
 
 const navItems = [
-  { ind: 0, icon: <IoIosHome />, name: "Home", link: "/" },
-  { ind: 1, icon: <MdDashboard />, name: "Dashboard", link: "/dashboard" },
-  { ind: 2, icon: <RiClipboardFill />, name: "Sheets", link: "/sheets" },
-  { ind: 3, icon: <MdOutlineComputer />, name: "Core Subjects", link: "/coresub" },
-  { ind: 4, icon: <MdOutlineAssessment size={22} />, name: "Mock Assessment", link: "/mockassessment" },
+  { ind: 0, icon: <IoIosHome size={22} />, name: "Home", link: "/" },
+  {
+    ind: 1,
+    icon: <MdDashboard size={22} />,
+    name: "Dashboard",
+    link: "/dashboard",
+  },
+  {
+    ind: 2,
+    icon: <RiClipboardFill size={22} />,
+    name: "Sheets",
+    link: "/sheets",
+  },
+  {
+    ind: 3,
+    icon: <MdOutlineComputer size={22} />,
+    name: "Core Subjects",
+    link: "/coresub",
+  },
+  {
+    ind: 4,
+    icon: <MdOutlineAssessment size={22} />,
+    name: "Mock Assessment",
+    link: "/mockassessment",
+  },
 ];
 
 export default function Navbar() {
   const { activeNav, changeActiveNav } = useContext(navContext);
   const { user, logout } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const handleNavClick = (index) => {
     changeActiveNav(index);
@@ -32,59 +54,105 @@ export default function Navbar() {
 
   return (
     <>
-      {!isOpen && (
-        <div className="md:hidden fixed top-4 left-4 z-50 hover:cursor-pointer">
-          <button onClick={() => setIsOpen(true)}>
-            <FaBars className="text-white text-3xl" />
-          </button>
-        </div>
-      )}
-      <div
-        className={`bg-black h-full fixed md:static top-0 left-0 w-64 flex-col flex text-white md:h-screen items-center text-xl shadow-md shadow-zinc-500 z-40 transition-transform duration-300 ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0`}
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className={`md:hidden fixed top-4 left-3 z-50 p-2 rounded-lg bg-zinc-900/80 backdrop-blur-sm 
+          transition-all duration-300 hover:bg-zinc-800 
+          ${isOpen ? "opacity-0" : "opacity-100"}`}
       >
-        <div className="flex flex-col items-center w-full">
-          <div className="w-full md:justify-center flex-row py-4 flex mt-8 rounded-lg text-white font-semibold items-center">
-            <h1 className="px-3 text-3xl md:text-[40px]">Code.XL</h1>
+        <FaBars className="text-green-400 text-2xl" />
+      </button>
+
+      {/* Main Navigation */}
+      <div
+        className={`fixed md:static top-0 left-0 h-full w-72 bg-zinc-950 flex flex-col
+          border-r border-zinc-800/50 shadow-xl shadow-black/20
+          transition-all duration-500 ease-in-out transform 
+          ${isOpen ? "translate-x-0" : "-translate-x-full"} 
+          md:translate-x-0 z-40`}
+      >
+        {/* Logo Section */}
+        <div className="flex flex-col items-center w-full pt-6 pb-4 px-4">
+          <div className="w-full flex items-center justify-between">
+            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+              Code.XL
+            </h1>
             {isOpen && (
               <button
                 onClick={() => setIsOpen(false)}
-                className="md:hidden ml-auto mr-2 p-1 rounded-lg bg-green-900 border border-green-500 text-green-400"
+                className="md:hidden p-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 transition-colors"
               >
-                <IoIosArrowBack size={22} />
+                <IoIosArrowBack className="text-green-400" size={22} />
               </button>
             )}
           </div>
-          <div className="mt-10 w-[93%]">
+
+          {/* Divider */}
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-700/50 to-transparent my-6" />
+        </div>
+
+        {/* Navigation Items */}
+        <nav className="flex-1 px-3">
+          <div className="space-y-2">
             {navItems.map((item) => (
               <Link key={item.ind} to={item.link}>
                 <div
                   onClick={() => handleNavClick(item.ind)}
-                  className={`flex flex-row space-x-5 items-center ${
-                    activeNav[item.ind] ? "bg-white text-black scale-105" : ""
-                  } py-3 px-4 w-full rounded-lg hover:cursor-pointer hover:scale-105 mb-1`}
+                  onMouseEnter={() => setHoveredIndex(item.ind)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  className={`group relative flex items-center gap-3 px-4 py-3 rounded-lg
+                    transition-all duration-300 
+                    ${
+                      activeNav[item.ind]
+                        ? "bg-green-500/10 text-green-400"
+                        : "text-zinc-400 hover:bg-zinc-800/50 hover:text-green-400"
+                    }`}
                 >
-                  {item.icon}
-                  <div>{item.name}</div>
+                  <span
+                    className={`transition-transform duration-300 
+                    ${hoveredIndex === item.ind ? "scale-110" : "scale-100"}
+                    ${activeNav[item.ind] ? "text-green-400" : ""}`}
+                  >
+                    {item.icon}
+                  </span>
+                  <span className="font-medium">{item.name}</span>
+                  {activeNav[item.ind] && (
+                    <span className="absolute inset-y-0 left-0 w-1 bg-green-400 rounded-r-full" />
+                  )}
                 </div>
               </Link>
             ))}
           </div>
-        </div>
+        </nav>
+
+        {/* Logout Button */}
         {user && (
-          <div
-            onClick={logout}
-            className="flex items-center mt-auto w-[98%] justify-center text-lg mb-4 py-1.5 px-4 rounded-lg text-zinc-900 bg-white flex-row space-x-2 hover:cursor-pointer duration-200 hover:bg-red-600 hover:text-zinc-300"
-          >
-            <div>Logout |</div> <MdOutlineLogout />
+          <div className="p-4">
+            <button
+              onClick={logout}
+              className="flex items-center justify-center w-full gap-2 px-4 py-3 
+                text-zinc-400 rounded-lg border border-zinc-800/50
+                transition-all duration-300
+                hover:bg-red-500/10 hover:text-red-400 hover:border-red-500/50
+                group"
+            >
+              <span>Logout</span>
+              <MdOutlineLogout
+                className="transition-all duration-300 group-hover:rotate-180"
+                size={20}
+              />
+            </button>
           </div>
         )}
       </div>
+
+      {/* Mobile Overlay */}
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
-          className="fixed inset-0 bg-black bg-opacity-50 md:hidden z-30"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm md:hidden z-30
+            animate-fadeIn"
         />
       )}
     </>

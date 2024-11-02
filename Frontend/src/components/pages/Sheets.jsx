@@ -1,26 +1,25 @@
 import React, { useState, useEffect, useContext } from "react";
-import { FiPlus } from "react-icons/fi";
-import { FaArrowRight, FaExternalLinkAlt } from "react-icons/fa";
+import { FiPlus, FiTrash } from "react-icons/fi";
+import { FaArrowRight, FaExternalLinkAlt, FaCode } from "react-icons/fa";
+import { CiSearch } from "react-icons/ci";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContextProvider";
 import { FileUploader } from "react-drag-drop-files";
 import Sheet from "./Sheet";
-import { CiSearch } from "react-icons/ci";
-import { FaCode } from "react-icons/fa";
-import { FiTrash } from "react-icons/fi";
 import SheetSkeletonLoader from "../ui/skeleton/SheetSkeleton";
+
 function FileUploadForm({ setFileshow, user_id, setReload }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   const handleFileChange = (file) => {
     setSelectedFile(file);
+    setUploadProgress(0);
   };
 
   const FileUpload = async () => {
-    if (!user_id) {
-      return console.log("No user");
-    }
+    if (!user_id) return console.log("No user");
     setLoading(true);
     const formData = new FormData();
     formData.append("excelFile", selectedFile);
@@ -31,12 +30,13 @@ function FileUploadForm({ setFileshow, user_id, setReload }) {
         "https://code-xl.onrender.com/api/upload",
         formData,
         {
-          headers: {
-            "Content-Type": "multipart/form-data",
+          headers: { "Content-Type": "multipart/form-data" },
+          onUploadProgress: (progressEvent) => {
+            const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            setUploadProgress(progress);
           },
         }
       );
-      console.log(response);
       setReload(true);
       setFileshow(false);
     } catch (error) {
@@ -48,32 +48,49 @@ function FileUploadForm({ setFileshow, user_id, setReload }) {
 
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
-      <div className="bg-black bg-opacity-50 backdrop-blur-sm absolute inset-0"></div>
-      <div className="bg-white p-8 rounded-lg shadow-lg z-10 flex items-center flex-row">
-        <FileUploader
-          handleChange={handleFileChange}
-          name="file"
-          types={["XLSX"]}
-        />
-        <button
-          className="bg-black text-gray-100 py-2 px-4 rounded-lg ml-7 hover:cursor-pointer hover:scale-105 duration-200"
-          onClick={() => {
-            if (!selectedFile) {
-              alert("Select or drop a file to continue!");
-            } else FileUpload();
-          }}
-        >
-          Upload
-        </button>
-        <button
-          className="bg-gray-200 border shadow-lg text-black py-2 px-4 rounded-lg ml-3 hover:cursor-pointer hover:scale-105 duration-300"
-          onClick={() => {
-            setFileshow(false);
-            setSelectedFile(null);
-          }}
-        >
-          Cancel
-        </button>
+      <div 
+        className="bg-black bg-opacity-50 backdrop-blur-sm absolute inset-0 animate-fadeIn"
+        onClick={() => setFileshow(false)}
+      />
+      <div className="bg-zinc-900 p-8 rounded-lg shadow-xl z-10 flex flex-col items-center transform animate-slideUp">
+        <div className="mb-6">
+          <FileUploader
+            handleChange={handleFileChange}
+            name="file"
+            types={["XLSX"]}
+          />
+        </div>
+        {uploadProgress > 0 && (
+          <div className="w-full mb-4 bg-zinc-800 rounded-full h-2">
+            <div 
+              className="bg-green-500 h-2 rounded-full transition-all duration-300"
+              style={{ width: `${uploadProgress}%` }}
+            />
+          </div>
+        )}
+        <div className="flex space-x-4">
+          <button
+            className={`bg-green-500 text-white py-2 px-6 rounded-lg transition-all duration-300 
+              ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green-600 hover:scale-105'}`}
+            onClick={() => {
+              if (!selectedFile) {
+                alert("Select or drop a file to continue!");
+              } else FileUpload();
+            }}
+            disabled={loading}
+          >
+            {loading ? 'Uploading...' : 'Upload'}
+          </button>
+          <button
+            className="bg-zinc-700 text-white py-2 px-6 rounded-lg hover:bg-zinc-600 transition-all duration-300 hover:scale-105"
+            onClick={() => {
+              setFileshow(false);
+              setSelectedFile(null);
+            }}
+          >
+            Cancel
+          </button>
+        </div>
       </div>
       {loading && <SheetSkeletonLoader />}
     </div>
@@ -92,14 +109,18 @@ export default function Sheets() {
   const [sheet_id, setSheet_id] = useState("");
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [deleteConfirm, setDeleteConfirm] = useState(null);
+
   const handleDelete = async (id) => {
     try {
       await axios.delete(`https://code-xl.onrender.com/api/sheets/${id}`);
       setReload(true);
+      setDeleteConfirm(null);
     } catch (error) {
       console.log("Error deleting sheet:", error);
     }
   };
+
   useEffect(() => {
     const getSheets = async () => {
       try {
@@ -110,11 +131,8 @@ export default function Sheets() {
         setLoading(true);
         const response = await axios.get(
           "https://code-xl.onrender.com/api/getSheets",
-          {
-            params: { user_id: user_id },
-          }
+          { params: { user_id: user_id } }
         );
-
         setSheets(response.data.sheets);
         setFilteredSheets(response.data.sheets);
       } catch (error) {
@@ -125,6 +143,7 @@ export default function Sheets() {
     };
     getSheets();
   }, [user, reload]);
+
   const handleSearchChange = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
@@ -137,116 +156,125 @@ export default function Sheets() {
       setFilteredSheets(filtered);
     }
   };
-  
+
   return (
-    <div
-      className="overflow-auto w-full h-full"
-      style={{
-        overflowY: "scroll",
-        scrollbarWidth: "thin",
-        msOverflowStyle: "none",
-        scrollbarColor: "#10B981 transparent",
-      }}
-    >
-      <div className=" px-4 md:px-8 py-10 h-full w-full">
-        <div className="mb-4">
-          <h1 className="text-3xl font-bold text-zinc-300">
+    <div className="overflow-auto w-full h-full bg-zinc-950">
+      <div className="px-4 md:px-8 py-10 h-full w-full max-w-7xl mx-auto">
+        <div className="mb-8 animate-fadeIn">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
             Personalized Sheets
           </h1>
-          <p className="mt-4 text-md text-zinc-400 font-heading">
+          <p className="text-lg text-zinc-400 font-heading leading-relaxed">
             Our Personalized Sheets feature revolutionizes study efficiency by
             allowing users to upload Excel or similar sheets. Automatically
             extracting and categorizing problems by topic, it seamlessly
-            integrates with YouTube to provide relevant video links. Users can
-            easily track completion status, checking off solved problems for a
-            clear overview of their progress. Enhance your learning experience
-            with organized, interactive study tools tailored to your needs.
+            integrates with YouTube to provide relevant video links.
           </p>
         </div>
-        <div className="mb-9">
-          <h2 className="text-xl font-bold text-zinc-300 font-heading">
-            Sample Sheets:
+
+        <div className="mb-9 animate-slideUp">
+          <h2 className="text-2xl font-bold text-white mb-4 font-heading">
+            Sample Sheets
           </h2>
-          <ul className="mt-4 space-x-3 flex flex-row mb-4">
-            <li>
-              <a
-                href="https://docs.google.com/spreadsheets/d/1SJYYWag2RNONf8BNW3W8z92nhJotSDm_/edit"
-                target="_blank"
-                rel="noopener noreferrer"
-                className=" text-sm px-2 py-1 rounded-md font-semibold  hover:scale-105 duration-200 shadow-sm border  border-green-500 text-green-500 flex items-center"
-              >
-                Striver's SDE Sheet <FaExternalLinkAlt className="ml-2" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://docs.google.com/spreadsheets/d/1jVwt5re-jxnMXvOz2s-CHNm5-Xp8YT6C/edit?usp=sharing&ouid=104446117698915010531&rtpof=true&sd=true"
-                target="_blank"
-                rel="noopener noreferrer"
-                className=" text-sm px-2 py-1 rounded-md font-semibold  hover:scale-105 duration-200 shadow-sm border  border-green-500 text-green-500 flex items-center"
-              >
-                Test Sheet <FaExternalLinkAlt className="ml-2" />
-              </a>
-            </li>
+          <ul className="flex flex-wrap gap-4">
+            {['Striver\'s SDE Sheet', 'Test Sheet'].map((name, index) => (
+              <li key={index}>
+                <a
+                  href={index === 0 
+                    ? "https://docs.google.com/spreadsheets/d/1SJYYWag2RNONf8BNW3W8z92nhJotSDm_/edit"
+                    : "https://docs.google.com/spreadsheets/d/1jVwt5re-jxnMXvOz2s-CHNm5-Xp8YT6C/edit"
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center space-x-2 px-4 py-2 rounded-lg text-green-400 border border-green-500/30 hover:border-green-500 transition-all duration-300 hover:scale-105 bg-zinc-900/50"
+                >
+                  <span>{name}</span>
+                  <FaExternalLinkAlt className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
-        <div className="mb-8 flex justify-center">
-          <span className="flex flex-row space-x-3 items-center w-full p-2 border border-zinc-400 rounded-lg bg-zinc-900 text-zinc-300 focus-within:ring-2 focus-within:ring-green-500">
-            <CiSearch size={22} />
+        <div className="mb-8 animate-slideUp">
+          <div className="relative max-w-2xl mx-auto">
             <input
               type="text"
               value={searchQuery}
               onChange={handleSearchChange}
               placeholder="Search sheets..."
-              className="w-full bg-zinc-900 text-zinc-300 placeholder:text-zinc-500 focus:outline-none"
+              className="w-full px-12 py-3 bg-zinc-900 text-zinc-300 rounded-xl border border-zinc-800 focus:border-green-500 focus:ring-2 focus:ring-green-500/20 transition-all duration-300 placeholder:text-zinc-600"
             />
-          </span>
+            <CiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-zinc-500" size={22} />
+          </div>
         </div>
+
         {loading ? (
           <SheetSkeletonLoader />
         ) : !sheetshow ? (
-          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-8 gap-4">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fadeIn">
             <div
               onClick={() => setFileshow(true)}
-              className="hover:cursor-pointer hover:scale-105 duration-200 bg p-5 rounded-xl h-44 flex flex-col items-center justify-center text-3xl font-bold border border-green-500 hover:border-2 bg-zinc-900 text-green-500"
+              className="group relative bg-zinc-900 p-6 rounded-xl aspect-video flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105 border border-zinc-800 hover:border-green-500"
             >
-              <FiPlus className="hover:scale-105 duration-200" size={100} />
+              <FiPlus className="text-green-500 transition-all duration-300 group-hover:scale-110" size={80} />
+              <span className="mt-4 text-zinc-400 group-hover:text-green-500 transition-colors">Add New Sheet</span>
             </div>
 
-            {filteredSheets.map((it, index) => (
+            {filteredSheets.map((sheet, index) => (
               <div
                 key={index}
-                onClick={() => {
-                  setSelectedsheet(it);
-                  setSheetshow(true);
-                  setSheet_id(it._id);
-                }}
-                className="hover:cursor-pointer hover:scale-105 duration-200 p-5 rounded-xl h-44 flex flex-col bg text-2xl text-gray-300 font-bold bg-zinc-900 border-zinc-700 border hover:border-2 hover:text-green-500 hover:border-green-500"
+                className="group relative bg-zinc-900 p-6 rounded-xl aspect-video flex flex-col cursor-pointer transition-all duration-300 hover:scale-105 border border-zinc-800 hover:border-green-500"
               >
-                <div className="flex flex-row items-center mb-3">
-                  <div className="mr-3 text-green-500">
-                    <FaCode size={32} />
+                <div 
+                  onClick={() => {
+                    setSelectedsheet(sheet);
+                    setSheetshow(true);
+                    setSheet_id(sheet._id);
+                  }}
+                  className="flex-1"
+                >
+                  <div className="flex items-center space-x-3 mb-4">
+                    <FaCode className="text-green-500" size={32} />
+                    <h3 className="text-xl font-semibold text-zinc-300 group-hover:text-green-500 transition-colors">
+                      {sheet.name.substring(0, sheet.name.length - 5)}
+                    </h3>
                   </div>
-                  <div>{it.name.substring(0, it.name.length - 5)}</div>
-                </div>
-                <div className="w-full justify-between flex flex-row mt-auto">
-                  <div className="text-sm font-sans font flex flex-row items-center">
+                  <div className="mt-auto flex items-center text-sm text-zinc-500 group-hover:text-green-500 transition-colors">
                     View all
-                    <div className="px-1">
-                      <FaArrowRight />
+                    <FaArrowRight className="ml-2 transform group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setDeleteConfirm(sheet._id);
+                  }}
+                  className="absolute top-4 right-4 p-2 text-zinc-600 hover:text-red-500 transition-colors"
+                >
+                  <FiTrash size={20} />
+                </button>
+                {deleteConfirm === sheet._id && (
+                  <div className="absolute inset-0 bg-zinc-900/95 flex items-center justify-center rounded-xl animate-fadeIn">
+                    <div className="text-center">
+                      <p className="text-zinc-300 mb-4">Are you sure you want to delete this sheet?</p>
+                      <div className="flex justify-center space-x-4">
+                        <button
+                          onClick={() => handleDelete(sheet._id)}
+                          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                        >
+                          Delete
+                        </button>
+                        <button
+                          onClick={() => setDeleteConfirm(null)}
+                          className="px-4 py-2 bg-zinc-700 text-white rounded-lg hover:bg-zinc-600 transition-colors"
+                        >
+                          Cancel
+                        </button>
+                      </div>
                     </div>
                   </div>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDelete(it._id);
-                    }}
-                    className="ml-auto mt-auto text-zinc-700 hover:text-red-700"
-                  >
-                    <FiTrash size={24} />
-                  </button>
-                </div>
+                )}
               </div>
             ))}
           </div>
