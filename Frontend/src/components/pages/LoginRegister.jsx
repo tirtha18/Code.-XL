@@ -61,7 +61,7 @@ const LoginRegister = () => {
           username: username,
           password: password,
           location: location,
-          college: college,
+          collegeName: college,
         }
       );
       console.log("Registration successful:", response.data);
