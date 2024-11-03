@@ -1,204 +1,44 @@
 {
-    "techQuotes": [
-      {
-        "quote": "Technology is best when it brings people together.",
-        "author": "Matt Mullenweg"
-      },
-      {
-        "quote": "The science of today is the technology of tomorrow.",
-        "author": "Edward Teller"
-      },
-      {
-        "quote": "It has become appallingly obvious that our technology has exceeded our humanity.",
-        "author": "Albert Einstein"
-      },
-      {
-        "quote": "Any sufficiently advanced technology is indistinguishable from magic.",
-        "author": "Arthur C. Clarke"
-      },
-      {
-        "quote": "The real problem is not whether machines think but whether men do.",
-        "author": "B.F. Skinner"
-      },
-      {
-        "quote": "Technology like art is a soaring exercise of the human imagination.",
-        "author": "Daniel Bell"
-      },
-      {
-        "quote": "The great myth of our times is that technology is communication.",
-        "author": "Libby Larsen"
-      },
-      {
-        "quote": "The human spirit must prevail over technology.",
-        "author": "Albert Einstein"
-      },
-      {
-        "quote": "Technology is nothing. What's important is that you have faith in people.",
-        "author": "Steve Jobs"
-      },
-      {
-        "quote": "It's not a faith in technology. It's faith in people.",
-        "author": "Steve Jobs"
-      },
-      {
-        "quote": "We are stuck with technology when what we really want is just stuff that works.",
-        "author": "Douglas Adams"
-      },
-      {
-        "quote": "The real danger is not that computers will begin to think like men, but that men will begin to think like computers.",
-        "author": "Sydney Harris"
-      },
-      {
-        "quote": "Technology should improve your life, not become your life.",
-        "author": "Billy Cox"
-      },
-      {
-        "quote": "Just because something doesn't do what you planned it to do doesn't mean it's useless.",
-        "author": "Thomas Edison"
-      },
-      {
-        "quote": "Innovation is the outcome of a habit, not a random act.",
-        "author": "Sukant Ratnakar"
-      },
-      {
-        "quote": "Technology over technique produces emotionless design.",
-        "author": "Daniel Mall"
-      },
-      {
-        "quote": "Computers are useless. They can only give you answers.",
-        "author": "Pablo Picasso"
-      },
-      {
-        "quote": "Everybody gets so much information all day long that they lose their common sense.",
-        "author": "Gertrude Stein"
-      },
-      {
-        "quote": "The most technologically efficient machine that man has ever invented is the book.",
-        "author": "Northrop Frye"
-      },
-      {
-        "quote": "The purpose of technology is not to confuse the brain but to serve the body.",
-        "author": "William S. Burroughs"
-      },
-      {
-        "quote": "Technology feeds on itself. Technology makes more technology possible.",
-        "author": "Alvin Toffler"
-      },
-      {
-        "quote": "The art challenges the technology, and the technology inspires the art.",
-        "author": "John Lasseter"
-      },
-      {
-        "quote": "Technology will never replace great teachers, but technology in the hands of great teachers is transformational.",
-        "author": "George Couros"
-      },
-      {
-        "quote": "Technology is a useful servant but a dangerous master.",
-        "author": "Christian Lous Lange"
-      },
-      {
-        "quote": "It's not that we use technology, we live technology.",
-        "author": "Godfrey Reggio"
-      },
-      {
-        "quote": "Technology is the campfire around which we tell our stories.",
-        "author": "Laurie Anderson"
-      },
-      {
-        "quote": "The greatest achievement of humanity is not its works of art, science, or technology, but the recognition of its own dysfunction.",
-        "author": "Eckhart Tolle"
-      },
-      {
-        "quote": "Our technology forces us to live mythically.",
-        "author": "Marshall McLuhan"
-      },
-      {
-        "quote": "Technological progress has merely provided us with more efficient means for going backwards.",
-        "author": "Aldous Huxley"
-      },
-      {
-        "quote": "We are changing the world with technology.",
-        "author": "Bill Gates"
-      },
-      {
-        "quote": "The Internet is becoming the town square for the global village of tomorrow.",
-        "author": "Bill Gates"
-      },
-      {
-        "quote": "The advance of technology is based on making it fit in so that you don't really even notice it, so it's part of everyday life.",
-        "author": "Bill Gates"
-      },
-      {
-        "quote": "The new information technology… Internet and e-mail… have practically eliminated the physical costs of communications.",
-        "author": "Peter Drucker"
-      },
-      {
-        "quote": "If you think technology can solve your security problems, then you don't understand the problems and you don't understand the technology.",
-        "author": "Bruce Schneier"
-      },
-      {
-        "quote": "The advance of technology is based on making it fit in so that you don't really even notice it.",
-        "author": "Bill Gates"
-      },
-      {
-        "quote": "We are continually faced with great opportunities which are brilliantly disguised as unsolvable problems.",
-        "author": "Margaret Mead"
-      },
-      {
-        "quote": "The real question is, when will we draft an artificial intelligence bill of rights? What will that consist of? And who will get to decide that?",
-        "author": "Gray Scott"
-      },
-      {
-        "quote": "AI is likely to be either the best or worst thing to happen to humanity.",
-        "author": "Stephen Hawking"
-      },
-      {
-        "quote": "The question of whether a computer can think is no more interesting than the question of whether a submarine can swim.",
-        "author": "Edsger Dijkstra"
-      },
-      {
-        "quote": "The great thing about technology is that it can help us become more human again.",
-        "author": "Simon Mainwaring"
-      },
-      {
-        "quote": "We're still in the first minutes of the first day of the Internet revolution.",
-        "author": "Scott Cook"
-      },
-      {
-        "quote": "The real revolution is not AI, but how we choose to use it.",
-        "author": "Jean-Philippe Desbiolles"
-      },
-      {
-        "quote": "Programming isn't about what you know; it's about what you can figure out.",
-        "author": "Chris Pine"
-      },
-      {
-        "quote": "Innovation is the calling card of the future.",
-        "author": "Anna Eshoo"
-      },
-      {
-        "quote": "The true sign of intelligence is not knowledge but imagination.",
-        "author": "Albert Einstein"
-      },
-      {
-        "quote": "Don't compare yourself to others. Compare yourself to the person you were yesterday.",
-        "author": "Anonymous"
-      },
-      {
-        "quote": "Don't worry if it doesn't work right. If everything did, you'd be out of a job.",
-        "author": "Mosher's Law of Software Engineering"
-      },
-      {
-        "quote": "First we build the tools, then they build us.",
-        "author": "Marshall McLuhan"
-      },
-      {
-        "quote": "In a world that's changing really quickly, the only strategy that is guaranteed to fail is not taking risks.",
-        "author": "Mark Zuckerberg"
-      },
-      {
-        "quote": "Technology is a word that describes something that doesn't work yet.",
-        "author": "Douglas Adams"
-      }
-    ]
-  }
+  "techQuotes": [
+    {
+      "quote": "Technology is best when it brings people together.",
+      "author": "Matt Mullenweg"
+    },
+    {
+      "quote": "The science of today is the technology of tomorrow.",
+      "author": "Edward Teller"
+    },
+    {
+      "quote": "Any sufficiently advanced technology is indistinguishable from magic.",
+      "author": "Arthur C. Clarke"
+    },
+    {
+      "quote": "Technology should improve your life, not become your life.",
+      "author": "Billy Cox"
+    },
+    {
+      "quote": "The advance of technology is making it part of life.",
+      "author": "Bill Gates"
+    },
+    {
+      "quote": "AI will be the best or worst for humanity.",
+      "author": "Stephen Hawking"
+    },
+    {
+      "quote": "Innovation is the calling card of the future.",
+      "author": "Anna Eshoo"
+    },
+    {
+      "quote": "Programming isn’t about knowing; it’s about figuring it out.",
+      "author": "Chris Pine"
+    },
+    {
+      "quote": "We’re in the first day of the Internet revolution.",
+      "author": "Scott Cook"
+    },
+    {
+      "quote": "The real danger is men thinking like computers.",
+      "author": "Sydney Harris"
+    }
+  ]
+}

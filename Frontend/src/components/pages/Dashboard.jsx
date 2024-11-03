@@ -18,7 +18,7 @@ import NavTabs from "../ui/reusables/Tabs";
 import DashboardSkeleton from "../ui/skeleton/DashboardSkeleton";
 import { AvatarContext } from "../context/AvatarContext";
 import ProfileImage from "../ui/reusables/ProfileImage";
-
+import { Trophy } from 'lucide-react';
 
 function ShowMockResults({ setShowMockdata, selectedmockdata }) {
   const correctq = selectedmockdata.correct_q;
@@ -260,7 +260,6 @@ export default function Dashboard() {
   const [sheets, setSheets] = useState([]);
   const [selectedsheet, setSelectedsheet] = useState({});
   const [sheetshow, setSheetshow] = useState(false);
-  const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [mockresults, setMockresults] = useState([]);
   const [mocklabels, setMocklabels] = useState([]);
@@ -268,6 +267,7 @@ export default function Dashboard() {
   const [showMockdata, setShowMockdata] = useState(false);
   const [selectedmockdata, setSelectedmocckdata] = useState(null);
   const { avatar, updateAvatar } = useContext(AvatarContext);
+  const [User,setUser] =useState({});
   const [cfdata, setcfdata] = useState({
     contest_name: "",
     contest_link: "",
@@ -336,8 +336,7 @@ export default function Dashboard() {
             params: { user_id: user_id },
           }
         );
-        setName(response.data.name);
-        setUsername(response.data.username);
+        setUser(response.data);
         updateAvatar(response.data.avatar);
       } catch (error) {
         console.log(error);
@@ -438,8 +437,8 @@ export default function Dashboard() {
                 />
 
                 <div className="flex flex-col items-center space-y-2">
-                  <h1 className="text-2xl font-bold text-zinc-100">{name}</h1>
-                  <h2 className="text-zinc-400">{username}</h2>
+                  <h1 className="text-2xl font-bold text-zinc-100">{User.name}</h1>
+                  <h2 className="text-zinc-400">{User.username}</h2>
                 </div>
 
                 <div className="w-full pt-6 border-t border-zinc-700/50">
@@ -451,7 +450,7 @@ export default function Dashboard() {
                       <div className="flex flex-col">
                         <h2 className="text-sm text-zinc-500">College</h2>
                         <h2 className="text-zinc-200 font-semibold">
-                          Jadavpur University
+                          {User.collegeName}
                         </h2>
                       </div>
                     </div>
@@ -462,7 +461,7 @@ export default function Dashboard() {
                       </div>
                       <div className="flex flex-col">
                         <h2 className="text-sm text-zinc-500">Location</h2>
-                        <h2 className="text-zinc-200 font-semibold">Kolkata</h2>
+                        <h2 className="text-zinc-200 font-semibold">{User.location}</h2>
                       </div>
                     </div>
                   </div>
@@ -759,15 +758,13 @@ export default function Dashboard() {
                                   className="h-full bg-gradient-to-r from-green-500 to-blue-500 rounded-full transition-all duration-500 ease-out group-hover:scale-x-105"
                                 />
                               </div>
-
-                              {/* Optional: Add percentage display */}
                               <div className="text-xs text-zinc-500 text-right">
                                 {Math.floor(
                                   (Number(result.correct_q) /
                                     Number(result.total_q)) *
                                     100
                                 )}
-                                % Complete
+                                % Attempted
                               </div>
                             </div>
                           </div>
