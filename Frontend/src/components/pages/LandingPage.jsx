@@ -2,21 +2,21 @@ import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { navContext } from "../context/NavContextProvider";
 import { motion } from "framer-motion";
-import { 
-  FaCode, 
-  FaLaptopCode, 
-  FaUserGraduate, 
-  FaUsers, 
-  FaGithub, 
-  FaLinkedin 
+import {
+  FaCode,
+  FaLaptopCode,
+  FaUserGraduate,
+  FaUsers,
+  FaGithub,
+  FaLinkedin,
 } from "react-icons/fa";
-import { 
-  SiJavascript, 
-  SiReact, 
-  SiNodedotjs, 
-  SiMongodb, 
-  SiTailwindcss, 
-  SiExpress 
+import {
+  SiJavascript,
+  SiReact,
+  SiNodedotjs,
+  SiMongodb,
+  SiTailwindcss,
+  SiExpress,
 } from "react-icons/si";
 
 // Reusable components
@@ -42,17 +42,7 @@ const TechStack = ({ icon: Icon, name }) => (
   </motion.div>
 );
 
-const NavButton = ({ children, onClick }) => (
-  <motion.button
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    className="text-zinc-300 hover:text-green-500 transition-colors duration-300"
-    onClick={onClick}
-  >
-    {children}
-  </motion.button>
-);
-
+// Landing Page
 export default function LandingPage() {
   const { changeActiveNav } = useContext(navContext);
   const navigate = useNavigate();
@@ -61,27 +51,31 @@ export default function LandingPage() {
     {
       icon: <FaCode className="text-4xl text-green-500" />,
       title: "Personalized Learning",
-      description: "Upload study materials and get curated problem lists with comprehensive video tutorials tailored to your learning pace.",
-      nav: { path: "/sheets", id: 2 }
+      description:
+        "Upload study materials and get curated problem lists with comprehensive video tutorials tailored to your learning pace.",
+      nav: { path: "/sheets", id: 2 },
     },
     {
       icon: <FaLaptopCode className="text-4xl text-green-500" />,
       title: "Mock Assessments",
-      description: "Create and take custom practice tests focusing on key software development concepts and track your progress.",
-      nav: { path: "/mockassessment", id: 4 }
+      description:
+        "Create and take custom practice tests focusing on key software development concepts and track your progress.",
+      nav: { path: "/mockassessment", id: 4 },
     },
     {
       icon: <FaUserGraduate className="text-4xl text-green-500" />,
       title: "Core Subjects",
-      description: "Master fundamental computer science topics with our expertly curated content and structured learning paths.",
-      nav: { path: "/coresub", id: 3 }
+      description:
+        "Master fundamental computer science topics with our expertly curated content and structured learning paths.",
+      nav: { path: "/coresub", id: 3 },
     },
     {
       icon: <FaUsers className="text-4xl text-green-500" />,
       title: "Community",
-      description: "Join a vibrant community of learners, share knowledge, and grow together in your coding journey.",
-      nav: { path: "/community", id: 5 }
-    }
+      description:
+        "Join a vibrant community of learners, share knowledge, and grow together in your coding journey.",
+      nav: { path: "/community", id: 5 },
+    },
   ];
 
   const techStack = [
@@ -90,9 +84,13 @@ export default function LandingPage() {
     { icon: SiNodedotjs, name: "Node.js" },
     { icon: SiMongodb, name: "MongoDB" },
     { icon: SiTailwindcss, name: "Tailwind" },
-    { icon: SiExpress, name: "Express" }
+    { icon: SiExpress, name: "Express" },
   ];
-
+  useEffect(() => {
+    alert(
+      "If you are a recruiter please wait 50 second after you click the register button as it is deployed for free on render. Thank You!"
+    );
+  }, []);
   return (
     <div className="min-h-screen max-h-full overflow-auto text-zinc-300">
       {/* Hero Section */}
@@ -107,8 +105,8 @@ export default function LandingPage() {
             Level Up Your Coding Journey
           </h1>
           <p className="text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-            Transform your software development skills with personalized learning paths,
-            expert-curated content, and a supportive community.
+            Transform your software development skills with personalized
+            learning paths, expert-curated content, and a supportive community.
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -157,10 +155,18 @@ export default function LandingPage() {
         {/* Footer */}
         <footer className="text-center text-zinc-400 py-8 border-t border-zinc-800">
           <div className="flex justify-center gap-4  mb-4">
-            <a href="https://github.com/tirtha18/" target="_blank" rel="noreferrer">
+            <a
+              href="https://github.com/tirtha18/"
+              target="_blank"
+              rel="noreferrer"
+            >
               <FaGithub className="text-2xl text-zinc-400 hover:text-green-500 transition-colors duration-300" />
             </a>
-            <a href="https://www.linkedin.com/in/tirtha-biswas-594581230/"  target="_blank" rel="noreferrer">
+            <a
+              href="https://www.linkedin.com/in/tirtha-biswas-594581230/"
+              target="_blank"
+              rel="noreferrer"
+            >
               <FaLinkedin className="text-2xl text-zinc-400 hover:text-green-500 transition-colors duration-300" />
             </a>
           </div>

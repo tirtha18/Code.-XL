@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContextProvider";
-import Hero from "../../images/Heroimg.png";
+
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { navContext } from "../context/NavContextProvider";
 const LoginRegister = () => {
