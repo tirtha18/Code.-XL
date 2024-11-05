@@ -1,11 +1,8 @@
 import express from "express";
-import multer from "multer";
+import { upload } from "../middlewares/multerConfig.js";
 import { extract } from "../controllers/sheetextract.js";
 import { delcacheData } from "../middlewares/delcachedata.js";
 const router1 = express.Router();
-
-const upload = multer({ dest: "uploads/" });
-
 router1.post(
   "/upload",
   upload.single("excelFile"),
