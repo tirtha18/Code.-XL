@@ -5,6 +5,11 @@ import {
   MdOutlineLogout,
   MdOutlineAssessment,
 } from "react-icons/md";
+import {
+  FaCode,
+  FaLaptopCode,
+  FaUserGraduate,
+} from "react-icons/fa";
 import { RiClipboardFill } from "react-icons/ri";
 import { IoIosHome, IoIosArrowBack } from "react-icons/io";
 import { FaBars } from "react-icons/fa";
@@ -23,19 +28,19 @@ const navItems = [
   },
   {
     ind: 2,
-    icon: <RiClipboardFill size={22} />,
+    icon: <FaCode size={22} />,
     name: "Sheets",
     link: "/sheets",
   },
   {
     ind: 3,
-    icon: <MdOutlineComputer size={22} />,
+    icon: <FaUserGraduate size={22} />,
     name: "Core Subjects",
     link: "/coresub",
   },
   {
     ind: 4,
-    icon: <MdOutlineAssessment size={22} />,
+    icon: <FaLaptopCode size={22} />,
     name: "Mock Assessment",
     link: "/mockassessment",
   },

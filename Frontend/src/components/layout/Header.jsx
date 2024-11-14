@@ -142,7 +142,7 @@ export default function Header() {
   }, []);
 
   return (
-    <div className="w-full animate-fadeIn z-30">
+    <div className="w-full animate-fadeIn z-30 ">
       <div className="fixed-header h-16 flex items-center lg:justify-between justify-center px-4 md:px-8 bg-zinc-950/95 backdrop-blur-sm border-b border-zinc-800/50 shadow-lg z-50">
         {/* Logo */}
         <div className="flex items-center">

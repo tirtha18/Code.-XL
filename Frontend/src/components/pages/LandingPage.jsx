@@ -9,6 +9,7 @@ import {
   FaUsers,
   FaGithub,
   FaLinkedin,
+  FaClipboardList
 } from "react-icons/fa";
 import {
   SiJavascript,
@@ -19,7 +20,6 @@ import {
   SiExpress,
 } from "react-icons/si";
 
-// Reusable components
 const FeatureCard = ({ icon, title, description, onClick }) => (
   <motion.div
     whileHover={{ scale: 1.05 }}
@@ -50,9 +50,9 @@ export default function LandingPage() {
   const features = [
     {
       icon: <FaCode className="text-4xl text-green-500" />,
-      title: "Personalized Learning",
+      title: "Personalized Sheets",
       description:
-        "Upload study materials and get curated problem lists with comprehensive video tutorials tailored to your learning pace.",
+        "Upload excel sheets and get curated problem lists with comprehensive video tutorials tailored to your learning pace.",
       nav: { path: "/sheets", id: 2 },
     },
     {
@@ -70,11 +70,11 @@ export default function LandingPage() {
       nav: { path: "/coresub", id: 3 },
     },
     {
-      icon: <FaUsers className="text-4xl text-green-500" />,
-      title: "Community",
+      icon: <FaClipboardList className="text-4xl text-green-500" />,
+      title: "Resume Questions",
       description:
-        "Join a vibrant community of learners, share knowledge, and grow together in your coding journey.",
-      nav: { path: "/community", id: 5 },
+        "Get insights into potential interview questions based on your resume to prepare effectively for your next job interview.",
+      nav: { path: "/resume-questions", id: 6 },
     },
   ];
 
@@ -92,7 +92,8 @@ export default function LandingPage() {
     );
   }, []);
   return (
-    <div className="min-h-screen max-h-full overflow-auto text-zinc-300">
+    <div className=" max-h-full overflow-auto text-zinc-300 
+     bg-black ">
       {/* Hero Section */}
       <div className="container mx-auto px-6 pt-32 pb-20">
         <motion.div

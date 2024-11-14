@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaEdit, FaTimes, FaSpinner } from "react-icons/fa";
+import { FaEdit, FaTimes, FaSpinner, FaCamera } from "react-icons/fa";
 import axios from "axios";
 
 const OverlayAvatarUploadCard = ({
@@ -26,7 +26,6 @@ const OverlayAvatarUploadCard = ({
   };
 
   const handleUpload = async () => {
-    console.log(user_id);
     if (selectedFile && user_id) {
       setIsLoading(true);
       const formData = new FormData();
@@ -42,7 +41,6 @@ const OverlayAvatarUploadCard = ({
             },
           }
         );
-        console.log(response.data);
         setUploadStatus("Upload successful!");
         setSelectedFile(null);
         setPreview(null);
@@ -68,36 +66,49 @@ const OverlayAvatarUploadCard = ({
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center z-50 bg-black bg-opacity-50 backdrop-blur-sm">
-      <div className="relative bg-zinc-800 border-zinc-600 border rounded-lg shadow-lg text-zinc-300 flex flex-col items-center w-72 p-12">
+    <div className="fixed inset-0 flex justify-center items-center z-50 bg-black/70 backdrop-blur-sm animate-fadeIn">
+      <div className="relative bg-zinc-950 border border-zinc-800/50 rounded-2xl shadow-2xl text-zinc-300 flex flex-col items-center w-96 p-8 animate-slideUp">
+        {/* Decorative Elements */}
+        <div className="absolute inset-0 rounded-2xl pointer-events-none" />
+        <div className="absolute -inset-[1px] bg-gradient-to-b  rounded-2xl blur-sm pointer-events-none " />
+
+        {/* Close Button */}
         <button
           onClick={closeCard}
-          className="absolute top-2 right-2 p-1 text-zinc-400 hover:text-red-500"
+          className="absolute top-4 right-4 p-2 text-zinc-400 hover:text-red-500 transition-all duration-300 hover:rotate-90 transform"
           aria-label="Close"
         >
           <FaTimes className="text-xl" />
         </button>
 
-        <div className="relative w-32 h-32 mx-auto mt-4 mb-1">
+        {/* Title */}
+        <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+          Upload Avatar
+        </h2>
+
+        {/* Avatar Preview */}
+        <div className="relative w-40 h-40 mx-auto mb-6 group">
           {preview ? (
             <img
               src={preview}
               alt="Avatar Preview"
-              className="w-full h-full rounded-full object-cover"
+              className="w-full h-full rounded-full object-cover border-4 border-green-500/30 shadow-lg shadow-green-500/20 transition-transform duration-300 group-hover:scale-105"
             />
           ) : (
-            <div className="w-full h-full rounded-full bg-gray-200 flex items-center justify-center">
-              <span className="text-gray-500">No Avatar</span>
+            <div className="w-full h-full rounded-full bg-zinc-800/50 flex flex-col items-center justify-center border-4 border-zinc-700/30 transition-all duration-300 group-hover:border-green-500/30">
+              <FaCamera className="text-3xl text-zinc-600 mb-2" />
+              <span className="text-zinc-500 text-sm">No Avatar</span>
             </div>
           )}
 
-          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-full flex items-center justify-center">
+          {/* Hover Overlay */}
+          <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-full flex items-center justify-center backdrop-blur-sm">
             <label
               htmlFor="avatar-upload"
-              className="text-white flex items-center gap-2 cursor-pointer translate-x-[15%]"
+              className="text-white flex flex-col items-center gap-2 cursor-pointer transform transition-transform duration-300 hover:scale-110"
             >
-              <FaEdit className="text-lg" />
-              <span>Change Avatar</span>
+              <FaEdit className="text-2xl text-green-400" />
+              <span className="text-sm font-medium">Change Avatar</span>
             </label>
           </div>
         </div>
@@ -110,39 +121,45 @@ const OverlayAvatarUploadCard = ({
           onChange={handleFileChange}
         />
 
+        {/* File Name */}
         {selectedFile && (
-          <p className="mt-4 text-center text-sm text-gray-500">
+          <div className="mt-2 px-4 py-2 bg-zinc-800/50 rounded-lg text-sm text-zinc-400 max-w-[250px] truncate">
             {selectedFile.name}
-          </p>
+          </div>
         )}
 
+        {/* Upload Button */}
         <button
           onClick={handleUpload}
           disabled={isLoading}
-          className={`mt-4 ${
-            isLoading ? "bg-gray-500" : "bg-green-500 hover:bg-green-600"
-          } text-white px-4 py-2 rounded transition duration-200 flex items-center justify-center`}
+          className={`mt-6 px-8 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-green-500/20 disabled:opacity-50 disabled:cursor-not-allowed
+            ${
+              isLoading
+                ? "bg-zinc-700 text-zinc-400"
+                : "bg-gradient-to-r from-green-400 to-green-600 text-white hover:from-green-500 hover:to-green-700"
+            }`}
         >
           {isLoading ? (
-            <>
-              <FaSpinner className="animate-spin mr-2" />
-              Uploading...
-            </>
+            <div className="flex items-center gap-2">
+              <FaSpinner className="animate-spin" />
+              <span>Uploading...</span>
+            </div>
           ) : (
-            "Upload"
+            "Upload Avatar"
           )}
         </button>
 
+        {/* Status Message */}
         {uploadStatus && (
-          <p
-            className={`mt-2 text-center text-sm ${
+          <div
+            className={`mt-4 px-4 py-2 rounded-lg text-sm ${
               uploadStatus.includes("failed")
-                ? "text-red-500"
-                : "text-green-500"
+                ? "bg-red-500/10 text-red-400"
+                : "bg-green-500/10 text-green-400"
             }`}
           >
             {uploadStatus}
-          </p>
+          </div>
         )}
       </div>
     </div>

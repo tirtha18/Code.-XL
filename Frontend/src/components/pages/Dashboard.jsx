@@ -18,7 +18,12 @@ import NavTabs from "../ui/reusables/Tabs";
 import DashboardSkeleton from "../ui/skeleton/DashboardSkeleton";
 import { AvatarContext } from "../context/AvatarContext";
 import ProfileImage from "../ui/reusables/ProfileImage";
-import { Trophy } from 'lucide-react';
+import { Trophy } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
+
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Eye, CheckCircle,  Target } from "lucide-react";
 
 function ShowMockResults({ setShowMockdata, selectedmockdata }) {
   const correctq = selectedmockdata.correct_q;
@@ -26,92 +31,143 @@ function ShowMockResults({ setShowMockdata, selectedmockdata }) {
   const attemptedq = selectedmockdata.attempted_q;
   const [toggleresult, setToggleresult] = useState(false);
 
-  return (
-    <div className="fixed top-0 left-0 flex justify-center items-center h-screen w-screen z-50 bg-opacity-50 backdrop-blur-sm">
-      <div className="relative bg-zinc-900 border border-zinc-700 rounded-lg shadow-lg text-zinc-300 flex-col flex items-center lg:w-[40%] lg:min-h-[40%] ">
-        <div className="text-lg font-semibold border-b border-zinc-600 text-zinc-300 w-full p-4">
-          {selectedmockdata.name}
-          <button
-            onClick={() => setShowMockdata(false)}
-            className="absolute top-4 right-4"
-            aria-label="Close"
-          >
-            <svg
-              className="w-6 h-6 text-zinc-400 hover:text-red-500 transition-colors duration-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
-        <div className="w-[90%] mt-4">
-          <NavTabs setToggleresult={setToggleresult} />
-        </div>
-        {!toggleresult ? (
-          <div className="mt-6 flex-col w-[90%] h-[90%]">
-            <div className="text-zinc-300 bg-zinc-800 rounded-lg shadow-sm shadow-zinc-600 p-4">
-              <div className="flex flex-row w-full justify-between">
-                <h1>Attempted:</h1>
-                <p className="ml-2 bg-zinc-700 px-2 text-zinc-400 py-0.5 text-sm rounded-lg">
-                  {attemptedq + "/" + totalq}
-                </p>
-              </div>
-              <div className="mt-3">
-                <ProgressBar value={Math.floor((attemptedq / totalq) * 100)} />
-              </div>
-            </div>
-            <div className="text-zinc-300 bg-zinc-800 rounded-lg p-4 mt-4 mb-6">
-              <div className="flex flex-row w-full justify-between">
-                <h1>Total Score:</h1>
-                <p className="ml-2 bg-zinc-700 px-2 text-zinc-400 py-0.5 text-sm rounded-lg">
-                  {correctq + "/" + totalq}
-                </p>
-              </div>
-              <div className="mt-3">
-                <ProgressBar value={Math.floor((correctq / totalq) * 100)} />
-              </div>
-              <div className="flex flex-row w-full justify-between mt-3">
-                <h1>Accuracy</h1>
-              </div>
-              <div className="mt-3">
-                <ProgressBar
-                  value={
-                    attemptedq !== 0
-                      ? Math.floor((correctq / attemptedq) * 100)
-                      : 0
-                  }
-                />
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="mt-6 flex-col w-[90%] max-h-96 overflow-auto space-y-2">
-            {selectedmockdata.questions.map((question, index) => (
-              <div key={question._id} className="flex flex-col py-2">
-                <h1 className="text-zinc-300">
-                  {index + 1 + ") "}
-                  {question.problem}
-                </h1>
-                <h2 className="text-green-400 text-sm">
-                  <span className="text-zinc-400">Correct Answer: </span>
-                  {question.answer}
-                </h2>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+  const ProgressBar = ({ value, color }) => (
+    <div className="w-full bg-zinc-800/50 rounded-full h-3 overflow-hidden">
+      <motion.div
+        initial={{ width: 0 }}
+        animate={{ width: `${value}%` }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className={`h-full ${color || "bg-green-500"} rounded-full`}
+      />
     </div>
   );
+
+  const StatCard = ({ title, value, total, color, icon: Icon }) => (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="bg-zinc-800/30 backdrop-blur-sm rounded-xl border border-zinc-700/50 p-6 hover:border-green-500/20 transition-all duration-300"
+    >
+      <div className="flex justify-between items-start mb-4">
+        <div>
+          <h3 className="text-zinc-400 text-sm mb-1">{title}</h3>
+          <div className="flex items-center gap-2">
+            <span className="text-2xl font-bold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+              {value}
+            </span>
+            <span className="text-zinc-500">/ {total}</span>
+          </div>
+        </div>
+        <div className={`p-2 rounded-lg ${color}`}>
+          <Icon className="w-5 h-5 text-white" />
+        </div>
+      </div>
+      <ProgressBar
+        value={Math.floor((value / total) * 100)}
+        color={color}
+      />
+    </motion.div>
+  );
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 bg-zinc-950/80 backdrop-blur-sm flex justify-center items-center z-50 p-4"
+      >
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          className="bg-gradient-to-br from-zinc-900 via-zinc-900/95 to-zinc-900 border border-zinc-800/50 
+                    w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden"
+        >
+          {/* Header */}
+          <div className="relative border-b border-zinc-800/50 p-6">
+            <div className="flex items-center gap-3">
+              <Trophy className="w-6 h-6 text-green-500" />
+              <h2 className="text-xl font-semibold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+                {selectedmockdata.name}
+              </h2>
+            </div>
+            <motion.button
+              whileHover={{ scale: 1.1, rotate: 90 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setShowMockdata(false)}
+              className="absolute top-6 right-6 text-zinc-400 hover:text-zinc-200 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </motion.button>
+          </div>
+
+          {/* Content */}
+          <div className="p-6 space-y-6">
+            {!toggleresult ? (
+              <div className="space-y-4">
+                <StatCard
+                  title="Questions Attempted"
+                  value={attemptedq}
+                  total={totalq}
+                  color="bg-blue-500"
+                  icon={CheckCircle}
+                />
+                <StatCard
+                  title="Correct Answers"
+                  value={correctq}
+                  total={totalq}
+                  color="bg-green-500"
+                  icon={Trophy}
+                />
+                <StatCard
+                  title="Accuracy"
+                  value={attemptedq !== 0 ? correctq : 0}
+                  total={attemptedq !== 0 ? attemptedq : 1}
+                  color="bg-purple-500"
+                  icon={Target}
+                />
+              </div>
+            ) : (
+              <div className="space-y-4 max-h-[60vh] overflow-auto custom-scrollbar">
+                {selectedmockdata.questions.map((question, index) => (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    key={question._id}
+                    className="bg-zinc-800/30 backdrop-blur-sm rounded-xl border border-zinc-700/50 p-6 hover:border-green-500/20 transition-all duration-300"
+                  >
+                    <h3 className="text-zinc-300 font-medium mb-2">
+                      {index + 1}. {question.problem}
+                    </h3>
+                    <div className="flex items-center gap-2 text-green-400">
+                      <CheckCircle className="w-4 h-4" />
+                      <span className="text-sm">{question.answer}</span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+
+            {/* Toggle Button */}
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setToggleresult(!toggleresult)}
+              className="w-full bg-zinc-800/50 text-zinc-100 rounded-xl py-3 px-4 font-medium 
+                        transition-all duration-300 hover:bg-zinc-700/50 flex items-center justify-center gap-2"
+            >
+              <Eye className="w-5 h-5" />
+              {toggleresult ? "Show Statistics" : "Show Answers"}
+            </motion.button>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
 }
+
+
 
 function ShowSheetDetails({ selectedsheet, setSheetshow }) {
   if (!selectedsheet.sheet) return null;
@@ -267,7 +323,7 @@ export default function Dashboard() {
   const [showMockdata, setShowMockdata] = useState(false);
   const [selectedmockdata, setSelectedmocckdata] = useState(null);
   const { avatar, updateAvatar } = useContext(AvatarContext);
-  const [User,setUser] =useState({});
+  const [User, setUser] = useState({});
   const [cfdata, setcfdata] = useState({
     contest_name: "",
     contest_link: "",
@@ -279,6 +335,7 @@ export default function Dashboard() {
     contest_datetime: "",
   });
   const currentTime = new Date();
+  const navigate = useNavigate();
   useEffect(() => {
     const getCfdata = async () => {
       try {
@@ -437,7 +494,9 @@ export default function Dashboard() {
                 />
 
                 <div className="flex flex-col items-center space-y-2">
-                  <h1 className="text-2xl font-bold text-zinc-100">{User.name}</h1>
+                  <h1 className="text-2xl font-bold text-zinc-100">
+                    {User.name}
+                  </h1>
                   <h2 className="text-zinc-400">{User.username}</h2>
                 </div>
 
@@ -461,7 +520,9 @@ export default function Dashboard() {
                       </div>
                       <div className="flex flex-col">
                         <h2 className="text-sm text-zinc-500">Location</h2>
-                        <h2 className="text-zinc-200 font-semibold">{User.location}</h2>
+                        <h2 className="text-zinc-200 font-semibold">
+                          {User.location}
+                        </h2>
                       </div>
                     </div>
                   </div>
@@ -709,70 +770,76 @@ export default function Dashboard() {
                 </div>
 
                 {/* Content Container */}
-                <div className="w-full flex lg:flex-grow flex-row overflow-y-hidden justify-center p-6 gap-6">
-                  {/* Chart Section */}
-                  <div className="flex w-[90%] justify-center items-center bg-zinc-900/40 rounded-xl p-6 border border-zinc-800/50 hover:border-green-500/20 transition-colors duration-300 shadow-lg hover:shadow-green-500/5">
-                    {!loading && (
-                      <div className="w-full">
-                        <LineChart
-                          mockdata={mockdata}
-                          mocklabels={mocklabels}
-                        />
-                      </div>
-                    )}
-                  </div>
+                {mockresults.length > 0 ? (
+                  <div className="w-full flex lg:flex-grow flex-row overflow-y-hidden justify-center p-6 gap-6">
+                    {/* Chart Section */}
+                    <div className="flex w-[90%] justify-center items-center bg-zinc-900/40 rounded-xl p-6 border border-zinc-800/50 hover:border-green-500/20 transition-colors duration-300 shadow-lg hover:shadow-green-500/5">
+                      {!loading && (
+                        <div className="w-full">
+                          <LineChart
+                            mockdata={mockdata}
+                            mocklabels={mocklabels}
+                          />
+                        </div>
+                      )}
+                    </div>
 
-                  {/* Results List Section */}
-                  <div className="w-[60%] lg:flex hidden">
-                    <div className="w-full h-full flex flex-col bg-zinc-900/40 rounded-xl border border-zinc-800/50 hover:border-green-500/20 transition-colors duration-300 shadow-lg">
-                      <div className="flex flex-col space-y-3 p-4 h-full overflow-y-auto scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-transparent hover:scrollbar-thumb-green-600">
-                        {mockresults.map((result) => (
-                          <div
-                            key={result._id}
-                            className="group w-full rounded-xl bg-zinc-800/50 hover:bg-zinc-800/80 transition-all duration-300 cursor-pointer border border-transparent hover:border-green-500/30 hover:shadow-lg hover:shadow-green-500/5"
-                            onClick={() => {
-                              setSelectedmocckdata(result);
-                              setShowMockdata(true);
-                            }}
-                          >
-                            <div className="p-4 space-y-3">
-                              <div className="flex items-center justify-between">
-                                <p className="text-zinc-300 font-medium group-hover:text-green-400 transition-colors">
-                                  {result.name}
-                                </p>
-                                <span className="px-3 py-1.5 bg-zinc-900/70 rounded-full text-sm text-green-400 font-medium border border-green-500/20 group-hover:bg-green-500/10 transition-colors">
-                                  {result.correct_q}/{result.total_q}
-                                </span>
-                              </div>
+                    {/* Results List Section */}
+                    <div className="w-[60%] lg:flex hidden">
+                      <div className="w-full h-full flex flex-col bg-zinc-900/40 rounded-xl border border-zinc-800/50 hover:border-green-500/20 transition-colors duration-300 shadow-lg">
+                        <div className="flex flex-col space-y-3 p-4 h-full overflow-y-auto scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-transparent hover:scrollbar-thumb-green-600">
+                          {mockresults.map((result) => (
+                            <div
+                              key={result._id}
+                              className="group w-full rounded-xl bg-zinc-800/50 hover:bg-zinc-800/80 transition-all duration-300 cursor-pointer border border-transparent hover:border-green-500/30 hover:shadow-lg hover:shadow-green-500/5"
+                              onClick={() => {
+                                setSelectedmocckdata(result);
+                                setShowMockdata(true);
+                              }}
+                            >
+                              <div className="p-4 space-y-3">
+                                <div className="flex items-center justify-between">
+                                  <p className="text-zinc-300 font-medium group-hover:text-green-400 transition-colors">
+                                    {result.name}
+                                  </p>
+                                  <span className="px-3 py-1.5 bg-zinc-900/70 rounded-full text-sm text-green-400 font-medium border border-green-500/20 group-hover:bg-green-500/10 transition-colors">
+                                    {result.correct_q}/{result.total_q}
+                                  </span>
+                                </div>
 
-                              {/* Progress Bar */}
-                              <div className="w-full h-2.5 bg-zinc-700/30 rounded-full overflow-hidden">
-                                <div
-                                  style={{
-                                    width: `${Math.floor(
-                                      (Number(result.correct_q) /
-                                        Number(result.total_q)) *
-                                        100
-                                    )}%`,
-                                  }}
-                                  className="h-full bg-gradient-to-r from-green-500 to-blue-500 rounded-full transition-all duration-500 ease-out group-hover:scale-x-105"
-                                />
-                              </div>
-                              <div className="text-xs text-zinc-500 text-right">
-                                {Math.floor(
-                                  (Number(result.correct_q) /
-                                    Number(result.total_q)) *
-                                    100
-                                )}
-                                % Attempted
+                                {/* Progress Bar */}
+                                <div className="w-full h-2.5 bg-zinc-700/30 rounded-full overflow-hidden">
+                                  <div
+                                    style={{
+                                      width: `${Math.floor(
+                                        (Number(result.correct_q) /
+                                          Number(result.total_q)) *
+                                          100
+                                      )}%`,
+                                    }}
+                                    className="h-full bg-gradient-to-r from-green-500 to-blue-500 rounded-full transition-all duration-500 ease-out group-hover:scale-x-105"
+                                  />
+                                </div>
+                                <div className="text-xs text-zinc-500 text-right">
+                                  {Math.floor(
+                                    (Number(result.correct_q) /
+                                      Number(result.total_q)) *
+                                      100
+                                  )}
+                                  % Attempted
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="w-full flex lg:flex-grow h-[100vh] overflow-y-hidden justify-center ">
+                    <EmptyMockTest />
+                  </div>
+                )}
 
                 {/* Loading State */}
                 {loading && (

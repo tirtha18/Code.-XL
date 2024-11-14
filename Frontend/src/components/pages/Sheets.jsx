@@ -7,7 +7,7 @@ import { AuthContext } from "../context/AuthContextProvider";
 import { FileUploader } from "react-drag-drop-files";
 import Sheet from "./Sheet";
 import SheetSkeletonLoader from "../ui/skeleton/SheetSkeleton";
-
+import TestSheet from "../../../Sheets/Test Sheet.xlsx"
 function FileUploadForm({ setFileshow, user_id, setReload }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -20,11 +20,9 @@ function FileUploadForm({ setFileshow, user_id, setReload }) {
 
   const FileUpload = async () => {
     if (!user_id) return console.log("No user");
-    setLoading(true);
     const formData = new FormData();
     formData.append("excelFile", selectedFile);
     formData.append("user_id", user_id);
-
     try {
       const response = await axios.post(
         "https://code-xl.onrender.com/api/upload",
@@ -32,7 +30,9 @@ function FileUploadForm({ setFileshow, user_id, setReload }) {
         {
           headers: { "Content-Type": "multipart/form-data" },
           onUploadProgress: (progressEvent) => {
-            const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            const progress = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
             setUploadProgress(progress);
           },
         }
@@ -41,14 +41,12 @@ function FileUploadForm({ setFileshow, user_id, setReload }) {
       setFileshow(false);
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
-      <div 
+      <div
         className="bg-black bg-opacity-50 backdrop-blur-sm absolute inset-0 animate-fadeIn"
         onClick={() => setFileshow(false)}
       />
@@ -62,7 +60,7 @@ function FileUploadForm({ setFileshow, user_id, setReload }) {
         </div>
         {uploadProgress > 0 && (
           <div className="w-full mb-4 bg-zinc-800 rounded-full h-2">
-            <div 
+            <div
               className="bg-green-500 h-2 rounded-full transition-all duration-300"
               style={{ width: `${uploadProgress}%` }}
             />
@@ -71,7 +69,11 @@ function FileUploadForm({ setFileshow, user_id, setReload }) {
         <div className="flex space-x-4">
           <button
             className={`bg-green-500 text-white py-2 px-6 rounded-lg transition-all duration-300 
-              ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green-600 hover:scale-105'}`}
+              ${
+                loading
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:bg-green-600 hover:scale-105"
+              }`}
             onClick={() => {
               if (!selectedFile) {
                 alert("Select or drop a file to continue!");
@@ -79,7 +81,7 @@ function FileUploadForm({ setFileshow, user_id, setReload }) {
             }}
             disabled={loading}
           >
-            {loading ? 'Uploading...' : 'Upload'}
+            {loading ? "Uploading..." : "Upload"}
           </button>
           <button
             className="bg-zinc-700 text-white py-2 px-6 rounded-lg hover:bg-zinc-600 transition-all duration-300 hover:scale-105"
@@ -177,12 +179,13 @@ export default function Sheets() {
             Sample Sheets
           </h2>
           <ul className="flex flex-wrap gap-4">
-            {['Striver\'s SDE Sheet', 'Test Sheet'].map((name, index) => (
+            {["Striver's SDE Sheet", "Test Sheet"].map((name, index) => (
               <li key={index}>
                 <a
-                  href={index === 0 
-                    ? "https://docs.google.com/spreadsheets/d/1SJYYWag2RNONf8BNW3W8z92nhJotSDm_/edit"
-                    : "https://docs.google.com/spreadsheets/d/1jVwt5re-jxnMXvOz2s-CHNm5-Xp8YT6C/edit"
+                  href={
+                    index === 0
+                      ? "https://docs.google.com/spreadsheets/d/1SJYYWag2RNONf8BNW3W8z92nhJotSDm_/edit"
+                      : "https://docs.google.com/spreadsheets/d/1jVwt5re-jxnMXvOz2s-CHNm5-Xp8YT6C/edit"
                   }
                   target="_blank"
                   rel="noopener noreferrer"
@@ -205,7 +208,10 @@ export default function Sheets() {
               placeholder="Search sheets..."
               className="w-full px-12 py-3 bg-zinc-900 text-zinc-300 rounded-xl border border-zinc-800 focus:border-green-500 focus:ring-2 focus:ring-green-500/20 transition-all duration-300 placeholder:text-zinc-600"
             />
-            <CiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-zinc-500" size={22} />
+            <CiSearch
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-zinc-500"
+              size={22}
+            />
           </div>
         </div>
         {loading ? (
@@ -216,8 +222,13 @@ export default function Sheets() {
               onClick={() => setFileshow(true)}
               className="group relative bg-zinc-900 p-6 rounded-xl aspect-video flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105 border border-zinc-800 hover:border-green-500"
             >
-              <FiPlus className="text-green-500 transition-all duration-300 group-hover:scale-110" size={80} />
-              <span className="mt-4 text-zinc-400 group-hover:text-green-500 transition-colors">Add New Sheet</span>
+              <FiPlus
+                className="text-green-500 transition-all duration-300 group-hover:scale-110"
+                size={80}
+              />
+              <span className="mt-4 text-zinc-400 group-hover:text-green-500 transition-colors">
+                Add New Sheet
+              </span>
             </div>
 
             {filteredSheets.map((sheet, index) => (
@@ -225,7 +236,7 @@ export default function Sheets() {
                 key={index}
                 className="group relative bg-zinc-900 p-6 rounded-xl aspect-video flex flex-col cursor-pointer transition-all duration-300 hover:scale-105 border border-zinc-800 hover:border-green-500"
               >
-                <div 
+                <div
                   onClick={() => {
                     setSelectedsheet(sheet);
                     setSheetshow(true);
@@ -256,7 +267,9 @@ export default function Sheets() {
                 {deleteConfirm === sheet._id && (
                   <div className="absolute inset-0 bg-zinc-900/95 flex items-center justify-center rounded-xl animate-fadeIn">
                     <div className="text-center">
-                      <p className="text-zinc-300 mb-4">Are you sure you want to delete this sheet?</p>
+                      <p className="text-zinc-300 mb-4">
+                        Are you sure you want to delete this sheet?
+                      </p>
                       <div className="flex justify-center space-x-4">
                         <button
                           onClick={() => handleDelete(sheet._id)}
