@@ -136,13 +136,7 @@ export default function Sheet({ setSheetshow, selectedsheet, user_id }) {
       }
     }
   };
-  /*************  ✨ Codeium Command ⭐  *************/
-  /**
-   * Toggles the revision status of a problem
-   * @param {string} problem_id
-   * @returns {Promise<void>}
-   */
-  /******  179719f8-a96c-44f5-bfbf-667bc200436b  *******/
+  
   const toggleRevisionstatus = async (problem_id) => {
     try {
       const response = await axios.post(
@@ -329,7 +323,7 @@ export default function Sheet({ setSheetshow, selectedsheet, user_id }) {
                           </td>
 
                           <td className="py-2 pl-4 border-t border-x border-zinc-600">
-                            {problem.name}
+                            {problem.name.replace(/-/g, " ")}
                           </td>
                           <td className="py-1 border-t text-center border-r border-zinc-600">
                             <a

@@ -14,16 +14,14 @@ import LineChart from "../ui/reusables/LineChart";
 import Leetcode from "../../images/LC_logo.png";
 import Gfg from "../../images/GFG_logo.png";
 import Cflogo from "../../images/cflogo.png";
-import NavTabs from "../ui/reusables/Tabs";
 import DashboardSkeleton from "../ui/skeleton/DashboardSkeleton";
 import { AvatarContext } from "../context/AvatarContext";
 import ProfileImage from "../ui/reusables/ProfileImage";
 import { Trophy } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Eye, CheckCircle,  Target } from "lucide-react";
+import { X, Eye, CheckCircle, PieChart, Target } from "lucide-react";
 
 function ShowMockResults({ setShowMockdata, selectedmockdata }) {
   const correctq = selectedmockdata.correct_q;
@@ -62,10 +60,7 @@ function ShowMockResults({ setShowMockdata, selectedmockdata }) {
           <Icon className="w-5 h-5 text-white" />
         </div>
       </div>
-      <ProgressBar
-        value={Math.floor((value / total) * 100)}
-        color={color}
-      />
+      <ProgressBar value={Math.floor((value / total) * 100)} color={color} />
     </motion.div>
   );
 
@@ -167,8 +162,6 @@ function ShowMockResults({ setShowMockdata, selectedmockdata }) {
   );
 }
 
-
-
 function ShowSheetDetails({ selectedsheet, setSheetshow }) {
   if (!selectedsheet.sheet) return null;
 
@@ -198,65 +191,120 @@ function ShowSheetDetails({ selectedsheet, setSheetshow }) {
     topicColors.push(randomColor({ luminosity: "bright" }));
     borderColors.push("rgb(39 39 42)");
   }
-
   return (
-    <div className="fixed top-0 left-0 flex justify-center items-center min-h-screen w-screen z-50 bg-opacity-50 backdrop-blur-sm">
-      <div className="relative bg-zinc-900 border border-zinc-700 rounded-lg shadow-lg text-zinc-300 flex-col flex items-center">
-        <div className="text-lg font-semibold p-4 border-b border-zinc-600 text-zinc-300 w-full  ">
-          Progress:
-          <button
-            onClick={() => setSheetshow(false)}
-            className="absolute top-4 right-4"
-            aria-label="Close"
-          >
-            <svg
-              className="w-6 h-6 text-zinc-400 hover:text-red-500 transition-colors duration-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 bg-zinc-950/80 backdrop-blur-sm flex justify-center items-center z-50 p-4"
+      >
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          className="bg-gradient-to-br from-zinc-900 via-zinc-900/95 to-zinc-900 border border-zinc-800/50 
+                    w-full max-w-5xl rounded-2xl shadow-2xl overflow-hidden"
+        >
+          {/* Header */}
+          <div className="relative border-b border-zinc-800/50 p-6">
+            <div className="flex items-center gap-3">
+              <Trophy className="w-6 h-6 text-green-500" />
+              <h2 className="text-xl font-semibold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+                Progress Overview
+              </h2>
+            </div>
+            <motion.button
+              whileHover={{ scale: 1.1, rotate: 90 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setSheetshow(false)}
+              className="absolute top-6 right-6 text-zinc-400 hover:text-zinc-200 transition-colors"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
-        <div className="flex items-center flex-row space-x-16 mt-8 mb-8">
-          <div className="flex items-center">
-            <div className="w-[550px] capitalize mt-4">
-              <DoughnutChart
-                topicColors={topicColors}
-                topicLabels={topicLabels}
-                topicCompletion={topicCompletion}
-                borderColors={borderColors}
-              />
+              <X className="w-5 h-5" />
+            </motion.button>
+          </div>
+
+          {/* Content */}
+          <div className="p-6">
+            <div className="flex gap-8">
+              {/* Chart Section */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="flex-1"
+              >
+                <div className="bg-zinc-800/30 backdrop-blur-sm rounded-xl border border-zinc-700/50 p-6 hover:border-green-500/20 transition-all duration-300">
+                  <div className="flex items-center gap-2 mb-4">
+                    <PieChart className="w-5 h-5 text-green-500" />
+                    <h3 className="text-zinc-300 font-medium">
+                      Topic Distribution
+                    </h3>
+                  </div>
+                  <div className="w-full h-[400px]">
+                    <DoughnutChart
+                      topicColors={topicsCompstatus.map(
+                        () => `hsl(${Math.random() * 360}, 70%, 50%)`
+                      )}
+                      topicLabels={topicsCompstatus.map((item) =>
+                        item.topic.toUpperCase()
+                      )}
+                      topicCompletion={topicsCompstatus.map(
+                        (item) => item.doneprob
+                      )}
+                      borderColors={Array(topicsCompstatus.length).fill(
+                        "rgb(39 39 42)"
+                      )}
+                    />
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Progress Bars Section */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="w-80"
+              >
+                <div className="bg-zinc-800/30 backdrop-blur-sm rounded-xl border border-zinc-700/50 p-6 hover:border-green-500/20 transition-all duration-300">
+                  <h3 className="text-zinc-300 font-medium mb-4">
+                    Topic Progress
+                  </h3>
+                  <div
+                    style={{
+                      overflowY: "scroll",
+                      scrollbarWidth: "thin",
+                      msOverflowStyle: "none",
+                      scrollbarColor: "rgb(39 39 42) transparent",
+                    }}
+                    className="space-y-6 max-h-[400px] overflow-auto custom-scrollbar pr-2"
+                  >
+                    {topicsCompstatus.map((item, index) => (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        key={item.topic}
+                        className="space-y-2"
+                      >
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm text-zinc-400">
+                            {item.topic.toUpperCase()}
+                          </span>
+                          <span className="text-sm text-zinc-500">
+                            {item.doneprob}/{item.totalprob}
+                          </span>
+                        </div>
+                        <ProgressBar value={item.completion} />
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
-          <div></div>
-          <div></div>
-          <div className="flex flex-col overflow-auto h-[600px]">
-            {topicsCompstatus.map((it, index) => (
-              <ul
-                key={index}
-                className="flex flex-col min-w-72 text-sm pr-2 py-2 space-y-2 text-zinc-400 font-semibold"
-              >
-                <div className="">
-                  <h4>{it.topic.toUpperCase()}</h4>
-                </div>
-                <div className="">
-                  <ProgressBar value={it.completion} />
-                </div>
-              </ul>
-            ))}
-          </div>
-        </div>
-        <div></div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 }
 function TimeLeft({ timeLeft }) {
@@ -479,7 +527,7 @@ export default function Dashboard() {
         overflowY: "scroll",
         scrollbarWidth: "thin",
         msOverflowStyle: "none",
-        scrollbarColor: "#10B981 transparent",
+        scrollbarColor: "rgb(39 39 42) transparent",
       }}
     >
       {!loading ? (
@@ -543,10 +591,17 @@ export default function Dashboard() {
                     </h2>
                   </div>
 
-                  {/* Content area with custom scrollbar */}
-                  <div className="flex-grow overflow-auto scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-transparent hover:scrollbar-thumb-green-600">
+                  <div
+                    style={{
+                      overflowY: "scroll",
+                      scrollbarWidth: "thin",
+                      msOverflowStyle: "none",
+                      scrollbarColor: "rgb(39 39 42) transparent",
+                    }}
+                    className="flex-grow overflow-auto hover:scrollbar-thumb-green-600  max-h-96"
+                  >
                     {editedsheets.length > 0 ? (
-                      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 p-6">
+                      <div className="grid 2xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-6 p-6  md:h-full">
                         {editedsheets.map((sheet) => (
                           <div
                             key={sheet._id}
@@ -604,7 +659,15 @@ export default function Dashboard() {
                   </div>
 
                   {/* Contest List Container */}
-                  <div className="flex-grow overflow-auto scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-transparent hover:scrollbar-thumb-green-600">
+                  <div
+                    className="flex-grow overflow-auto  "
+                    style={{
+                      overflowY: "scroll",
+                      scrollbarWidth: "thin",
+                      msOverflowStyle: "none",
+                      scrollbarColor: "rgb(39 39 42) transparent",
+                    }}
+                  >
                     <div className="flex flex-col space-y-3 p-4">
                       {/* Leetcode Weekly Contest */}
                       <a
@@ -773,9 +836,9 @@ export default function Dashboard() {
                 {mockresults.length > 0 ? (
                   <div className="w-full flex lg:flex-grow flex-row overflow-y-hidden justify-center p-6 gap-6">
                     {/* Chart Section */}
-                    <div className="flex w-[90%] justify-center items-center bg-zinc-900/40 rounded-xl p-6 border border-zinc-800/50 hover:border-green-500/20 transition-colors duration-300 shadow-lg hover:shadow-green-500/5">
+                    <div className="flex w-[90%] max-h-96 lg:h-full  justify-center items-center bg-zinc-900/40 rounded-xl p-6 border border-zinc-800/50 hover:border-green-500/20 transition-colors duration-300 shadow-lg hover:shadow-green-500/5">
                       {!loading && (
-                        <div className="w-full">
+                        <div className="w-full h-full">
                           <LineChart
                             mockdata={mockdata}
                             mocklabels={mocklabels}
@@ -787,7 +850,15 @@ export default function Dashboard() {
                     {/* Results List Section */}
                     <div className="w-[60%] lg:flex hidden">
                       <div className="w-full h-full flex flex-col bg-zinc-900/40 rounded-xl border border-zinc-800/50 hover:border-green-500/20 transition-colors duration-300 shadow-lg">
-                        <div className="flex flex-col space-y-3 p-4 h-full overflow-y-auto scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-transparent hover:scrollbar-thumb-green-600">
+                        <div
+                          className="flex flex-col space-y-3 p-4 h-full overflow-y-auto hover:scrollbar-thumb-green-600"
+                          style={{
+                            overflowY: "scroll",
+                            scrollbarWidth: "thin",
+                            msOverflowStyle: "none",
+                            scrollbarColor: "rgb(39 39 42) transparent",
+                          }}
+                        >
                           {mockresults.map((result) => (
                             <div
                               key={result._id}
